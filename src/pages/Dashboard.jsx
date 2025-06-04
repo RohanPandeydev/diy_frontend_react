@@ -24,13 +24,12 @@ const HeroSlider = lazy(() => import("../components/dashboard/HeroSlider"));
 const Dashboard = () => {
   const [openVideo, setOpenVideo] = useState(false);
   const seo = useSeoHelmet("home"); // Fetch SEO by slug
-  // console.log("home", helmet?.props)
   const toggleVideo = () => setOpenVideo(prev => !prev);
 
   return (
     <div className="dashboard-box">
-
       <SeoHelmet seo={seo} />
+
       <NavBar />
 
       {/* Hero Section */}

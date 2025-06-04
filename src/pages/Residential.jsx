@@ -8,6 +8,8 @@ import WeOffer from "../components/productandservices/diyprefabkits/WeOffer";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
 import Comparison from "../components/productandservices/diyprefabkits/homekit/Comparison";
 import Faq from "../components/productandservices/diyprefabkits/homekit/Faq";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 // Lazy-loaded components
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
 const CounterCard = lazy(() => import("../common/CounterCard"));
@@ -19,10 +21,14 @@ const VideoModal = lazy(() => import("../common/VideoModal"));
 const Residential = () => {
     const [openVideo, setOpenVideo] = useState(false);
     const handleOpenVideo = () => setOpenVideo(!openVideo);
+    const seo = useSeoHelmet("residential"); // Fetch SEO by slug
+
 
 
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Residential"}

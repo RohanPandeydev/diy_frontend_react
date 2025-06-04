@@ -5,6 +5,8 @@ import { Button, Col, Container, Form, Input, Row } from 'reactstrap'
 import { ImOffice } from 'react-icons/im'
 import { MdOutlineEmail } from 'react-icons/md'
 import { IoCallOutline } from 'react-icons/io5'
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 const Footer = lazy(() => import("../common/Footer"));
 
 
@@ -30,8 +32,12 @@ const contactList = [
 ]
 
 const ContactUs = () => {
+    const seo = useSeoHelmet("contact-us"); // Fetch SEO by slug
+
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner title={"Contact Us"} description={"Reach Out for Innovation and Industrial Solutions"} />
             <section className='contact-us-form'>

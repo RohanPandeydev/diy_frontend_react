@@ -11,6 +11,8 @@ import Comparison from "../components/productandservices/diyprefabkits/Compariso
 import WeOffer from "../components/productandservices/diyprefabkits/WeOffer";
 import Faq from "../components/productandservices/diyprefabkits/Faq";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 
 // Lazy-loaded components
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -23,9 +25,12 @@ const DiyPreFabKits = () => {
     const [openVideo, setOpenVideo] = useState(false);
     const handleOpenVideo = () => setOpenVideo(!openVideo);
 
+    const seo = useSeoHelmet("diy-prefab-kits"); // Fetch SEO by slug
 
     return (
-        <div>
+        <div>   
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"DIY PreFab Kits"}

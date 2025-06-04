@@ -8,6 +8,8 @@ import { infoBoxList } from '../Constants';
 import NavBar from '../common/NavBar';
 import Banner from '../common/Banner';
 import WhoWeAre from '../common/WhoWeAre';
+import useSeoHelmet from '../hooks/ReactHelmet';
+import SeoHelmet from '../common/SeoHelmet';
 
 // Lazy load components used below the fold
 const OurVision = lazy(() => import('../common/OurVision'));
@@ -18,8 +20,11 @@ const WaveWrapper = lazy(() => import('../common/WaveWrapper'));
 const Footer = lazy(() => import('../common/Footer'));
 
 const IntroductionToDIYPreFabSolutions = () => {
+  const seo = useSeoHelmet("introduction-to-diy-prefab-solutions"); // Fetch SEO by slug
   return (
     <>
+      <SeoHelmet seo={seo} />
+
       <NavBar />
       <Banner
         title="Introduction To DIY PreFab Solutions"

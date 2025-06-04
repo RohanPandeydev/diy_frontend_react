@@ -4,6 +4,8 @@ import NavBar from "../common/NavBar";
 import WhyChooseUs from "../components/productandservices/diyprefabkits/WhyChooseUs";
 import WeOffer from "../components/productandservices/diyprefabkits/WeOffer";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 
 // / Lazy-loaded components
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -21,6 +23,7 @@ const WallRoofingSolutions = () => {
     const [openVideo, setOpenVideo] = useState(false);
     const handleOpenVideo = () => setOpenVideo(!openVideo);
 
+    const seo = useSeoHelmet("wall-roofing-solutions"); // Fetch SEO by slug
 
 
 
@@ -28,6 +31,8 @@ const WallRoofingSolutions = () => {
 
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Wall & Roofing Solutions"}

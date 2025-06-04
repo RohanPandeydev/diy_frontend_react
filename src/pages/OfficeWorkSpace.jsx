@@ -6,6 +6,8 @@ import NavBar from "../common/NavBar";
 import WhyChooseUs from "../components/productandservices/diyprefabkits/WhyChooseUs";
 import WeOffer from "../components/productandservices/diyprefabkits/WeOffer";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 
 // Lazy-loaded components
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -15,37 +17,22 @@ const Footer = lazy(() => import("../common/Footer"));
 const VideoModal = lazy(() => import("../common/VideoModal"));
 
 
-import {
-    Button,
-    Col,
-    Container,
-    Progress,
-    Row,
-    Table,
-    Accordion,
-    AccordionBody,
-    AccordionHeader,
-    AccordionItem,
-} from "reactstrap";
-import { TbSettingsUp } from "react-icons/tb";
-import { FaHelmetSafety } from "react-icons/fa6";
-import { FaLayerGroup, FaLeaf, FaPlay, FaSortAmountUp } from "react-icons/fa";
-import { MdEngineering, MdFactory } from "react-icons/md";
-import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
-import { GiCargoCrane } from "react-icons/gi";
-import { VscFileSubmodule } from "react-icons/vsc";
-import { FiSettings } from "react-icons/fi";
+
 
 const OfficeWorkSpace = () => {
 
     const [openVideo, setOpenVideo] = useState(false);
     const handleOpenVideo = () => setOpenVideo(!openVideo);
+    const seo = useSeoHelmet("office-workspaces"); // Fetch SEO by slug
+
 
 
 
 
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Office & Workspaces"}

@@ -7,13 +7,20 @@ import Banner from "../common/Banner";
 import NavBar from "../common/NavBar";
 import ImagePath from "../assets/ImagePath";
 import SuccessStory from "../components/projectandcasestudies/SuccessStory";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
 const Footer = lazy(() => import("../common/Footer"));
 
 
 const ClientTestimonial = () => {
+    const seo = useSeoHelmet("client-testimonials"); // Fetch SEO by slug
+
+
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Client Testimonials"}

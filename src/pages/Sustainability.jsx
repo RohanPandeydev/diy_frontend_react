@@ -1,10 +1,12 @@
 import React, { lazy, Suspense } from "react";
 import ImagePath from "../assets/ImagePath";
 import { FaWarehouse } from "react-icons/fa";
-import {  FaHelmetSafety } from "react-icons/fa6";
+import { FaHelmetSafety } from "react-icons/fa6";
 import { MdSupportAgent } from "react-icons/md";
 import { Col, Container, Row, Table } from "reactstrap";
 import { comparisonListSus } from "../Constants";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 
 // Lazy-loaded components
 const NavBar = lazy(() => import("../common/NavBar"));
@@ -26,8 +28,12 @@ const InfoBox = ({ icon: Icon, title, content, list }) => (
 );
 
 const Sustainability = () => {
+  const seo = useSeoHelmet("sustainability-eco-friendly-initiatives"); // Fetch SEO by slug
+
   return (
     <div>
+      <SeoHelmet seo={seo} />
+
       <Suspense fallback={<div>Loading header...</div>}>
         <NavBar />
       </Suspense>

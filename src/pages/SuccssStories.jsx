@@ -7,15 +7,20 @@ import { Button, Col, Container, Row } from "reactstrap";
 import Banner from "../common/Banner";
 import NavBar from "../common/NavBar";
 import ImagePath from "../assets/ImagePath";
-import { successStories } from "../Constants";
 import SuccessStory from "../components/projectandcasestudies/SuccessStory";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
 const Footer = lazy(() => import("../common/Footer"));
 
 
 const SucessStories = () => {
+    const seo = useSeoHelmet("success-stories"); // Fetch SEO by slug
+
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Success Stories"}

@@ -4,6 +4,8 @@ import NavBar from "../common/NavBar";
 import WhyChooseUs from "../components/productandservices/diyprefabkits/WhyChooseUs";
 import WeOffer from "../components/productandservices/diyprefabkits/WeOffer";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
+import SeoHelmet from "../common/SeoHelmet";
+import useSeoHelmet from "../hooks/ReactHelmet";
 
 
 
@@ -20,12 +22,16 @@ const PortableStructure = () => {
 
     const [openVideo, setOpenVideo] = useState(false);
     const handleOpenVideo = () => setOpenVideo(!openVideo);
+    const seo = useSeoHelmet("portable-structures"); // Fetch SEO by slug
+
 
 
 
 
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Portable Structures"}

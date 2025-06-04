@@ -4,6 +4,8 @@ import NavBar from "../common/NavBar";
 import WhyChooseUs from "../components/productandservices/diyprefabkits/WhyChooseUs";
 import WeOffer from "../components/productandservices/diyprefabkits/WeOffer";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 
 // Lazy-loaded components
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -17,11 +19,15 @@ const StorageWarehousing = () => {
 
     const [openVideo, setOpenVideo] = useState(false);
     const handleOpenVideo = () => setOpenVideo(!openVideo);
+    const seo = useSeoHelmet("storage-warehousing"); // Fetch SEO by slug
+
 
 
 
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Storage & Warehousing"}

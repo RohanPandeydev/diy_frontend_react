@@ -8,6 +8,8 @@ import { Col, Container, Row, Table } from "reactstrap";
 import { comparisonListAbout } from "../Constants";
 import NavBar from "../common/NavBar";
 import Banner from "../common/Banner";
+import SeoHelmet from "../common/SeoHelmet";
+import useSeoHelmet from "../hooks/ReactHelmet";
 
 const CounterCard = lazy(() => import("../common/CounterCard"));
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -33,9 +35,14 @@ const InfoBox = ({ icon: Icon, title, content, items }) => (
 const CompanyOverview = () => {
   const [OpenVideo, setOpenVideo] = useState(false);
   const handleOpenVideo = () => setOpenVideo(!OpenVideo);
+  const seo = useSeoHelmet("company-overview"); // Fetch SEO by slug
+
+
 
   return (
     <div>
+      <SeoHelmet seo={seo} />
+
       <NavBar />
       <Banner
         title={"Company Overview"}

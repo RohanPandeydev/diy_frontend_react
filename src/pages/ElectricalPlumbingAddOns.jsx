@@ -4,6 +4,8 @@ import Info from "../components/productandservices/portablestructure/Info";
 
 import Banner from "../common/Banner";
 import NavBar from "../common/NavBar";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 
 const CounterCard = lazy(() => import("../common/CounterCard"));
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -16,6 +18,7 @@ const VideoModal = lazy(() => import("../common/VideoModal"));
 const ElectricalPlumbingAddOns = () => {
     const [openVideo, setOpenVideo] = useState(false);
     const handleOpenVideo = () => setOpenVideo(!openVideo);
+    const seo = useSeoHelmet("electrical-plumbing-add-ons"); // Fetch SEO by slug
 
 
 
@@ -23,6 +26,8 @@ const ElectricalPlumbingAddOns = () => {
 
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Electrical & Plumbing Add-ons"}

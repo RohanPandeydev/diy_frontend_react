@@ -8,6 +8,8 @@ import OurVision from '../common/OurVision';
 import Banner from '../common/Banner';
 import WhoWeAre from '../common/WhoWeAre';
 import NavBar from '../common/NavBar';
+import SeoHelmet from '../common/SeoHelmet';
+import useSeoHelmet from '../hooks/ReactHelmet';
 
 // Lazy-loaded components
 const TrustSlider = lazy(() => import('../common/TrustSlider'));
@@ -16,8 +18,12 @@ const WaveWrapper = lazy(() => import('../common/WaveWrapper'));
 const Footer = lazy(() => import('../common/Footer'));
 
 const KeyBenefits = () => {
+    const seo = useSeoHelmet("key-benefits-of-prefab-construction"); // Fetch SEO by slug
+
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner title={"Key Benefits OF Prefab Construction"} />
             <WhoWeAre />

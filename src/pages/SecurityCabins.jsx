@@ -4,6 +4,8 @@ import Info from "../components/productandservices/portablestructure/Info";
 
 import Banner from "../common/Banner";
 import NavBar from "../common/NavBar";
+import SeoHelmet from "../common/SeoHelmet";
+import useSeoHelmet from "../hooks/ReactHelmet";
 
 const CounterCard = lazy(() => import("../common/CounterCard"));
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -14,40 +16,44 @@ const OurVision = lazy(() => import('../common/OurVision'));
 const VideoModal = lazy(() => import("../common/VideoModal"));
 
 const SecurityCabins = () => {
-    const [openVideo, setOpenVideo] = useState(false);
-    const handleOpenVideo = () => setOpenVideo(!openVideo);
+  const [openVideo, setOpenVideo] = useState(false);
+  const handleOpenVideo = () => setOpenVideo(!openVideo);
+  const seo = useSeoHelmet("security-cabins"); // Fetch SEO by slug
 
 
 
 
 
-    return (
-        <div>
-            <NavBar />
-            <Banner
-                title={"Security Cabins"}
-                description={"Crafting Engineering Excellence"}
-            />
-            <WhoWeAre />
-            
-           <Info/>
+
+  return (
+    <div>
+      <SeoHelmet seo={seo} />
+
+      <NavBar />
+      <Banner
+        title={"Security Cabins"}
+        description={"Crafting Engineering Excellence"}
+      />
+      <WhoWeAre />
+
+      <Info />
       <OurVision />
 
 
 
-  <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Loading...</div>}>
         <CounterCard />
         <TrustSlider />
         <TestimonialCard />
         <WaveWrapper />
         <Footer />
       </Suspense>
-                {/* Video Modal */}
-                  <Suspense fallback={null}>
-                    <VideoModal open={openVideo} onClose={handleOpenVideo} />
-                  </Suspense>
-        </div>
-    )
+      {/* Video Modal */}
+      <Suspense fallback={null}>
+        <VideoModal open={openVideo} onClose={handleOpenVideo} />
+      </Suspense>
+    </div>
+  )
 }
 
 export default SecurityCabins

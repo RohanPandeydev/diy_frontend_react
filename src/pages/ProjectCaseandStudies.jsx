@@ -18,6 +18,8 @@ import OurServices from "../components/productandservices/diyprefabkits/OurServi
 import ImagePath from "../assets/ImagePath";
 import { weOfferList } from "../Constants";
 import WhyChooseUs from "../components/productandservices/wallroofingsolutions/sandwichpanel/WhyChooseUs";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 
 
 // Lazy-loaded components
@@ -29,6 +31,8 @@ const VideoModal = lazy(() => import("../common/VideoModal"));
 
 
 const ProjectCaseStudies = () => {
+    const seo = useSeoHelmet("project-case-studies"); // Fetch SEO by slug
+
 
 
     const [openVideo, setOpenVideo] = useState(false);
@@ -37,6 +41,8 @@ const ProjectCaseStudies = () => {
 
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Project & Case Studies"}

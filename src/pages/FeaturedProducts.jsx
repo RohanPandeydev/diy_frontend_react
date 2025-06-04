@@ -3,6 +3,8 @@ import { Col, Container, Row } from "reactstrap";
 import NavBar from '../common/NavBar';
 import Banner from '../common/Banner';
 import ImagePath from "../assets/ImagePath";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 
 // Lazy load components below the fold
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -10,8 +12,13 @@ const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
 const Footer = lazy(() => import("../common/Footer"));
 
 const FeaturedProducts = () => {
+  const seo = useSeoHelmet("featured-projects"); // Fetch SEO by slug
+
+
   return (
     <div>
+      <SeoHelmet seo={seo} />
+
       <NavBar />
       <Banner
         title={"Featured Projects"}

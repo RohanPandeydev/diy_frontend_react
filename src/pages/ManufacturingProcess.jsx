@@ -4,6 +4,8 @@ import { FaHelmetSafety } from "react-icons/fa6";
 import { MdSupportAgent } from "react-icons/md";
 import { Col, Container, Row } from "reactstrap";
 import ImagePath from "../assets/ImagePath";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 
 // Lazy load components
 const NavBar = lazy(() => import("../common/NavBar"));
@@ -24,8 +26,12 @@ const InfoBox = ({ icon: Icon, title, children }) => (
 );
 
 const ManufacturingProcess = () => {
+  const seo = useSeoHelmet("manufacturing-process"); // Fetch SEO by slug
+
   return (
     <div>
+      <SeoHelmet seo={seo} />
+
       <Suspense fallback={<div>Loading navigation...</div>}>
         <NavBar />
       </Suspense>

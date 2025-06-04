@@ -2,21 +2,13 @@ import React, { useState, lazy, Suspense } from "react";
 
 import {
   Button,
-  Col,
   Container,
-  Progress,
-  Row,
   Table,
-  Accordion,
-  AccordionBody,
-  AccordionHeader,
-  AccordionItem,
+
 } from "reactstrap";
 import Banner from "../common/Banner";
 import NavBar from "../common/NavBar";
-import Info from "../components/productandservices/portablestructure/Info";
-import TestimonialCard from "../common/TestimonialCard";
-import OurVision from "../common/OurVision";
+
 
 // Lazy-loaded components
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -25,18 +17,19 @@ const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
 const Footer = lazy(() => import("../common/Footer"));
 const VideoModal = lazy(() => import("../common/VideoModal"));
 
-import { FiSettings } from "react-icons/fi";
 import { comparisonListProductandServices, weOfferListProductandServices } from "../Constants";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
-import WhyChoose from "../components/dashboard/WhyChoose";
 import ImagePath from "../assets/ImagePath";
-import WhoWeAre from "../common/WhoWeAre";
 import WhyChooseUs from "../components/productandservices/wallroofingsolutions/sandwichpanel/WhyChooseUs";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 
 const ProductandServices = () => {
 
   const [openVideo, setOpenVideo] = useState(false);
   const handleOpenVideo = () => setOpenVideo(!openVideo);
+  const seo = useSeoHelmet("product-services"); // Fetch SEO by slug
+
 
 
 
@@ -44,6 +37,7 @@ const ProductandServices = () => {
 
   return (
     <div>
+      <SeoHelmet seo={seo} />
       <NavBar />
       <Banner
         title={"Product & Services"}
@@ -172,7 +166,7 @@ const ProductandServices = () => {
         </Container>
       </section>
 
-      <WhyChooseUs  handleOpenVideo={handleOpenVideo}   />
+      <WhyChooseUs handleOpenVideo={handleOpenVideo} />
 
 
 

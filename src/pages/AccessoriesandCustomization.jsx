@@ -4,6 +4,8 @@ import NavBar from "../common/NavBar";
 import WhyChooseUs from "../components/productandservices/diyprefabkits/WhyChooseUs";
 import WeOffer from "../components/productandservices/diyprefabkits/WeOffer";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
+import SeoHelmet from "../common/SeoHelmet";
+import useSeoHelmet from "../hooks/ReactHelmet";
 // / Lazy-loaded components
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
 const CounterCard = lazy(() => import("../common/CounterCard"));
@@ -18,9 +20,14 @@ const AccessoriesandCustomization = () => {
 
     const [openVideo, setOpenVideo] = useState(false);
     const handleOpenVideo = () => setOpenVideo(!openVideo);
+    const seo = useSeoHelmet("accessories-customization"); // Fetch SEO by slug
+
 
     return (
+
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Accessories & Customization"}

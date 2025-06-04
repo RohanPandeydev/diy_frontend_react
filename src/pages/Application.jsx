@@ -17,11 +17,15 @@ const VideoModal = lazy(() => import("../common/VideoModal"));
 import WeOffer from "../components/dashboard/WeOffer";
 import WhyChooseUs from "../components/productandservices/wallroofingsolutions/sandwichpanel/WhyChooseUs";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
+import SeoHelmet from "../common/SeoHelmet";
+import useSeoHelmet from "../hooks/ReactHelmet";
 
 const Application = () => {
 
     const [openVideo, setOpenVideo] = useState(false);
     const handleOpenVideo = () => setOpenVideo(!openVideo);
+    const seo = useSeoHelmet("applications"); // Fetch SEO by slug
+
 
 
 
@@ -29,6 +33,8 @@ const Application = () => {
 
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Applications"}

@@ -15,16 +15,22 @@ import ComparisionSec2 from "../components/productandservices/wallroofingsolutio
 import ComparisionSec1 from "../components/productandservices/wallroofingsolutions/sandwichpanel/ComparisionSec1";
 import WhyChooseUs from "../components/productandservices/wallroofingsolutions/sandwichpanel/WhyChooseUs";
 import Faq from "../components/productandservices/wallroofingsolutions/sandwichpanel/Faq";
+import SeoHelmet from "../common/SeoHelmet";
+import useSeoHelmet from "../hooks/ReactHelmet";
 
 const SandwichPanels = () => {
 
   const [openVideo, setOpenVideo] = useState(false);
   const handleOpenVideo = () => setOpenVideo(!openVideo);
+  const seo = useSeoHelmet("sandwich-panels"); // Fetch SEO by slug
+
 
 
 
   return (
     <div>
+      <SeoHelmet seo={seo} />
+
       <NavBar />
       <Banner
         title={"Sandwich Panels"}

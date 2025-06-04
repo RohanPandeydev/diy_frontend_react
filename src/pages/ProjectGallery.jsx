@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import NavBar from "../common/NavBar";
 import ImagePath from "../assets/ImagePath";
 import WhyChooseUs from "../components/productandservices/diyprefabkits/WhyChooseUs";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 
 // Lazy-loaded components
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -20,11 +22,15 @@ const VideoModal = lazy(() => import("../common/VideoModal"));
 const ProjectGallery = () => {
     const [openVideo, setOpenVideo] = useState(false);
     const handleOpenVideo = () => setOpenVideo(!openVideo);
+    const seo = useSeoHelmet("project-gallery"); // Fetch SEO by slug
+
 
 
 
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
 
             <section className="project-banner-wrap">
@@ -157,7 +163,7 @@ const ProjectGallery = () => {
 
             <CounterCard />
 
-            <WhyChooseUs desc={"World-class quality is our top priority, driving excellence in every detail we deliver."} title={"World class quality is our priority"}  handleOpenVideo={handleOpenVideo} />
+            <WhyChooseUs desc={"World-class quality is our top priority, driving excellence in every detail we deliver."} title={"World class quality is our priority"} handleOpenVideo={handleOpenVideo} />
 
 
             <Suspense fallback={<div>Loading visual section...</div>}>

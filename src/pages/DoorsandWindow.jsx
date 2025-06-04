@@ -4,6 +4,8 @@ import Info from "../components/productandservices/portablestructure/Info";
 
 import Banner from "../common/Banner";
 import NavBar from "../common/NavBar";
+import useSeoHelmet from "../hooks/ReactHelmet";
+import SeoHelmet from "../common/SeoHelmet";
 
 const CounterCard = lazy(() => import("../common/CounterCard"));
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -16,6 +18,8 @@ const VideoModal = lazy(() => import("../common/VideoModal"));
 const DoorsandWindow = () => {
     const [openVideo, setOpenVideo] = useState(false);
     const handleOpenVideo = () => setOpenVideo(!openVideo);
+    const seo = useSeoHelmet("doors-windows"); // Fetch SEO by slug
+
 
 
 
@@ -23,6 +27,8 @@ const DoorsandWindow = () => {
 
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Doors & Windows"}

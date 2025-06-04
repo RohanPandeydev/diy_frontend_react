@@ -4,6 +4,8 @@ import Info from "../components/productandservices/portablestructure/Info";
 
 import Banner from "../common/Banner";
 import NavBar from "../common/NavBar";
+import SeoHelmet from "../common/SeoHelmet";
+import useSeoHelmet from "../hooks/ReactHelmet";
 
 const CounterCard = lazy(() => import("../common/CounterCard"));
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -16,6 +18,8 @@ const VideoModal = lazy(() => import("../common/VideoModal"));
 const InsulationMaterials = () => {
     const [openVideo, setOpenVideo] = useState(false);
     const handleOpenVideo = () => setOpenVideo(!openVideo);
+    const seo = useSeoHelmet("insulation-materials"); // Fetch SEO by slug
+
 
 
 
@@ -23,6 +27,8 @@ const InsulationMaterials = () => {
 
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Insulation Materials"}

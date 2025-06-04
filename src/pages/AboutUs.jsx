@@ -6,6 +6,8 @@ import WhoWeAre from "../components/productandservices/portablestructure/WhoWeAr
 import Info from "../components/productandservices/portablestructure/Info";
 import TestimonialCard from "../common/TestimonialCard";
 import OurVision from "../common/OurVision";
+import SeoHelmet from "../common/SeoHelmet";
+import useSeoHelmet from "../hooks/ReactHelmet";
 
 // Lazy-loaded components
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -18,10 +20,14 @@ const AboutUs = () => {
 
   const [openVideo, setOpenVideo] = useState(false);
   const handleOpenVideo = () => setOpenVideo(!openVideo);
+  const seo = useSeoHelmet("about-us"); // Fetch SEO by slug
+
 
 
   return (
     <div>
+      <SeoHelmet seo={seo} />
+
       <NavBar />
       <Banner
         title={"About Us"}

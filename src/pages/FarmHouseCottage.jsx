@@ -6,6 +6,8 @@ import NavBar from "../common/NavBar";
 import WhyChooseUs from "../components/productandservices/diyprefabkits/WhyChooseUs";
 import WeOffer from "../components/productandservices/diyprefabkits/WeOffer";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
+import SeoHelmet from "../common/SeoHelmet";
+import useSeoHelmet from "../hooks/ReactHelmet";
 
 // Lazy-loaded components
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
@@ -22,17 +24,21 @@ const FarmHouseCottage = () => {
     const [openVideo, setOpenVideo] = useState(false);
     const handleOpenVideo = () => setOpenVideo(!openVideo);
 
+    const seo = useSeoHelmet("farmhouses-cottages"); // Fetch SEO by slug
+
 
 
     return (
         <div>
+            <SeoHelmet seo={seo} />
+
             <NavBar />
             <Banner
                 title={"Farmhouses & Cottages"}
                 description={"Engineering Excellence, Industrial Solutions"}
             />
 
-   <OurServices title={"Precision-Built Wall & Roofing Systems That Last"} desc={"At “DIY PreFab”, we specialize in delivering high-performance wall and roofing solutions that offer superior durability, energy efficiency, and design flexibility. Every product is engineered for seamless integration and long-term reliability."} />
+            <OurServices title={"Precision-Built Wall & Roofing Systems That Last"} desc={"At “DIY PreFab”, we specialize in delivering high-performance wall and roofing solutions that offer superior durability, energy efficiency, and design flexibility. Every product is engineered for seamless integration and long-term reliability."} />
 
 
             <Suspense fallback={<div>Loading trust slider...</div>}>
