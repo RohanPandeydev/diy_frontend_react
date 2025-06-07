@@ -22,7 +22,7 @@ const WhyChooseUs = ({handleOpenVideo }) => {
                 </p>
                 <hr style={{ borderColor: "#001524", borderWidth: "1px" }} />
                 <div className="choose-us-container">
-                  {chooseUsSandwich.map((item, index) => (
+                  {chooseUsSandwich.map((item) => (
                     <div className="why-choose-us-boxes">
                       <div className="box-icon">{item.icon}</div>
                       <div className="box-content">

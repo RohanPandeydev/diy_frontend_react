@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
+import {  FaLinkedinIn, FaYoutube } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import ImagePath from '../assets/ImagePath';
 

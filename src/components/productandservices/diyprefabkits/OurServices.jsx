@@ -3,7 +3,7 @@ import { FiSettings } from 'react-icons/fi'
 import { Col, Container, Progress, Row } from 'reactstrap'
 import ImagePath from '../../../assets/ImagePath'
 
-const OurServices = ({ title, desc }) => {
+const OurServices = ({ title, }) => {
     return (
         <section className="common-section our-service-wrap">
             <Container>

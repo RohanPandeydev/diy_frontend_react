@@ -11,7 +11,7 @@ const ContactForm = () => {
     });
 
     // State for error messages
-    const [errors, setErrors] = useState({
+    const [errors] = useState({
         name: '',
         email: '',
         message: '',
@@ -24,18 +24,7 @@ const ContactForm = () => {
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    // Form validation
-    const validateForm = () => {
-        const newErrors = {};
-        if (!formData.name) newErrors.name = 'Name is required';
-        if (!formData.email) newErrors.email = 'Email is required';
-        else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is not valid';
-        if (!formData.message) newErrors.message = 'Message is required';
-        if (!formData.interest) newErrors.interest = 'Interest of service is required'; // Validate interest
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
+  
 
     // Handle form submit
     const handleSubmit = (e) => {

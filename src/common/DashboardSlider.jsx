@@ -53,13 +53,6 @@ const DashboardSlider = () => {
         }
     };
 
-    const prevSlide = () => {
-        const slide = slideRef.current;
-        if (slide.children.length > 0) {
-            const last = slide.children[slide.children.length - 1];
-            slide.prepend(last);
-        }
-    };
 
     useEffect(() => {
         const interval = setInterval(() => {

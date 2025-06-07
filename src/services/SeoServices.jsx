@@ -11,7 +11,7 @@ SeoServices.seoBySlug = (params) => {
     if (!params?.slug) {
         return []
     }
-    return axios.get(`${config.apiUrl}/api/seo/${params.slug}`, HttpHeaders.getAuthHeader());
+    return axios.get(`${config.apiUrl}/api/seo/${params.slug}`);
 };
 SeoServices.addSeo = (formdata) => {
     return axios.post(`${config.apiUrl}/api/admin/seo`, formdata, HttpHeaders.getAuthHeader());

@@ -4,7 +4,7 @@ import ImagePath from '../../assets/ImagePath'
 import { FaPlay } from 'react-icons/fa'
 import { performanceList } from '../../Constants'
 
-const Performance = ({openVideo, setOpenVideo,toggleVideo}) => {
+const Performance = ({toggleVideo}) => {
 
 
   return (

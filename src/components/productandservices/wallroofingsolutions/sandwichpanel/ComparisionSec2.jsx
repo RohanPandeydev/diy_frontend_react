@@ -1,5 +1,5 @@
 import React from 'react'
-import { comparisonList2Sandwich, comparisonListSandwich } from '../../../../Constants'
+import { comparisonList2Sandwich } from '../../../../Constants'
 import { Container, Table } from 'reactstrap'
 
 const ComparisionSec2 = () => {

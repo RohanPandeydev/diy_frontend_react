@@ -17,7 +17,7 @@ const TestimonialCard = lazy(() => import("../common/TestimonialCard"));
 const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
 const Footer = lazy(() => import("../common/Footer"));
 
-const InfoBox = ({ icon: Icon, title, children }) => (
+const InfoBox = ({  title, children }) => (
   <div className="info-box">
     <Icon className="info-box-icons" />
     <h6>{title}</h6>

@@ -12,7 +12,7 @@ import { MdOutlineMail } from "react-icons/md";
 import { Navbar, NavbarBrand, Nav, NavItem, Button } from "reactstrap";
 import { IoCloseSharp } from "react-icons/io5";
 import { navItems } from "../Constants";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import ImagePath from "../assets/ImagePath";
 
 const Header = () => {
@@ -113,9 +113,9 @@ const Header = () => {
       </section>
 
       <Navbar expand="md" className="px-4 d-flex justify-content-between navbar-container">
-        <NavbarBrand href="/" className="logo-image">
+        <NavLink to="/" className="logo-image">
           <img src={ImagePath.Logo} alt="DIY Prefab Logo" className="img-fluid" loading="lazy" />
-        </NavbarBrand>
+        </NavLink>
 
         <div className="d-none d-lg-flex" onMouseLeave={handleMouseLeave}>
           <Nav className="ml-auto" navbar>

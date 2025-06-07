@@ -1,0 +1,6 @@
+# Allow all robots full access
+User-agent: *
+Disallow:
+
+# Specify the location of your sitemap
+Sitemap: https://yourdomain.com/sitemap.xml

@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, {  lazy, Suspense } from "react";
 import Banner from "../common/Banner";
 import NavBar from "../common/NavBar";
 import { Button, Col, Container, Form, Input, Row } from 'reactstrap'
@@ -50,7 +50,7 @@ const ContactUs = () => {
                                     <h2>Connect with Engineering Excellence</h2>
                                     <p>Connect with engineering excellence that delivers smart, sustainable, and precision-driven prefab solutions tailored to your vision.</p>
                                     <div className="choose-us-container">
-                                        {contactList.map((item, index) => (
+                                        {contactList.map((item) => (
                                             <div className="why-choose-us-boxes">
                                                 <div className="box-icon">{item.icon}</div>
                                                 <div className="box-content">
