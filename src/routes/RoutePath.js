@@ -45,6 +45,7 @@ const ROUTE_PATHS = {
   PROJECT_GALLERY: "/project-case-studies/project-gallery",
 
   BLOG_NEWS: "/blog-news",
+  BLOG_DETAILS: "/blog/:slug",
   INDUSTRY_TRENDS: "/blog-news/industry-trends",
   CONSTRUCTION_TIPS_TRICKS: "/blog-news/construction-tips-tricks",
   SUSTAINABILITY_IN_PREFAB: "/blog-news/sustainability-in-prefab",

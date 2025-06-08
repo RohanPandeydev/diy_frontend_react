@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Route } from "react-router-dom";
 import ROUTE_PATHS from "../../routes/RoutePath";
 
+
 const Dashboard = lazy(() => import("../../pages/Dashboard"));
 const IntroductionToDIYPreFabSolutions = lazy(() => import("../../pages/IntroductionToDIYPreFabSolutions"));
 const FeaturedProducts = lazy(() => import("../../pages/FeaturedProducts"));
@@ -44,6 +45,12 @@ const IndustryTrends = lazy(() => import("../../pages/IndustryTrends"));
 const ConstructionTipsandTricks = lazy(() => import("../../pages/ConstructionTipsandTricks"));
 const SustainbilityInPreFab = lazy(() => import("../../pages/SustainbilityInPreFab"));
 const ContactUs = lazy(() => import("../../pages/ContactUs"));
+const EnquiryForm = lazy(() => import("../../pages/EnquiryForm"));
+const Career = lazy(() => import("../../pages/Career"));
+const JobOpening = lazy(() => import("../../pages/JobOpening"));
+const WorkCulture = lazy(() => import("../../pages/WorkCulture"));
+const BlogDetails = lazy(() => import("../../pages/BlogDetails"));
+
 
 const RoutesPath = () => {
     return (<>
@@ -96,12 +103,21 @@ const RoutesPath = () => {
 
         {/* Blog and News */}
         <Route path={ROUTE_PATHS.BLOG_NEWS} element={<BlogandNews />} />
+        <Route path={ROUTE_PATHS.BLOG_DETAILS} element={<BlogDetails />} />
         <Route path={ROUTE_PATHS.INDUSTRY_TRENDS} element={<IndustryTrends />} />
         <Route path={ROUTE_PATHS.CONSTRUCTION_TIPS_TRICKS} element={<ConstructionTipsandTricks />} />
         <Route path={ROUTE_PATHS.SUSTAINABILITY_IN_PREFAB} element={<SustainbilityInPreFab />} />
 
+        {/* Career */}
+        <Route path={ROUTE_PATHS.CAREERS} element={<Career />} />
+        <Route path={ROUTE_PATHS.JOB_OPENINGS} element={<JobOpening />} />
+        <Route path={ROUTE_PATHS.WORK_CULTURE} element={<WorkCulture />} />
+
+
+
         {/* Contact Us */}
         <Route path={ROUTE_PATHS.CONTACT_US} element={<ContactUs />} />
+        <Route path={ROUTE_PATHS.INQUIRY_FORM} element={<EnquiryForm />} />
     </>
     );
 };
