@@ -20,7 +20,7 @@ const Footer = lazy(() => import("../common/Footer"));
 
 const InfoBox = ({  title, content, list }) => (
   <div className="info-box">
-    <Icon className="info-box-icons" />
+    <div className="info-box-icons" />
     <h6>{title}</h6>
     {content && <p>{content}</p>}
     {list && <ul>{list.map((item, idx) => <li key={idx}>{item}</li>)}</ul>}

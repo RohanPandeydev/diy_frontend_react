@@ -1,8 +1,5 @@
 import React, { useState, lazy, Suspense } from "react";
-
-
 import { FiSettings } from "react-icons/fi";
-
 import Banner from "../common/Banner";
 import ImagePath from "../assets/ImagePath";
 import NavBar from "../common/NavBar";
@@ -14,60 +11,81 @@ import OurServices from "../components/productandservices/diyprefabkits/OurServi
 import useSeoHelmet from "../hooks/ReactHelmet";
 import SeoHelmet from "../common/SeoHelmet";
 
-// Lazy-loaded components
-const TrustSlider = lazy(() => import("../common/TrustSlider"));
-const CounterCard = lazy(() => import("../common/CounterCard"));
-const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
-const Footer = lazy(() => import("../common/Footer"));
-const VideoModal = lazy(() => import("../common/VideoModal"));
+// Constants
+const BANNER_TITLE = "DIY PreFab Kits";
+const BANNER_DESCRIPTION = "Engineering Excellence, Industrial Solutions";
+const OUR_SERVICES_TITLE = "Precision-Built Wall & Roofing Systems That Last";
+const OUR_SERVICES_DESCRIPTION = "At DIY PreFab, we specialize in delivering high-performance wall and roofing solutions that offer superior durability, energy efficiency, and design flexibility. Every product is engineered for seamless integration and long-term reliability.";
+const LOADING_TEXT = "Loading...";
+
+// Lazy-loaded components with error handling
+const TrustSlider = lazy(() =>
+  import("../common/TrustSlider").catch(() => ({ default: () => <div>Failed to load TrustSlider</div> }))
+);
+
+const CounterCard = lazy(() =>
+  import("../common/CounterCard").catch(() => ({ default: () => <div>Failed to load CounterCard</div> }))
+);
+
+const WaveWrapper = lazy(() =>
+  import("../common/WaveWrapper").catch(() => ({ default: () => <div>Failed to load WaveWrapper</div> }))
+);
+
+const Footer = lazy(() =>
+  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load Footer</div> }))
+);
+
+const VideoModal = lazy(() =>
+  import("../common/VideoModal").catch(() => ({ default: () => <div>Failed to load VideoModal</div> }))
+);
+
+// Loading component
+const LoadingSpinner = ({ message = LOADING_TEXT }) => (
+  <div className="flex items-center justify-center py-8">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mr-3"></div>
+    <span className="text-gray-600">{message}</span>
+  </div>
+);
 
 const DiyPreFabKits = () => {
-    const [openVideo, setOpenVideo] = useState(false);
-    const handleOpenVideo = () => setOpenVideo(!openVideo);
+  const [openVideo, setOpenVideo] = useState(false);
+  const handleOpenVideo = () => setOpenVideo(!openVideo);
+  const seo = useSeoHelmet("diy-prefab-kits");
 
-    const seo = useSeoHelmet("diy-prefab-kits"); // Fetch SEO by slug
+  return (
+    <div>
+      <SeoHelmet seo={seo} />
+      <NavBar />
+      <Banner title={BANNER_TITLE} description={BANNER_DESCRIPTION} />
+      <OurServices title={OUR_SERVICES_TITLE} desc={OUR_SERVICES_DESCRIPTION} />
 
-    return (
-        <div>   
-            <SeoHelmet seo={seo} />
+      <Suspense fallback={<LoadingSpinner message="Loading trust slider..." />}>
+        <TrustSlider />
+      </Suspense>
 
-            <NavBar />
-            <Banner
-                title={"DIY PreFab Kits"}
-                description={"Engineering Excellence, Industrial Solutions"}
-            />
+      <WeOffer />
+      <Comparison />
 
-            <OurServices title={"Precision-Built Wall & Roofing Systems That Last"} desc={"At “DIY PreFab”, we specialize in delivering high-performance wall and roofing solutions that offer superior durability, energy efficiency, and design flexibility. Every product is engineered for seamless integration and long-term reliability."} />
-            <Suspense fallback={<div>Loading trust slider...</div>}>
-                <TrustSlider />
-            </Suspense>
+      <Suspense fallback={<LoadingSpinner message="Loading statistics..." />}>
+        <CounterCard />
+      </Suspense>
 
-            <WeOffer />
+      <WhyChooseUs handleOpenVideo={handleOpenVideo} />
+      <Faq />
 
-            <Comparison />
+      <Suspense fallback={<LoadingSpinner message="Loading visual section..." />}>
+        <WaveWrapper />
+      </Suspense>
 
-            <Suspense fallback={<div>Loading statistics...</div>}>
-                <CounterCard />
-            </Suspense>
+      <Suspense fallback={<LoadingSpinner message="Loading footer..." />}>
+        <Footer />
+      </Suspense>
 
-            <WhyChooseUs handleOpenVideo={handleOpenVideo} />
-
-            <Faq />
-
-            <Suspense fallback={<div>Loading visual section...</div>}>
-                <WaveWrapper />
-            </Suspense>
-
-            <Suspense fallback={<div>Loading footer...</div>}>
-                <Footer />
-            </Suspense>
-
-            {/* Video Modal */}
-            <Suspense fallback={null}>
-                <VideoModal open={openVideo} onClose={handleOpenVideo} />
-            </Suspense>
-        </div>
-    );
+      <Suspense fallback={null}>
+        <VideoModal open={openVideo} onClose={handleOpenVideo} />
+      </Suspense>
+    </div>
+  );
 };
 
 export default DiyPreFabKits;
