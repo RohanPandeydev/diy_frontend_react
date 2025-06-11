@@ -19,7 +19,7 @@ const Footer = lazy(() => import("../common/Footer"));
 
 const InfoBox = ({  title, children }) => (
   <div className="info-box">
-    <Icon className="info-box-icons" />
+    <div className="info-box-icons" />
     <h6>{title}</h6>
     {children}
   </div>
