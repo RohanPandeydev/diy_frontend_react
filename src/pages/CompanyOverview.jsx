@@ -1,8 +1,8 @@
 import React, { useState, lazy, Suspense } from "react";
 import ImagePath from "../assets/ImagePath";
+import { FaWarehouse } from "react-icons/fa";
 import { FaHelmetSafety } from "react-icons/fa6";
-
-import { FaPlay, FaWarehouse } from "react-icons/fa";
+import { FaPlay } from "react-icons/fa";
 import { MdSupportAgent } from "react-icons/md";
 import { Col, Container, Row, Table } from "reactstrap";
 import { comparisonListAbout } from "../Constants";
@@ -10,22 +10,51 @@ import NavBar from "../common/NavBar";
 import Banner from "../common/Banner";
 import SeoHelmet from "../common/SeoHelmet";
 import useSeoHelmet from "../hooks/ReactHelmet";
+import VideoModal from "../common/VideoModal";
 
-const CounterCard = lazy(() => import("../common/CounterCard"));
-const TrustSlider = lazy(() => import("../common/TrustSlider"));
-const TestimonialCard = lazy(() => import("../common/TestimonialCard"));
-const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
-const Footer = lazy(() => import("../common/Footer"));
+// Constants
+const BANNER_TITLE = "Company Overview";
+const BANNER_DESCRIPTION = "Crafting Engineering Excellence";
+const LOADING_TEXT = "Loading...";
 
-const InfoBox = ({  title, content, items }) => (
+// Lazy-loaded components with error handling
+const CounterCard = lazy(() =>
+  import("../common/CounterCard").catch(() => ({ default: () => <div>Failed to load CounterCard</div> }))
+);
+
+const TrustSlider = lazy(() =>
+  import("../common/TrustSlider").catch(() => ({ default: () => <div>Failed to load TrustSlider</div> }))
+);
+
+const TestimonialCard = lazy(() =>
+  import("../common/TestimonialCard").catch(() => ({ default: () => <div>Failed to load TestimonialCard</div> }))
+);
+
+const WaveWrapper = lazy(() =>
+  import("../common/WaveWrapper").catch(() => ({ default: () => <div>Failed to load WaveWrapper</div> }))
+);
+
+const Footer = lazy(() =>
+  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load Footer</div> }))
+);
+
+// Loading component
+const LoadingSpinner = ({ message = LOADING_TEXT }) => (
+  <div className="flex items-center justify-center py-8">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mr-3"></div>
+    <span className="text-gray-600">{message}</span>
+  </div>
+);
+
+const InfoBox = ({ icon: Icon, title, content, items }) => (
   <div className="info-box">
-    <Icon className="info-box-icons" />
+    <div className="info-box-icons" />
     <h6>{title}</h6>
     {content && <p>{content}</p>}
     {items && (
       <ul>
-        {items.map((i, idx) => (
-          <li key={idx}>{i}</li>
+        {items.map((item, idx) => (
+          <li key={idx}>{item}</li>
         ))}
       </ul>
     )}
@@ -33,70 +62,46 @@ const InfoBox = ({  title, content, items }) => (
 );
 
 const CompanyOverview = () => {
-  const [OpenVideo, setOpenVideo] = useState(false);
-  const handleOpenVideo = () => setOpenVideo(!OpenVideo);
-  const seo = useSeoHelmet("company-overview"); // Fetch SEO by slug
-
-
+  const [openVideo, setOpenVideo] = useState(false);
+  const handleOpenVideo = () => setOpenVideo(!openVideo);
+  const seo = useSeoHelmet("company-overview");
 
   return (
     <div>
       <SeoHelmet seo={seo} />
-
       <NavBar />
-      <Banner
-        title={"Company Overview"}
-        description={"Crafting Engineering Excellence"}
-      />
+      <Banner title={BANNER_TITLE} description={BANNER_DESCRIPTION} />
 
       <section className="we-are-section">
         <Container>
           <Row>
             <Col md={12} lg={6}>
               <div className="we-are-left">
-                <h2>
-                  Your Trusted and Visionary Partner in Engineering Excellence
-                </h2>
+                <h2>Your Trusted and Visionary Partner in Engineering Excellence</h2>
                 <p>
-                  Prefab buildings empower professional experts with faster
-                  deployment, design flexibility, and cost-effective
-                  construction solutions.
+                  Prefab buildings empower professional experts with faster deployment, design flexibility, and cost-effective construction solutions.
                 </p>
                 <p>
-                  Welcome to “DIY PreFab”— India’s emerging name in pre
-                  engineered building solutions and modular prefab construction.
+                  Welcome to “DIY PreFab”— India’s emerging name in pre-engineered building solutions and modular prefab construction.
                 </p>
+                <p>From remote villages to fast-paced industrial hubs, our mission is simple:</p>
+                <p>Make high-quality prefab structures accessible, fast, and affordable for all.</p>
                 <p>
-                  From remote villages to fast-paced industrial hubs, our
-                  mission is simple:
-                </p>
-                <p>
-                  Make high-quality prefab structures accessible, fast, and
-                  affordable for all.
-                </p>
-                <p>
-                  Whether you’re setting up a PEB warehouse in Rajasthan, a
-                  factory in Madhya Pradesh, or a modular shed in Gujarat, “DIY
-                  PreFab” delivers solutions tailored to your space, budget, and
-                  timeline.
+                  Whether you’re setting up a PEB warehouse in Rajasthan, a factory in Madhya Pradesh, or a modular shed in Gujarat, “DIY PreFab” delivers solutions tailored to your space, budget, and timeline.
                 </p>
                 <div className="we-are-left-content-container">
                   <div className="we-are-left-content-box">
                     <FaHelmetSafety className="performance-icons" />
                     <h4>Professional Expert</h4>
                     <p>
-                      Prefab buildings empower professional experts with faster
-                      deployment, design flexibility, and cost-effective
-                      construction solutions.
+                      Prefab buildings empower professional experts with faster deployment, design flexibility, and cost-effective construction solutions.
                     </p>
                   </div>
                   <div className="we-are-left-content-box">
                     <MdSupportAgent className="performance-icons" />
                     <h4>24/7 Premium Support</h4>
                     <p>
-                      Experience uninterrupted service and peace of mind with
-                      24/7 premium support tailored for your prefab building
-                      needs.
+                      Experience uninterrupted service and peace of mind with 24/7 premium support tailored for your prefab building needs.
                     </p>
                   </div>
                 </div>
@@ -105,11 +110,7 @@ const CompanyOverview = () => {
             <Col md={12} lg={6}>
               <div className="we-are-right">
                 <div className="we-are-back-image-section">
-                  <img
-                    src={ImagePath.WRB}
-                    alt="we-are-back"
-                    className="img-fluid"
-                  />
+                  <img src={ImagePath.WRB} alt="we-are-back" className="img-fluid" />
                   <div className="we-are-back-right-content-box">
                     <div className="we-are-back-right-content">
                       <h4>7+</h4>
@@ -134,8 +135,7 @@ const CompanyOverview = () => {
           <div className="WhoWeAre-box">
             <h2>Who We Are</h2>
             <p>
-              Backed by strong engineering, modern fabrication, and on-ground
-              project execution experience, we specialize in:
+              Backed by strong engineering, modern fabrication, and on-ground project execution experience, we specialize in:
             </p>
             <ul>
               <li>Pre Engineered Buildings (PEBs)</li>
@@ -145,18 +145,13 @@ const CompanyOverview = () => {
               <li>Projects Across Rural, Urban & International Markets</li>
             </ul>
             <p>
-              We proudly operate our in-house manufacturing facility in
-              Banswara, Rajasthan, covering over 10,000+ sqm of area.
+              We proudly operate our in-house manufacturing facility in Banswara, Rajasthan, covering over 10,000+ sqm of area.
             </p>
             <p>
-              With active operations in Udaipur, Jaipur, Ahmedabad, Indore, and
-              growing export success in South Africa, DIY PreFab is on a mission
-              to redefine how India builds — faster, smarter, and greener.
+              With active operations in Udaipur, Jaipur, Ahmedabad, Indore, and growing export success in South Africa, DIY PreFab is on a mission to redefine how India builds — faster, smarter, and greener.
             </p>
             <p>
-              Each building is designed using pre engineered steel frames,
-              precision-cut panels, and simplified assembly workflows — ensuring
-              strength, safety, and speed.
+              Each building is designed using pre-engineered steel frames, precision-cut panels, and simplified assembly workflows — ensuring strength, safety, and speed.
             </p>
           </div>
         </Container>
@@ -243,17 +238,10 @@ const CompanyOverview = () => {
         </Container>
       </section>
 
-      <section
-        className="our-vision-mission-section"
-        style={{
-          backgroundImage: `url(${ImagePath.Bg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover"
-        }}
-      >
+      <section className="our-vision-mission-section" style={{ backgroundImage: `url(${ImagePath.Bg})`, backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
         <Container>
           <div className="our-vision-video-section">
-            <img src={ImagePath.VideoBg} alt="" />
+            <img src={ImagePath.VideoBg} alt="Vision Video" />
             <div className="play-button">
               <div className="play-button-box" onClick={handleOpenVideo}>
                 <FaPlay className="play-button-icon" />
@@ -262,24 +250,15 @@ const CompanyOverview = () => {
             </div>
           </div>
         </Container>
-        {OpenVideo && (
-          <div className="play-video-container">
-            <button className="close-video-btn" onClick={handleOpenVideo}>✖</button>
-            <div className="video-wrapper">
-              <iframe
-                width="800"
-                height="450"
-                src="/video/videoplayback.webm"
-                title="Intro Video"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </div>
+        {openVideo && (
+
+          <Suspense fallback={null}>
+            <VideoModal open={openVideo} onClose={handleOpenVideo} />
+          </Suspense>
         )}
       </section>
 
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<LoadingSpinner />}>
         <CounterCard />
         <TrustSlider />
         <TestimonialCard />

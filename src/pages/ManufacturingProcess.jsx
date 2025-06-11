@@ -8,36 +8,187 @@ import useSeoHelmet from "../hooks/ReactHelmet";
 import SeoHelmet from "../common/SeoHelmet";
 
 // Lazy load components
-const NavBar = lazy(() => import("../common/NavBar"));
-const Banner = lazy(() => import("../common/Banner"));
-const OurVision = lazy(() => import("../common/OurVision"));
-const CounterCard = lazy(() => import("../common/CounterCard"));
-const TrustSlider = lazy(() => import("../common/TrustSlider"));
-const TestimonialCard = lazy(() => import("../common/TestimonialCard"));
-const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
-const Footer = lazy(() => import("../common/Footer"));
+const NavBar = lazy(() =>
+  import("../common/NavBar").then((module) => ({
+    default: module.default,
+  }))
+);
 
-const InfoBox = ({  title, children }) => (
+const Banner = lazy(() =>
+  import("../common/Banner").then((module) => ({
+    default: module.default,
+  }))
+);
+
+const OurVision = lazy(() =>
+  import("../common/OurVision").then((module) => ({
+    default: module.default,
+  }))
+);
+
+const CounterCard = lazy(() =>
+  import("../common/CounterCard").then((module) => ({
+    default: module.default,
+  }))
+);
+
+const TrustSlider = lazy(() =>
+  import("../common/TrustSlider").then((module) => ({
+    default: module.default,
+  }))
+);
+
+const TestimonialCard = lazy(() =>
+  import("../common/TestimonialCard").then((module) => ({
+    default: module.default,
+  }))
+);
+
+const WaveWrapper = lazy(() =>
+  import("../common/WaveWrapper").then((module) => ({
+    default: module.default,
+  }))
+);
+
+const Footer = lazy(() =>
+  import("../common/Footer").then((module) => ({
+    default: module.default,
+  }))
+);
+
+// Custom loading spinner component
+const LoadingSpinner = React.memo(() => (
+  <div
+    className="loading-spinner-container"
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "40px 0",
+      minHeight: "100px",
+    }}
+    role="status"
+    aria-label="Loading content"
+  >
+    <div
+      className="spinner"
+      style={{
+        width: "24px",
+        height: "24px",
+        border: "3px solid #f3f3f3",
+        borderTop: "3px solid #007bff",
+        borderRadius: "50%",
+        animation: "spin 1s linear infinite",
+      }}
+    />
+    <style jsx>{`
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    `}</style>
+  </div>
+));
+
+// Section loader component
+const SectionLoader = React.memo(({ height = "150px" }) => (
+  <div
+    style={{
+      minHeight: height,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      opacity: 0.7,
+    }}
+    role="status"
+    aria-label="Loading section"
+  >
+    <LoadingSpinner />
+  </div>
+));
+
+// Error boundary for lazy components
+class LazyComponentErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("Lazy component loading error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: "20px", textAlign: "center", color: "#666" }}>
+          <p>Something went wrong loading this section.</p>
+          <button
+            onClick={() => this.setState({ hasError: false })}
+            style={{
+              padding: "8px 16px",
+              border: "1px solid #ddd",
+              borderRadius: "4px",
+              background: "#f8f9fa",
+              cursor: "pointer",
+            }}
+          >
+            Retry
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+// Memoized InfoBox component
+const InfoBox = React.memo(({ icon: Icon, title, children }) => (
   <div className="info-box">
-    <Icon className="info-box-icons" />
+    <div className="info-box-icons" />
     <h6>{title}</h6>
     {children}
   </div>
-);
+));
+
+// Memoized ContentBox component
+const ContentBox = React.memo(({ icon, title, description }) => (
+  <div className="we-are-left-content-box">
+    {icon}
+    <h4>{title}</h4>
+    <p>{description}</p>
+  </div>
+));
 
 const ManufacturingProcess = () => {
-  const seo = useSeoHelmet("manufacturing-process"); // Fetch SEO by slug
+  const seo = useSeoHelmet("manufacturing-process");
 
   return (
     <div>
       <SeoHelmet seo={seo} />
 
-      <Suspense fallback={<div>Loading navigation...</div>}>
-        <NavBar />
+      <Suspense fallback={<SectionLoader height="60px" />}>
+        <LazyComponentErrorBoundary>
+          <NavBar />
+        </LazyComponentErrorBoundary>
       </Suspense>
 
-      <Suspense fallback={<div>Loading banner...</div>}>
-        <Banner title={"Manufacturing Process"} description={"Crafting Engineering Excellence"} />
+      <Suspense fallback={<SectionLoader height="200px" />}>
+        <LazyComponentErrorBoundary>
+          <Banner
+            title={"Manufacturing Process"}
+            description={"Crafting Engineering Excellence"}
+          />
+        </LazyComponentErrorBoundary>
       </Suspense>
 
       <section className="we-are-section">
@@ -62,24 +213,16 @@ const ManufacturingProcess = () => {
                   engineering, and experience.
                 </p>
                 <div className="we-are-left-content-container">
-                  <div className="we-are-left-content-box">
-                    <FaHelmetSafety className="performance-icons" />
-                    <h4>Professional Expert</h4>
-                    <p>
-                      Prefab buildings empower professional experts with faster
-                      deployment, design flexibility, and cost-effective
-                      construction solutions.
-                    </p>
-                  </div>
-                  <div className="we-are-left-content-box">
-                    <MdSupportAgent className="performance-icons" />
-                    <h4>24/7 Premium Support</h4>
-                    <p>
-                      Experience uninterrupted service and peace of mind with
-                      24/7 premium support tailored for your prefab building
-                      needs.
-                    </p>
-                  </div>
+                  <ContentBox
+                    icon={<FaHelmetSafety className="performance-icons" />}
+                    title="Professional Expert"
+                    description="Prefab buildings empower professional experts with faster deployment, design flexibility, and cost-effective construction solutions."
+                  />
+                  <ContentBox
+                    icon={<MdSupportAgent className="performance-icons" />}
+                    title="24/7 Premium Support"
+                    description="Experience uninterrupted service and peace of mind with 24/7 premium support tailored for your prefab building needs."
+                  />
                 </div>
               </div>
             </Col>
@@ -113,7 +256,10 @@ const ManufacturingProcess = () => {
       <section className="information-section manuf">
         <Container>
           <div className="information-container">
-            <InfoBox icon={FaWarehouse} title="Step-by-Step Prefab Manufacturing Process">
+            <InfoBox
+              icon={FaWarehouse}
+              title="Step-by-Step Prefab Manufacturing Process"
+            >
               <p>Here’s how we bring your dream structure to life:</p>
             </InfoBox>
 
@@ -121,7 +267,10 @@ const ManufacturingProcess = () => {
               <ul>
                 <li>Requirement gathering based on site, usage & load factors</li>
                 <li>2D/3D CAD modeling using structural design software</li>
-                <li>Design optimization for weight, cost, and environmental efficiency</li>
+                <li>
+                  Design optimization for weight, cost, and environmental
+                  efficiency
+                </li>
               </ul>
             </InfoBox>
 
@@ -133,7 +282,10 @@ const ManufacturingProcess = () => {
               </ul>
             </InfoBox>
 
-            <InfoBox icon={FaWarehouse} title="Supporting Sustainable Growth in India">
+            <InfoBox
+              icon={FaWarehouse}
+              title="Supporting Sustainable Growth in India"
+            >
               <p>Whether you're:</p>
               <p>
                 A farmer looking to build a recyclable agro shed, A business
@@ -160,18 +312,12 @@ const ManufacturingProcess = () => {
             </InfoBox>
 
             <InfoBox icon={FaWarehouse} title="Global Responsibility, Local Action">
-              <p>
-                We align with the UN Sustainable Development Goals (SDGs),
-                especially:
-              </p>
+              <p>We align with the UN Sustainable Development Goals (SDGs), especially:</p>
               <ul>
                 <li>Goal 9: Industry, Innovation & Infrastructure</li>
                 <li>Goal 11: Sustainable Cities & Communities</li>
                 <li>
-                  Goal 13: Climate Action Our project in South Africa
-                  demonstrates our ability to deliver low-carbon PEB buildings
-                  internationally — and we aim to bring these standards to every
-                  corner of India.
+                  Goal 13: Climate Action Our project in South Africa demonstrates our ability to deliver low-carbon PEB buildings internationally — and we aim to bring these standards to every corner of India.
                 </li>
               </ul>
             </InfoBox>
@@ -179,8 +325,10 @@ const ManufacturingProcess = () => {
         </Container>
       </section>
 
-      <Suspense fallback={<div>Loading vision section...</div>}>
-        <OurVision />
+      <Suspense fallback={<SectionLoader height="200px" />}>
+        <LazyComponentErrorBoundary>
+          <OurVision />
+        </LazyComponentErrorBoundary>
       </Suspense>
 
       <section className="common-section where-manuf-wrap">
@@ -188,37 +336,51 @@ const ManufacturingProcess = () => {
           <div className="wm-box">
             <h3>Where We Manufacture</h3>
             <p>
-              Our manufacturing operations are based in <strong>Rajasthan</strong>, with ongoing expansion
-              across <strong>central India</strong>. All projects — from <strong>Udaipur to Indore, Ahmedabad to Jaipur</strong> — are powered by our factory-to-site supply chain.
+              Our manufacturing operations are based in{" "}
+              <strong>Rajasthan</strong>, with ongoing expansion across{" "}
+              <strong>central India</strong>. All projects — from{" "}
+              <strong>Udaipur to Indore, Ahmedabad to Jaipur</strong> — are
+              powered by our factory-to-site supply chain.
             </p>
           </div>
           <div className="wm-box">
             <h3>Want a Custom PEB Kit for Your Site?</h3>
             <p>
-              We’ll take your concept from drawing board to delivery — backed by solid engineering and rapid execution.
+              We’ll take your concept from drawing board to delivery — backed by
+              solid engineering and rapid execution.
             </p>
           </div>
         </Container>
       </section>
 
-      <Suspense fallback={<div>Loading counters...</div>}>
-        <CounterCard />
+      <Suspense fallback={<SectionLoader height="200px" />}>
+        <LazyComponentErrorBoundary>
+          <CounterCard />
+        </LazyComponentErrorBoundary>
       </Suspense>
 
-      <Suspense fallback={<div>Loading trust slider...</div>}>
-        <TrustSlider />
+      <Suspense fallback={<SectionLoader height="200px" />}>
+        <LazyComponentErrorBoundary>
+          <TrustSlider />
+        </LazyComponentErrorBoundary>
       </Suspense>
 
-      <Suspense fallback={<div>Loading testimonials...</div>}>
-        <TestimonialCard />
+      <Suspense fallback={<SectionLoader height="200px" />}>
+        <LazyComponentErrorBoundary>
+          <TestimonialCard />
+        </LazyComponentErrorBoundary>
       </Suspense>
 
-      <Suspense fallback={<div>Loading footer visuals...</div>}>
-        <WaveWrapper />
-        <Footer />
+      <Suspense fallback={<SectionLoader height="200px" />}>
+        <LazyComponentErrorBoundary>
+          <WaveWrapper />
+        </LazyComponentErrorBoundary>
+        <LazyComponentErrorBoundary>
+          <Footer />
+        </LazyComponentErrorBoundary>
       </Suspense>
     </div>
   );
 };
 
-export default ManufacturingProcess;
+export default React.memo(ManufacturingProcess);

@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense, useCallback } from "react";
 import Banner from "../common/Banner";
 import NavBar from "../common/NavBar";
 import WhyChooseUs from "../components/productandservices/diyprefabkits/WhyChooseUs";
@@ -6,62 +6,94 @@ import WeOffer from "../components/productandservices/diyprefabkits/WeOffer";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
 import SeoHelmet from "../common/SeoHelmet";
 import useSeoHelmet from "../hooks/ReactHelmet";
-// / Lazy-loaded components
-const TrustSlider = lazy(() => import("../common/TrustSlider"));
-const CounterCard = lazy(() => import("../common/CounterCard"));
-const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
-const Footer = lazy(() => import("../common/Footer"));
-const VideoModal = lazy(() => import("../common/VideoModal"));
 
+// Lazy-loaded components with better error boundaries
+const TrustSlider = lazy(() => 
+  import("../common/TrustSlider").catch(() => ({ default: () => <div>Failed to load content</div> }))
+);
+const CounterCard = lazy(() => 
+  import("../common/CounterCard").catch(() => ({ default: () => <div>Failed to load content</div> }))
+);
+const WaveWrapper = lazy(() => 
+  import("../common/WaveWrapper").catch(() => ({ default: () => <div>Failed to load content</div> }))
+);
+const Footer = lazy(() => 
+  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load content</div> }))
+);
+const VideoModal = lazy(() => 
+  import("../common/VideoModal").catch(() => ({ default: () => <div>Failed to load content</div> }))
+);
 
+// Optimized loading component
+const LoadingSpinner = ({ message = "Loading..." }) => (
+  <div className="flex items-center justify-center py-8">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mr-3"></div>
+    <span className="text-gray-600">{message}</span>
+  </div>
+);
 
 const AccessoriesandCustomization = () => {
+  const [openVideo, setOpenVideo] = useState(false);
+  
+  // Memoized callback to prevent unnecessary re-renders
+  const handleOpenVideo = useCallback(() => {
+    setOpenVideo(prev => !prev);
+  }, []);
 
+  // Memoized callback for closing video
+  const handleCloseVideo = useCallback(() => {
+    setOpenVideo(false);
+  }, []);
 
-    const [openVideo, setOpenVideo] = useState(false);
-    const handleOpenVideo = () => setOpenVideo(!openVideo);
-    const seo = useSeoHelmet("accessories-customization"); // Fetch SEO by slug
+  const seo = useSeoHelmet("accessories-customization");
 
+  return (
+    <>
+      {/* SEO Meta Tags */}
+      <SeoHelmet seo={seo} />
+      
+      {/* Navigation */}
+      <NavBar />
+      
+      {/* Hero Section */}
+      <Banner />
+      
+      {/* Main Content Sections */}
+      <main>
+        <WhyChooseUs />
+        <WeOffer />
+        <OurServices />
+        
+        {/* Lazy-loaded sections with optimized loading states */}
+        <Suspense fallback={<LoadingSpinner message="Loading trust indicators..." />}>
+          <TrustSlider />
+        </Suspense>
+        
+        <Suspense fallback={<LoadingSpinner message="Loading statistics..." />}>
+          <CounterCard />
+        </Suspense>
+        
+        <Suspense fallback={<LoadingSpinner message="Loading visual elements..." />}>
+          <WaveWrapper />
+        </Suspense>
+      </main>
+      
+      {/* Footer */}
+      <Suspense fallback={<LoadingSpinner message="Loading footer..." />}>
+        <Footer />
+      </Suspense>
+      
+      {/* Video Modal - Only load when needed */}
+      {openVideo && (
+        <Suspense fallback={<LoadingSpinner message="Loading video player..." />}>
+          <VideoModal 
+            isOpen={openVideo} 
+            onClose={handleCloseVideo}
+          />
+        </Suspense>
+      )}
+    </>
+  );
+};
 
-    return (
-
-        <div>
-            <SeoHelmet seo={seo} />
-
-            <NavBar />
-            <Banner
-                title={"Accessories & Customization"}
-                description={"Engineering Excellence, Industrial Solutions"}
-            />
-
-            <OurServices />
-
-
-
-            <Suspense fallback={<div>Loading trust slider...</div>}>
-                <TrustSlider />
-            </Suspense>
-            <WeOffer />
-
-
-            <CounterCard />
-            <WhyChooseUs handleOpenVideo={handleOpenVideo} title={"World-Class Quality"} desc={"At “DIY PreFab”, we deliver high-performance steel and metal roofing systems that combine strength, aesthetics, and long-term value. Our roofing solutions are ideal for industrial, commercial, and residential prefab structures—ensuring lasting protection in all environments."} />
-
-
-
-            <Suspense fallback={<div>Loading visual section...</div>}>
-                <WaveWrapper />
-            </Suspense>
-
-            <Suspense fallback={<div>Loading footer...</div>}>
-                <Footer />
-            </Suspense>
-            {/* Video Modal */}
-            <Suspense fallback={null}>
-                <VideoModal open={openVideo} onClose={handleOpenVideo} />
-            </Suspense>
-        </div>
-    )
-}
-
-export default AccessoriesandCustomization
+export default AccessoriesandCustomization;

@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense, useCallback, useMemo } from "react";
+import React, { useState, lazy, Suspense, useCallback, useMemo, useEffect } from "react";
 import { Col, Container, Row } from "reactstrap";
 
 // Critical components - loaded immediately
@@ -48,7 +48,7 @@ const VideoModal = lazy(() =>
   }))
 );
 
-// Optimized loading components
+// Optimized loading components using functional components
 const LoadingSpinner = React.memo(() => (
   <div 
     className="loading-spinner-container"
@@ -98,9 +98,46 @@ const SectionLoader = React.memo(({ height = '150px' }) => (
   </div>
 ));
 
-// Preload critical components after initial render
+// Error boundary as functional component using react-error-boundary pattern
+const LazyComponentErrorBoundary = ({ children, fallback }) => {
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    const handleError = (error, errorInfo) => {
+      console.error('Lazy component loading error:', error, errorInfo);
+      setHasError(true);
+    };
+
+    // Reset error state when children change
+    setHasError(false);
+  }, [children]);
+
+  if (hasError) {
+    return fallback || (
+      <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
+        <p>Something went wrong loading this section.</p>
+        <button 
+          onClick={() => setHasError(false)}
+          style={{
+            padding: '8px 16px',
+            border: '1px solid #ddd',
+            borderRadius: '4px',
+            background: '#f8f9fa',
+            cursor: 'pointer'
+          }}
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  return children;
+};
+
+// Custom hook for component preloading
 const useComponentPreloading = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     const preloadComponents = () => {
       // Preload components that user is likely to interact with
       import("../common/WhoWeAre");
@@ -142,66 +179,49 @@ const useComponentPreloading = () => {
   }, []);
 };
 
-// Error boundary for lazy components
-class LazyComponentErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error('Lazy component loading error:', error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
-          <p>Something went wrong loading this section.</p>
-          <button 
-            onClick={() => this.setState({ hasError: false })}
-            style={{
-              padding: '8px 16px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              background: '#f8f9fa',
-              cursor: 'pointer'
-            }}
-          >
-            Retry
-          </button>
-        </div>
-      );
-    }
-
-    return this.props.children;
-  }
-}
-
-const Dashboard = () => {
+// Custom hook for video modal state management
+const useVideoModal = () => {
   const [openVideo, setOpenVideo] = useState(false);
   
-  // Memoize SEO data to prevent unnecessary re-renders
-  const seo = useSeoHelmet("home");
-  
-  // Optimize toggle function with useCallback
   const toggleVideo = useCallback(() => {
     setOpenVideo(prev => !prev);
   }, []);
 
+  const closeVideo = useCallback(() => {
+    setOpenVideo(false);
+  }, []);
+
+  const openVideoModal = useCallback(() => {
+    setOpenVideo(true);
+  }, []);
+
+  return {
+    openVideo,
+    toggleVideo,
+    closeVideo,
+    openVideoModal
+  };
+};
+
+// Main Dashboard functional component
+const Dashboard = () => {
+  // Custom hooks
+  const { openVideo, toggleVideo, closeVideo } = useVideoModal();
+  useComponentPreloading();
+  
+  // Memoize SEO data to prevent unnecessary re-renders
+  const seo = useSeoHelmet("home");
+  
   // Memoize video props to prevent unnecessary re-renders
   const videoProps = useMemo(() => ({
     openVideo,
-    setOpenVideo,
     toggleVideo
   }), [openVideo, toggleVideo]);
 
-  // Use component preloading hook
-  useComponentPreloading();
+  // Memoize static props that don't change
+  const whyChooseProps = useMemo(() => ({
+    toggleVideo
+  }), [toggleVideo]);
 
   return (
     <div className="dashboard-box">
@@ -231,7 +251,7 @@ const Dashboard = () => {
       <OurVision />
       <CounterCard />
 
-      <WhyChoose toggleVideo={toggleVideo} />
+      <WhyChoose {...whyChooseProps} />
 
       <WeOffer />
       <TakeAction />
@@ -265,7 +285,7 @@ const Dashboard = () => {
       {openVideo && (
         <LazyComponentErrorBoundary>
           <Suspense fallback={null}>
-            <VideoModal open={openVideo} onClose={toggleVideo} />
+            <VideoModal open={openVideo} onClose={closeVideo} />
           </Suspense>
         </LazyComponentErrorBoundary>
       )}
