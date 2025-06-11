@@ -154,7 +154,7 @@ class LazyComponentErrorBoundary extends React.Component {
 // Memoized InfoBox component
 const InfoBox = React.memo(({ icon: Icon, title, children }) => (
   <div className="info-box">
-    <Icon className="info-box-icons" />
+    <div className="info-box-icons" />
     <h6>{title}</h6>
     {children}
   </div>

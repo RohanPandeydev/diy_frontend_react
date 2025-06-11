@@ -48,7 +48,7 @@ const LoadingSpinner = ({ message = LOADING_TEXT }) => (
 
 const InfoBox = ({ icon: Icon, title, content, items }) => (
   <div className="info-box">
-    {Icon && <Icon className="info-box-icons" />}
+    <div className="info-box-icons" />
     <h6>{title}</h6>
     {content && <p>{content}</p>}
     {items && (
