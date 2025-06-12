@@ -16,93 +16,6 @@ const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
 const Footer = lazy(() => import("../common/Footer"));
 const VideoModal = lazy(() => import("../common/VideoModal"));
 
-// Loading Spinner Component
-const LoadingSpinner = React.memo(() => (
-  <div
-    className="loading-spinner-container"
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: "40px 0",
-      minHeight: "100px",
-    }}
-    role="status"
-    aria-label="Loading content"
-  >
-    <div
-      className="spinner"
-      style={{
-        width: "24px",
-        height: "24px",
-        border: "3px solid #f3f3f3",
-        borderTop: "3px solid #007bff",
-        borderRadius: "50%",
-        animation: "spin 1s linear infinite",
-      }}
-    />
-    <style>
-      {`
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-      `}
-    </style>
-  </div>
-));
-
-// Section Loader Component
-const SectionLoader = React.memo(({ height = "150px" }) => (
-  <div
-    style={{
-      minHeight: height,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      opacity: 0.7,
-    }}
-    role="status"
-    aria-label="Loading section"
-  >
-    <LoadingSpinner />
-  </div>
-));
-
-// Error Boundary Component
-const ErrorBoundary = ({ children }) => {
-  const [hasError, setHasError] = useState(false);
-
-  if (hasError) {
-    return (
-      <div style={{ padding: "20px", textAlign: "center", color: "#666" }}>
-        <p>Something went wrong loading this section.</p>
-        <button
-          onClick={() => setHasError(false)}
-          style={{
-            padding: "8px 16px",
-            border: "1px solid #ddd",
-            borderRadius: "4px",
-            background: "#f8f9fa",
-            cursor: "pointer",
-          }}
-        >
-          Retry
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <React.ErrorBoundary
-      onError={() => setHasError(true)}
-      fallbackRender={() => null}
-    >
-      {children}
-    </React.ErrorBoundary>
-  );
-};
-
 const ProductandServices = () => {
   const [openVideo, setOpenVideo] = useState(false);
   const handleOpenVideo = () => setOpenVideo(!openVideo);
@@ -146,25 +59,23 @@ const ProductandServices = () => {
                   </tr>
                 </thead>
                 <tbody className="common-table-tbody">
-                  {comparisonListProductandServices.map((compare, index) => (
-                    <tr key={index}>
+                  {comparisonListProductandServices.map((compare) => (
+                    <tr key={compare.id}>
                       <td><p><strong>{compare.feature}</strong></p></td>
                       <td><p>{compare.prefab}</p></td>
                     </tr>
                   ))}
                 </tbody>
               </Table>
-              <p><strong>Service Areas: </strong> Rajasthan, Gujarat, Madhya Pradesh — especially Udaipur, Jaipur, Ahmedabad, and Indore</p>
+              <p><strong>Service Areas:</strong> Rajasthan, Gujarat, Madhya Pradesh — especially Udaipur, Jaipur, Ahmedabad, and Indore</p>
             </div>
           </div>
         </Container>
       </section>
 
-      <ErrorBoundary>
-        <Suspense fallback={<SectionLoader height="200px" />}>
-          <TrustSlider />
-        </Suspense>
-      </ErrorBoundary>
+      <Suspense fallback={<div>Loading...</div>}>
+        <TrustSlider />
+      </Suspense>
 
       <section className="product we-offer" style={{ backgroundImage: `url(${ImagePath.Bg})`, backgroundSize: "cover", backgroundPosition: "center", padding: "60px 0", backgroundColor: "#a8dadc" }}>
         <Container>
@@ -180,7 +91,7 @@ const ProductandServices = () => {
                     <div className="we-offer-icon">{item.icon}</div>
                     <div className="we-offer-content">
                       <h4>{item.title}</h4>
-                      <p>{item.description && item.description}</p>
+                      <p>{item.description}</p>
                       <ul>
                         {item.listData && item.listData.map((listItem, listIndex) => (
                           <li key={listIndex}>{listItem}</li>
@@ -207,11 +118,7 @@ const ProductandServices = () => {
         </Container>
       </section>
 
-      <ErrorBoundary>
-        <Suspense fallback={<SectionLoader height="200px" />}>
-          <CounterCard />
-        </Suspense>
-      </ErrorBoundary>
+      <CounterCard />
 
       <section className="common-section WhoWeAre-about">
         <Container>
@@ -230,25 +137,17 @@ const ProductandServices = () => {
 
       <WhyChooseUs handleOpenVideo={handleOpenVideo} />
 
-      <ErrorBoundary>
-        <Suspense fallback={<SectionLoader height="200px" />}>
-          <WaveWrapper />
-        </Suspense>
-      </ErrorBoundary>
+      <Suspense fallback={<div>Loading visual section...</div>}>
+        <WaveWrapper />
+      </Suspense>
 
-      <ErrorBoundary>
-        <Suspense fallback={<SectionLoader height="200px" />}>
-          <Footer />
-        </Suspense>
-      </ErrorBoundary>
+      <Suspense fallback={<div>Loading footer...</div>}>
+        <Footer />
+      </Suspense>
 
-      {openVideo && (
-        <ErrorBoundary>
-          <Suspense fallback={null}>
-            <VideoModal open={openVideo} onClose={handleOpenVideo} />
-          </Suspense>
-        </ErrorBoundary>
-      )}
+      <Suspense fallback={null}>
+        <VideoModal open={openVideo} onClose={handleOpenVideo} />
+      </Suspense>
     </div>
   );
 };
