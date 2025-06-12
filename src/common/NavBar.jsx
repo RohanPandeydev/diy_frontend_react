@@ -21,13 +21,18 @@ const Header = () => {
   const [mobileOpenSubmenu, setMobileOpenSubmenu] = useState(null);
   const [hoveredSubIndex, setHoveredSubIndex] = useState(null);
 
-  const toggleDrawer = useCallback(() => setIsDrawerOpen(prev => !prev), []);
+  const toggleDrawer = useCallback(() => {
+    setIsDrawerOpen(prev => !prev);
+  }, []);
 
-  const handleMouseEnter = index => setOpenSubmenu(index);
-  const handleMouseLeave = () => {
+  const handleMouseEnter = useCallback((index) => {
+    setOpenSubmenu(index);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
     setOpenSubmenu(null);
     setHoveredSubIndex(null);
-  };
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -36,19 +41,22 @@ const Header = () => {
         setMobileOpenSubmenu(null);
       }
     };
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [isDrawerOpen]);
 
   const renderSubsubmenu = (subItem, subIndex, index, isMobile = false) => {
     const isOpen = hoveredSubIndex === `${index}-${subIndex}`;
+    const toggleSubsubmenu = () => {
+      setHoveredSubIndex(isOpen ? null : `${index}-${subIndex}`);
+    };
+
     return (
       subItem.subsubmenu && (
         <>
           <button
-            onClick={() =>
-              setHoveredSubIndex(isOpen ? null : `${index}-${subIndex}`)
-            }
+            onClick={toggleSubsubmenu}
             className="bg-transparent border-0 p-0 ms-2"
             aria-label="Toggle subsubmenu"
             aria-haspopup="true"
@@ -62,7 +70,7 @@ const Header = () => {
           </button>
           {isOpen && (
             <div className={isMobile ? "mobile-subsubmenu ps-3" : "subsubmenu"}>
-              {subItem.subsubmenu.map(child => (
+              {subItem.subsubmenu.map((child) => (
                 <Link
                   key={child.link}
                   to={child.link}
@@ -98,6 +106,7 @@ const Header = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="header-social-box"
+            aria-label="LinkedIn"
           >
             <FaLinkedinIn className="top-header-social-icon" />
           </a>
@@ -106,6 +115,7 @@ const Header = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="header-social-box"
+            aria-label="YouTube"
           >
             <FaYoutube className="top-header-social-icon" />
           </a>
@@ -144,18 +154,18 @@ const Header = () => {
                         <div
                           key={subItem.id}
                           className="submenu-item-wrapper"
-                          onMouseEnter={() => setHoveredSubIndex(subIndex)}
+                          onMouseEnter={() => setHoveredSubIndex(`${index}-${subIndex}`)}
                           onMouseLeave={() => setHoveredSubIndex(null)}
                         >
                           <Link to={subItem.link} className="submenu-link">
                             {subItem.title}
                             {subItem.subsubmenu && (
                               <span className="submenu-arrow ms-2">
-                                {hoveredSubIndex === subIndex ? <IoIosArrowUp /> : <IoIosArrowForward />}
+                                {hoveredSubIndex === `${index}-${subIndex}` ? <IoIosArrowUp /> : <IoIosArrowForward />}
                               </span>
                             )}
                           </Link>
-                          {hoveredSubIndex === subIndex && subItem.subsubmenu && (
+                          {hoveredSubIndex === `${index}-${subIndex}` && subItem.subsubmenu && (
                             <div className="subsubmenu">
                               {subItem.subsubmenu.map(child => (
                                 <Link key={child.link} to={child.link} className="submenu-link">

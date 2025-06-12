@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const Counter = ({ end = 100, duration = 2000, label = "Label", showPercent = true }) => {
+const Counter = React.memo(({ end = 100, duration = 2000, label = "Label", showPercent = true }) => {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
@@ -24,7 +24,7 @@ const Counter = ({ end = 100, duration = 2000, label = "Label", showPercent = tr
     }
   }, [inView, end, duration, hasAnimated]);
 
-  const formattedValue = showPercent ? `${count}%` : `${count}`;
+  const formattedValue = showPercent ? `${count}%` : count.toString();
 
   return (
     <div ref={ref} className="counter-box text-center">
@@ -32,6 +32,6 @@ const Counter = ({ end = 100, duration = 2000, label = "Label", showPercent = tr
       <p>{label}</p>
     </div>
   );
-};
+});
 
 export default Counter;

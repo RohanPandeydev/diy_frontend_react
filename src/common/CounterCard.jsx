@@ -1,8 +1,8 @@
-import React from 'react'
-import { Container } from 'reactstrap'
-import Counter from './Counter'
+import React from 'react';
+import { Container } from 'reactstrap';
+import Counter from './Counter';
 
-const CounterCard = () => {
+const CounterCard = React.memo(() => {
   return (
     <section className="counter-section">
       <Container>
@@ -14,7 +14,7 @@ const CounterCard = () => {
         </div>
       </Container>
     </section>
-  )
-}
+  );
+});
 
-export default CounterCard
+export default CounterCard;

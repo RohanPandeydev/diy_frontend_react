@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import { Button, Container } from "reactstrap";
 import { sliderImages, sliderSettings } from "../../Constants";
 
-const HeroSlider = () => {
+const HeroSlider = React.memo(() => {
   return (
     <div className="slider-container">
       <Container>
@@ -24,30 +24,20 @@ const HeroSlider = () => {
         </div>
       </Container>
 
-      <Slider
-        {...sliderSettings}
-        // Reduce slides rendered at once to improve render speed
-        lazyLoad="ondemand"
-        // You can also adjust 'initialSlide' or 'slidesToShow' in sliderSettings if needed
-      >
+      <Slider {...sliderSettings} lazyLoad="ondemand">
         {sliderImages.map(({ id, image }) => (
           <div key={id} className="slider-img-box">
             <img
               src={image}
-              alt={`Slider ${id}`}
-              loading="lazy" // Lazy load to reduce initial load blocking
+              alt={`Slide ${id}`}
+              loading="lazy"
               className="slider-image"
-              style={{
-                width: "100%",
-                height: "100%",
-                transition: "transform 0.5s ease", // reduce transition duration
-              }}
             />
           </div>
         ))}
       </Slider>
     </div>
   );
-};
+});
 
 export default HeroSlider;
