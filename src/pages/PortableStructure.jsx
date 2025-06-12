@@ -104,7 +104,7 @@ const ErrorBoundary = ({ children }) => {
 const PortableStructure = () => {
   const [openVideo, setOpenVideo] = useState(false);
   const handleOpenVideo = () => setOpenVideo(!openVideo);
-  const seo = useSeoHelmet("portable-structures");
+const seo = useSeoHelmet("portable-structures") || {};
 
   return (
     <div>
