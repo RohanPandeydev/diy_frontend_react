@@ -7,15 +7,15 @@ import OurServices from "../components/productandservices/diyprefabkits/OurServi
 import SeoHelmet from "../common/SeoHelmet";
 import useSeoHelmet from "../hooks/ReactHelmet";
 
-// Lazy-loaded components
+// ✅ Lazy-loaded components
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
 const CounterCard = lazy(() => import("../common/CounterCard"));
 const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
 const Footer = lazy(() => import("../common/Footer"));
 const VideoModal = lazy(() => import("../common/VideoModal"));
 
-// Loading Spinner Component
-const LoadingSpinner = React.memo(() => (
+// ✅ Loading spinner
+const LoadingSpinner = () => (
   <div
     className="loading-spinner-container"
     style={{
@@ -44,14 +44,13 @@ const LoadingSpinner = React.memo(() => (
         @keyframes spin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
-        }
-      `}
+        `}
     </style>
   </div>
-));
+);
 
-// Section Loader Component
-const SectionLoader = React.memo(({ height = "150px" }) => (
+// ✅ SectionLoader
+const SectionLoader = ({ height = "150px" }) => (
   <div
     style={{
       minHeight: height,
@@ -65,46 +64,60 @@ const SectionLoader = React.memo(({ height = "150px" }) => (
   >
     <LoadingSpinner />
   </div>
-));
+);
 
-// Error Boundary Component
-const ErrorBoundary = ({ children }) => {
-  const [hasError, setHasError] = useState(false);
-
-  if (hasError) {
-    return (
-      <div style={{ padding: "20px", textAlign: "center", color: "#666" }}>
-        <p>Something went wrong loading this section.</p>
-        <button
-          onClick={() => setHasError(false)}
-          style={{
-            padding: "8px 16px",
-            border: "1px solid #ddd",
-            borderRadius: "4px",
-            background: "#f8f9fa",
-            cursor: "pointer",
-          }}
-        >
-          Retry
-        </button>
-      </div>
-    );
+// ✅ Real Error Boundary
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
   }
 
-  return (
-    <React.ErrorBoundary
-      onError={() => setHasError(true)}
-      fallbackRender={() => null}
-    >
-      {children}
-    </React.ErrorBoundary>
-  );
-};
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
 
+  componentDidCatch(error, info) {
+    console.error("Error in component:", error, info);
+  }
+
+  handleRetry = () => {
+    this.setState({ hasError: false });
+  };
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: "20px", textAlign: "center", color: "#666" }}>
+          <p>Something went wrong loading this section.</p>
+          <button
+            onClick={this.handleRetry}
+            style={{
+              padding: "8px 16px",
+              border: "1px solid #ddd",
+              borderRadius: "4px",
+              background: "#f8f9fa",
+              cursor: "pointer",
+            }}
+          >
+            Retry
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+// ✅ Main Component
 const PortableStructure = () => {
   const [openVideo, setOpenVideo] = useState(false);
   const handleOpenVideo = () => setOpenVideo(!openVideo);
-const seo = useSeoHelmet("portable-structures") || {};
+  const seo = useSeoHelmet("portable-structures") || {
+    title: "Portable Structures - DIY PreFab",
+    description: "Explore portable steel structures designed for performance and durability.",
+  };
 
   return (
     <div>
@@ -115,17 +128,21 @@ const seo = useSeoHelmet("portable-structures") || {};
         description={"Engineering Excellence, Industrial Solutions"}
       />
       <OurServices />
+
       <ErrorBoundary>
         <Suspense fallback={<SectionLoader height="200px" />}>
           <TrustSlider />
         </Suspense>
       </ErrorBoundary>
+
       <WeOffer />
+
       <ErrorBoundary>
         <Suspense fallback={<SectionLoader height="200px" />}>
           <CounterCard />
         </Suspense>
       </ErrorBoundary>
+
       <WhyChooseUs
         handleOpenVideo={handleOpenVideo}
         title={"Innovative, Durable, and Versatile Portable Solutions"}
@@ -133,16 +150,19 @@ const seo = useSeoHelmet("portable-structures") || {};
           "At 'DIY PreFab', we deliver high-performance steel and metal roofing systems that combine strength, aesthetics, and long-term value. Our roofing solutions are ideal for industrial, commercial, and residential prefab structures—ensuring lasting protection in all environments."
         }
       />
+
       <ErrorBoundary>
         <Suspense fallback={<SectionLoader height="200px" />}>
           <WaveWrapper />
         </Suspense>
       </ErrorBoundary>
+
       <ErrorBoundary>
         <Suspense fallback={<SectionLoader height="200px" />}>
           <Footer />
         </Suspense>
       </ErrorBoundary>
+
       {/* Video Modal */}
       {openVideo && (
         <ErrorBoundary>
