@@ -11,10 +11,10 @@ const imageList = [
   { img: ImagePath.downSlider5 },
 ];
 
-const TrustSlider = () => {
+const TrustSlider = React.memo(() => {
   const settings = {
     infinite: true,
-    speed: 8000,             // Reduced speed
+    speed: 8000,
     autoplay: true,
     autoplaySpeed: 0,
     cssEase: 'linear',
@@ -23,6 +23,14 @@ const TrustSlider = () => {
     rtl: false,
     arrows: false,
     pauseOnHover: false,
+    responsive: [
+      {
+        breakpoint: 768, // Adjust settings for smaller screens
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
   };
 
   return (
@@ -31,9 +39,7 @@ const TrustSlider = () => {
         <Row className="align-items-center">
           <Col md={6}>
             <div className="trust-slider-container">
-              <h2>
-                Trusted by Engineering Visionaries and Industrial Innovators Worldwide
-              </h2>
+              <h2>Trusted by Engineering Visionaries and Industrial Innovators Worldwide</h2>
               <p>
                 Trusted by engineering and industrial leaders for delivering
                 innovative, reliable, and scalable prefab building solutions.
@@ -46,7 +52,7 @@ const TrustSlider = () => {
                       src={item.img}
                       alt={`Slide ${index + 1}`}
                       loading="lazy"
-                      style={{ width: '100%', padding: '0 5px', borderRadius: '8px' }}
+                      className="slider-image"
                     />
                   </div>
                 ))}
@@ -57,7 +63,7 @@ const TrustSlider = () => {
             <div className="trust-map-img-box">
               <img
                 src={ImagePath.Map}
-                alt="map"
+                alt="World map showing trust locations"
                 className="img-fluid"
                 loading="lazy"
               />
@@ -67,6 +73,6 @@ const TrustSlider = () => {
       </Container>
     </section>
   );
-};
+});
 
-export default React.memo(TrustSlider);
+export default TrustSlider;

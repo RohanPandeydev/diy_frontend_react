@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Button, Col, Row } from 'reactstrap';
 
 const ContactForm = () => {
@@ -7,7 +7,7 @@ const ContactForm = () => {
         name: '',
         email: '',
         message: '',
-        interest: '', // Add interest field
+        interest: '',
     });
 
     // State for error messages
@@ -15,43 +15,21 @@ const ContactForm = () => {
         name: '',
         email: '',
         message: '',
-        interest: '', // Add interest error state
+        interest: '',
     });
 
-    // Handle form input changes
-    const handleInputChange = (e) => {
+    // Handle form input changes with useCallback to memoize the function
+    const handleInputChange = useCallback((e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({ ...prevData, [name]: value }));
-    };
+    }, []);
 
-  
-
-    // Handle form submit
-    const handleSubmit = (e) => {
+    // Handle form submit with useCallback to memoize the function
+    const handleSubmit = useCallback((e) => {
         e.preventDefault();
-
-        // if (validateForm()) {
-        //     // If form is valid, send email using EmailJS
-        //     emailjs
-        //         .sendForm(
-        //             'service_kdfpnlo',   // Replace with your EmailJS service ID
-        //             'template_c8aqmrp',   // Replace with your EmailJS template ID
-        //             e.target,
-        //             'Pcw8p3eXr0Idt7n7b'   // Replace with your EmailJS user ID
-        //         )
-        //         .then(
-        //             (result) => {
-        //                 alert('Message sent successfully!');
-        //                 setFormData({ name: '', email: '', message: '', interest: '' }); // Clear the form
-        //             },
-        //             (error) => {
-        //                 alert('Error sending message: ' + error.text);
-        //             }
-        //         );
-        // } else {
-        //     alert('Please fill out all fields correctly.');
-        // }
-    };
+        // Form submission logic here
+        alert('Form submitted');
+    }, []);
 
     return (
         <div className="contact-form">
@@ -90,7 +68,7 @@ const ContactForm = () => {
                             <label>Interest of Service</label>
                             <input
                                 type="text"
-                                name="interest" 
+                                name="interest"
                                 value={formData.interest}
                                 onChange={handleInputChange}
                                 required
@@ -120,4 +98,4 @@ const ContactForm = () => {
     );
 };
 
-export default ContactForm;
+export default React.memo(ContactForm);

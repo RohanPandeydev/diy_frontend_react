@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { Container } from 'reactstrap';
 
-import { Container } from 'reactstrap'
-
-const Banner = ({ title, description }) => {
+// Use React.memo to memoize the component
+const Banner = React.memo(({ title, description }) => {
     return (
         <div className="banner-pattern-wrapper">
             <Container>
@@ -12,7 +12,7 @@ const Banner = ({ title, description }) => {
                 </div>
             </Container>
         </div>
-    )
-}
+    );
+});
 
-export default Banner
+export default Banner;
