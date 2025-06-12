@@ -68,38 +68,44 @@ const SectionLoader = React.memo(({ height = "150px" }) => (
 ));
 
 // Error Boundary Component
-const ErrorBoundary = ({ children }) => {
-  const [hasError, setHasError] = useState(false);
-
-  if (hasError) {
-    return (
-      <div style={{ padding: "20px", textAlign: "center", color: "#666" }}>
-        <p>Something went wrong loading this section.</p>
-        <button
-          onClick={() => setHasError(false)}
-          style={{
-            padding: "8px 16px",
-            border: "1px solid #ddd",
-            borderRadius: "4px",
-            background: "#f8f9fa",
-            cursor: "pointer",
-          }}
-        >
-          Retry
-        </button>
-      </div>
-    );
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
   }
 
-  return (
-    <React.ErrorBoundary
-      onError={() => setHasError(true)}
-      fallbackRender={() => null}
-    >
-      {children}
-    </React.ErrorBoundary>
-  );
-};
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("Error caught by ErrorBoundary:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: "20px", textAlign: "center", color: "#666" }}>
+          <p>Something went wrong loading this section.</p>
+          <button
+            onClick={() => this.setState({ hasError: false })}
+            style={{
+              padding: "8px 16px",
+              border: "1px solid #ddd",
+              borderRadius: "4px",
+              background: "#f8f9fa",
+              cursor: "pointer",
+            }}
+          >
+            Retry
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
 
 const StorageWarehousing = () => {
   const [openVideo, setOpenVideo] = useState(false);
