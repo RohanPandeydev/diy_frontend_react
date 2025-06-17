@@ -56,7 +56,9 @@ const AccessoriesandCustomization = () => {
       <NavBar />
       
       {/* Hero Section */}
-      <Banner />
+      <Banner 
+      title="Accessories and Customization" 
+      description="Engineering Excellence, Industrial Solutions"/>
       
       {/* Main Content Sections */}
       <main>
