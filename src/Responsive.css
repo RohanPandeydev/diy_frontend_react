@@ -52,7 +52,6 @@
   .navlink-custom {
     font-size: 12px !important;
   }
-  
 }
 @media (max-width: 1199px) {
   .sign-up-content h5 {
@@ -61,11 +60,11 @@
   .logo-image {
     display: block;
     width: 80px;
-    height: 60px;
+    height: 50px;
   }
-  .navlink-custom {
+  /* .navlink-custom {
     font-size: 9px !important;
-  }
+  } */
   .we-are-left {
     gap: 10px;
   }
@@ -224,7 +223,7 @@
   .real-world-cases-container {
     grid-template-columns: repeat(2, 1fr);
   }
-  .benefits-cases-container{
+  .benefits-cases-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -454,12 +453,24 @@
 }
 
 @media (max-width: 575px) {
+  .logo-image {
+    width: 60px;
+    height: 50px;
+  }
+  .slider-container.unique .slick-slider {
+    height: 500px;
+  }
+  .submenu-link {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
   .header-top {
     gap: 10px;
+    padding: 10px 10px;
   }
   .contact-info-container {
     gap: 10px;
-    /* margin-bottom: 20px; */
+    margin-bottom: 0px;
   }
   .contact-info-box p {
     font-size: 12px;
@@ -476,6 +487,7 @@
   .video-section-container {
     grid-template-columns: repeat(1, 1fr);
     margin-bottom: 20px;
+    margin-top: 50px;
   }
 
   .we-are-left {
@@ -506,8 +518,14 @@
     margin: 0px !important;
   }
 
-  .we-are-back-image-section {
-    object-fit: cover;
+  .we-are-back-image-section img {
+    height: 300px;
+  }
+  .our-vision-video-section {
+    height: 300px;
+  }
+  .counter-box {
+    border-right: none !important;
   }
   .we-do-container {
     grid-template-columns: repeat(1, 1fr);
@@ -549,8 +567,8 @@
     margin-bottom: 20px;
   }
   .why-choose-right-content-container {
-    height: 200px;
-    margin-bottom: 10px;
+    height: auto;
+    margin-bottom: 20px;
   }
   .we-offer-container {
     grid-template-columns: repeat(1, 1fr);
@@ -593,6 +611,7 @@
   }
 
   .trust-slider-container {
+    width: 100%;
     gap: 10px;
     margin-bottom: 20px;
   }
@@ -627,8 +646,8 @@
   .why-choose-left-content-container h6::after {
     width: 60px;
   }
-  .why-choose-left-content-container h4 {
-    font-size: 13px;
+  .why-choose-left-content-container > h4 {
+    font-size: 16px;
   }
   .why-choose-left-content-container p {
     font-size: 12px;
@@ -665,7 +684,87 @@
   .right-testimony-box {
     padding: 10px;
   }
+  .our-project-right {
+    margin-top: 30px;
+  }
+  .latest-projects-wrap.common-section {
+    padding: 40px 0px;
+  }
+  .latest-proj-head h2 {
+    font-size: 30px;
+  }
+  .latest-proj-head {
+    margin-bottom: 10px;
+  }
+  .why-latest-box h3 {
+    font-size: 30px;
+  }
+  .comparison-section {
+    padding: 20px 0px;
+  }
+  .benefits-cases-container {
+    padding: 0px 0px 140px;
+  }
+  .common-section {
+    padding: 40px 0px;
+  }
   .information-container {
     grid-template-columns: repeat(1, 1fr);
+    padding: 20px 0px 140px;
+  }
+  .testimonial-section {
+    padding: 40px 0px;
+  }
+  form {
+    width: 100%;
+  }
+  .slider-content-box {
+    width: 100%;
+    padding-right: 30px;
+  }
+  .slider-content-box h3 {
+    font-size: 26px;
+  }
+  .we-are-left > h2 {
+    font-size: 22px;
+  }
+  .we-are-left > p {
+    font-size: 13px;
+    line-height: 24px;
+  }
+  .wsustain-box {
+    margin-top: 30px;
+  }
+  .our-service-performance {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .our-service-right{
+    padding: 0px;
+  }
+  .project-gallery-list{
+    margin-bottom: 30px;
+  }
+  .project-empower-wrap .project-empower-box h3{
+   font-size: 30px;
+  }
+  .project-empower-wrap .project-empower-box p{
+   font-size: 16px;
+  }
+  .project-empower-box{
+    width: 90%;
+  }
+  .common-section.success-stories-wrap{
+    padding: 40px 0px 0px;
+  }
+  .join-box{
+    margin: 0px;
+    width: 100%;;
+  }
+  .join-img-right{
+    display: none;
+  }
+  .join-wrap{
+    min-height: fit-content;
   }
 }

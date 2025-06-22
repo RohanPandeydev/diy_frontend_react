@@ -20,7 +20,7 @@ const WaveWrapper = React.memo(() => {
       <Container>
         <div className="sign-up-content">
           <h5>
-            Stay updated with our latest news, <br /> promotions, and tech insights.
+            Stay updated with our latest news, promotions, and tech insights.
           </h5>
           <form onSubmit={handleSubmit}>
             <div className="input-button-wrapper">
