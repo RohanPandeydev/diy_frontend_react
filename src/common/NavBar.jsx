@@ -122,7 +122,7 @@ const Header = () => {
         </div>
       </section>
 
-      <Navbar expand="md" className="px-4 d-flex justify-content-between navbar-container">
+      <Navbar expand="md" className="sm:px-4 d-flex justify-content-between navbar-container">
         <NavLink to="/" className="logo-image">
           <img src={ImagePath.Logo} alt="DIY Prefab Logo" className="img-fluid" loading="lazy" />
         </NavLink>
@@ -195,13 +195,13 @@ const Header = () => {
             <IoCloseSharp className="side-bar-close-btn-icon" />
           </Button>
         </div>
-        <Nav vertical className="p-4">
+        <Nav vertical className="p-4 gap-3">
           {navItems.map((item, index) => (
             <div key={item.slug || item.title} className="d-flex flex-column">
               <div className="d-flex justify-content-between align-items-center side-nav-box">
                 <Link
                   to={item.link || "#"}
-                  className="flex-grow-1 text-decoration-none"
+                  className="flex-grow-1 text-decoration-none text-white"
                   onClick={toggleDrawer}
                 >
                   {item.title}

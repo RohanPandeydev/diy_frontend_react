@@ -8,9 +8,14 @@
   padding: 0;
   margin: 0;
 }
+html,
+body {
+  overflow-x: hidden;
+}
 body {
   box-sizing: border-box;
   overflow-x: hidden !important;
+  padding-top: 116px;
 }
 hr {
   margin: 10px 0px !important;
@@ -60,10 +65,11 @@ hr {
 
 .header {
   width: 100%;
-  /* position: sticky; */
+  position: fixed;
   top: 0;
   left: 0px;
   z-index: 9999;
+  box-shadow: 0px 2px 2px #00000066;
 }
 
 .header-top {
@@ -140,8 +146,8 @@ hr {
 }
 .logo-image {
   display: block;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 }
 .logo-image img {
   width: 100%;
@@ -223,7 +229,9 @@ hr {
   text-decoration: none;
   /* transition: color 0.3s; */
 }
-
+.contact-info-box {
+  text-decoration: none;
+}
 /* Active item */
 /* .navlink-custom.active {
   color: #007bff;
@@ -1251,7 +1259,8 @@ hr {
   justify-content: center;
   gap: 10px;
 }
-.we-offer-content ul, .we-offer-hover-content ul {
+.we-offer-content ul,
+.we-offer-hover-content ul {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -1740,7 +1749,7 @@ body {
   max-height: 400px;
   height: 100%;
   background-color: #342e2e;
-  background-image: url("../src/assets/images/pattern-4.png");
+  background-image: url("../src/assets/images/pattern-4.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -2293,20 +2302,23 @@ thead tr th {
   font-weight: 400;
   color: #001524;
 }
-
+.common-section.success-stories-wrap{
+  padding: 80px 0px 0px;
+}
 .sucess-box {
+  margin-bottom: 100px;
   box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.4);
 }
 .sucess-box .sucess-img {
   width: 90%;
-  margin: auto;
+  margin: 0px auto;
   height: 100%;
 }
 .sucess-box .sucess-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  margin-top: -80px;
+  margin-top: -60px;
   position: relative;
   z-index: 1;
   box-shadow: 0px 0px 7px -4px rgba(0, 0, 0, 0.4);
@@ -2322,6 +2334,9 @@ thead tr th {
   font-weight: 600;
   color: #001524;
   margin-bottom: 0px;
+}
+.success-head{
+  margin-bottom: 100px;
 }
 .sucess-stories-lower p {
   font-size: 18px;
@@ -2705,7 +2720,6 @@ thead tr th {
   font-weight: 600;
   color: #001524;
   margin-bottom: 0px;
-
 }
 .blog-date {
   font-size: 13px;
@@ -2718,6 +2732,7 @@ thead tr th {
   margin-bottom: 10px;
   /* Limit to two lines */
   display: -webkit-box;
+  line-clamp: 3;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -2802,7 +2817,7 @@ thead tr th {
 }
 
 .job-opening-content {
-  display: flex ;
+  display: flex;
   align-items: center;
   gap: 20px;
   margin-bottom: 20px;
@@ -2826,10 +2841,12 @@ thead tr th {
   color: #001524;
   margin-bottom: 0px;
 }
-.form-control, .form-select {
+.form-control,
+.form-select {
   border-radius: 0px !important;
 }
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
   border-color: none !important;
   box-shadow: none !important;
   outline: none !important;
@@ -2841,6 +2858,7 @@ thead tr th {
 }
 .job-listing-box {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
@@ -2874,7 +2892,7 @@ thead tr th {
 .job-date p {
   margin-bottom: 8px;
   font-size: 14px;
-  color: #666;    
+  color: #666;
   font-weight: 400;
 }
 
@@ -2917,7 +2935,8 @@ thead tr th {
   color: #0b6bb0;
   margin-bottom: 5px;
 }
-.work-culture-right-box p, .work-culture-right-box ul li {
+.work-culture-right-box p,
+.work-culture-right-box ul li {
   font-size: 14px;
   font-weight: 400;
   color: #000;

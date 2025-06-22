@@ -5,7 +5,7 @@ import { sliderImages, sliderSettings } from "../../Constants";
 
 const HeroSlider = React.memo(() => {
   return (
-    <div className="slider-container">
+    <div className="slider-container unique">
       <Container>
         <div className="slider-content-box">
           <span>We provide cutting-edge, PEB Structure Solutions</span>

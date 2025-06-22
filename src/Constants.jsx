@@ -111,8 +111,8 @@ export const navItems = [
     link: "/contact-us",
     submenu: [
       { id: 46, title: "Inquiry Form", link: "/contact-us/inquiry-form" },
-      { id: 47, title: "Locate Our Dealers", link: "/contact-us/locate-our-dealers" },
-      { id: 48, title: "Customer Support", link: "/contact-us/customer-support" },
+      // { id: 47, title: "Locate Our Dealers", link: "/contact-us/locate-our-dealers" },
+      // { id: 48, title: "Customer Support", link: "/contact-us/customer-support" },
     ],
   },
 ];
