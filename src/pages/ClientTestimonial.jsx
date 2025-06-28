@@ -20,6 +20,7 @@ const JOIN_US_DESCRIPTION = "Elit consectetuer blandit diam quam cubilia. Dis sa
 const INSIGHTS_TITLE = "Insight & Article";
 const INSIGHTS_BUTTON_TEXT = "All Article";
 const LOADING_TEXT = "Loading...";
+const JOIN_US_BUTTON_TEXT = "Join Us";
 
 // Lazy-loaded components with error handling
 const WaveWrapper = lazy(() =>

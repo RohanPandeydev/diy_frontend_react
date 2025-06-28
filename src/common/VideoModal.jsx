@@ -1,5 +1,5 @@
 import React from "react";
-import video from "../assets/video/videoplayback.webm";
+import video from "../assets/video/dummyvideo.mp4";
 
 const VideoModal = ({ open, onClose }) => {
   if (!open) return null;
