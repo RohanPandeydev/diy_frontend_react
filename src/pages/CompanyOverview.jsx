@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from "react";
+import  { useState, lazy, Suspense } from "react";
 import ImagePath from "../assets/ImagePath";
 import { FaWarehouse } from "react-icons/fa";
 import { FaHelmetSafety } from "react-icons/fa6";
@@ -11,6 +11,7 @@ import Banner from "../common/Banner";
 import SeoHelmet from "../common/SeoHelmet";
 import useSeoHelmet from "../hooks/ReactHelmet";
 import VideoModal from "../common/VideoModal";
+import Footer from "../common/Footer";
 
 // Constants
 const BANNER_TITLE = "Company Overview";
@@ -34,9 +35,7 @@ const WaveWrapper = lazy(() =>
   import("../common/WaveWrapper").catch(() => ({ default: () => <div>Failed to load WaveWrapper</div> }))
 );
 
-const Footer = lazy(() =>
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load Footer</div> }))
-);
+
 
 // Loading component
 const LoadingSpinner = ({ message = LOADING_TEXT }) => (
@@ -46,7 +45,7 @@ const LoadingSpinner = ({ message = LOADING_TEXT }) => (
   </div>
 );
 
-const InfoBox = ({ icon: Icon, title, content, items }) => (
+const InfoBox = ({  title, content, items }) => (
   <div className="info-box">
     <div className="info-box-icons" />
     <h6>{title}</h6>

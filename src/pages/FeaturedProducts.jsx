@@ -5,6 +5,7 @@ import Banner from '../common/Banner';
 import ImagePath from "../assets/ImagePath";
 import useSeoHelmet from "../hooks/ReactHelmet";
 import SeoHelmet from "../common/SeoHelmet";
+import Footer from "../common/Footer";
 
 // Constants
 const BANNER_TITLE = "Featured Projects";
@@ -27,9 +28,6 @@ const WaveWrapper = lazy(() =>
   import("../common/WaveWrapper").catch(() => ({ default: () => <div>Failed to load WaveWrapper</div> }))
 );
 
-const Footer = lazy(() =>
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load Footer</div> }))
-);
 
 // Loading component
 const LoadingSpinner = ({ message = LOADING_TEXT }) => (

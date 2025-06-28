@@ -6,6 +6,7 @@ import WeOffer from "../components/productandservices/diyprefabkits/WeOffer";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
 import SeoHelmet from "../common/SeoHelmet";
 import useSeoHelmet from "../hooks/ReactHelmet";
+import Footer from "../common/Footer";
 
 // Lazy-loaded components with better error boundaries
 const TrustSlider = lazy(() => 
@@ -17,9 +18,7 @@ const CounterCard = lazy(() =>
 const WaveWrapper = lazy(() => 
   import("../common/WaveWrapper").catch(() => ({ default: () => <div>Failed to load content</div> }))
 );
-const Footer = lazy(() => 
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load content</div> }))
-);
+
 const VideoModal = lazy(() => 
   import("../common/VideoModal").catch(() => ({ default: () => <div>Failed to load content</div> }))
 );
@@ -35,10 +34,7 @@ const LoadingSpinner = ({ message = "Loading..." }) => (
 const AccessoriesandCustomization = () => {
   const [openVideo, setOpenVideo] = useState(false);
   
-  // Memoized callback to prevent unnecessary re-renders
-  const handleOpenVideo = useCallback(() => {
-    setOpenVideo(prev => !prev);
-  }, []);
+
 
   // Memoized callback for closing video
   const handleCloseVideo = useCallback(() => {

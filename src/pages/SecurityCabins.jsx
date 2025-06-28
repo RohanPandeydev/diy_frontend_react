@@ -11,7 +11,7 @@ const CounterCard = lazy(() => import("../common/CounterCard"));
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
 const TestimonialCard = lazy(() => import("../common/TestimonialCard"));
 const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
-const Footer = lazy(() => import("../common/Footer"));
+import Footer from "../common/Footer";
 const OurVision = lazy(() => import("../common/OurVision"));
 const VideoModal = lazy(() => import("../common/VideoModal"));
 

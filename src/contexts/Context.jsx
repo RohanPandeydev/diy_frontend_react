@@ -1,6 +1,5 @@
 import React from "react";
 import { createContext, useContext } from "react";
-import StorageData from "../helper/storagehelper/StorageData";
 
 const userContext = createContext();
 const ContextWrapper = ({ children }) => {

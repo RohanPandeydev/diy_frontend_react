@@ -1,11 +1,10 @@
 import axios from "axios";
 import config from "../../config";
-import HttpHeaders from "../helper/httphelper/HttpHeaders";
 
 const SeoServices = {};
 
 SeoServices.seoList = () => {
-    return axios.get(`${config.apiUrl}/api/seo`, HttpHeaders.getAuthHeader());
+    return axios.get(`${config.apiUrl}/api/seo`);
 };
 SeoServices.seoBySlug = (params) => {
     if (!params?.slug) {

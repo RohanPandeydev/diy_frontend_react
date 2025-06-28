@@ -10,6 +10,7 @@ import WhyChooseUs from "../components/productandservices/wallroofingsolutions/s
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
 import SeoHelmet from "../common/SeoHelmet";
 import useSeoHelmet from "../hooks/ReactHelmet";
+import Footer from "../common/Footer";
 
 // Lazy-loaded components with error handling
 const TrustSlider = lazy(() => 
@@ -21,9 +22,7 @@ const CounterCard = lazy(() =>
 const WaveWrapper = lazy(() => 
   import("../common/WaveWrapper").catch(() => ({ default: () => <div>Failed to load content</div> }))
 );
-const Footer = lazy(() => 
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load content</div> }))
-);
+
 const VideoModal = lazy(() => 
   import("../common/VideoModal").catch(() => ({ default: () => <div>Failed to load content</div> }))
 );

@@ -6,6 +6,7 @@ import WeOffer from "../components/productandservices/diyprefabkits/WeOffer";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
 import SeoHelmet from "../common/SeoHelmet";
 import useSeoHelmet from "../hooks/ReactHelmet";
+import Footer from "../common/Footer";
 
 // Constants
 const BANNER_TITLE = "Fiber Cement Boards";
@@ -27,9 +28,6 @@ const WaveWrapper = lazy(() =>
   import("../common/WaveWrapper").catch(() => ({ default: () => <div>Failed to load WaveWrapper</div> }))
 );
 
-const Footer = lazy(() =>
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load Footer</div> }))
-);
 
 const VideoModal = lazy(() =>
   import("../common/VideoModal").catch(() => ({ default: () => <div>Failed to load VideoModal</div> }))

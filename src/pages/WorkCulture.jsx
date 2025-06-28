@@ -10,7 +10,7 @@ import SeoHelmet from "../common/SeoHelmet";
 
 // Lazy-loaded components
 const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
-const Footer = lazy(() => import("../common/Footer"));
+import Footer from "../common/Footer";
 const VideoModal = lazy(() => import("../common/VideoModal"));
 const OurVision = lazy(() => import("../common/OurVision"));
 

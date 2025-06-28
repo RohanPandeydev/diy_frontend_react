@@ -8,6 +8,7 @@ import Comparison from "../components/productandservices/diyprefabkits/homekit/C
 import Faq from "../components/productandservices/diyprefabkits/homekit/Faq";
 import useSeoHelmet from "../hooks/ReactHelmet";
 import SeoHelmet from "../common/SeoHelmet";
+import Footer from "../common/Footer";
 
 // Constants
 const BANNER_TITLE = "Commercial";
@@ -31,9 +32,7 @@ const WaveWrapper = lazy(() =>
   import("../common/WaveWrapper").catch(() => ({ default: () => <div>Failed to load WaveWrapper</div> }))
 );
 
-const Footer = lazy(() =>
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load Footer</div> }))
-);
+
 
 const VideoModal = lazy(() =>
   import("../common/VideoModal").catch(() => ({ default: () => <div>Failed to load VideoModal</div> }))

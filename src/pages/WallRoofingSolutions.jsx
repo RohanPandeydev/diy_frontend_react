@@ -11,7 +11,7 @@ import SeoHelmet from "../common/SeoHelmet";
 const TrustSlider = lazy(() => import("../common/TrustSlider"));
 const CounterCard = lazy(() => import("../common/CounterCard"));
 const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
-const Footer = lazy(() => import("../common/Footer"));
+import Footer from "../common/Footer";
 const VideoModal = lazy(() => import("../common/VideoModal"));
 
 // Loading Spinner Component
@@ -74,7 +74,7 @@ class ErrorBoundary extends React.Component {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 

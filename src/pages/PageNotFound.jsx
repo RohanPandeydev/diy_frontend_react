@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react'
-const Footer = lazy(() => import("../common/Footer"));
+import Footer from "../common/Footer";
 import Banner from "../common/Banner";
 import NavBar from "../common/NavBar";
 const PageNotFound = () => {

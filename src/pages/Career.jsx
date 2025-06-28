@@ -6,6 +6,7 @@ import useSeoHelmet from "../hooks/ReactHelmet";
 import SeoHelmet from "../common/SeoHelmet";
 import NavBar from "../common/NavBar";
 import ImagePath from "../assets/ImagePath";
+import Footer from "../common/Footer";
 
 // Constants
 const COMPANY_NAME = "DIY PreFab";
@@ -17,9 +18,7 @@ const WaveWrapper = lazy(() =>
   import("../common/WaveWrapper").catch(() => ({ default: () => <div>Failed to load WaveWrapper</div> }))
 );
 
-const Footer = lazy(() =>
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load Footer</div> }))
-);
+
 
 // Loading component
 const LoadingSpinner = ({ message = "Loading..." }) => (

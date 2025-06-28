@@ -10,6 +10,7 @@ import Faq from "../components/productandservices/diyprefabkits/Faq";
 import OurServices from "../components/productandservices/diyprefabkits/OurServices";
 import useSeoHelmet from "../hooks/ReactHelmet";
 import SeoHelmet from "../common/SeoHelmet";
+import Footer from "../common/Footer";
 
 // Constants
 const BANNER_TITLE = "DIY PreFab Kits";
@@ -31,9 +32,7 @@ const WaveWrapper = lazy(() =>
   import("../common/WaveWrapper").catch(() => ({ default: () => <div>Failed to load WaveWrapper</div> }))
 );
 
-const Footer = lazy(() =>
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load Footer</div> }))
-);
+
 
 const VideoModal = lazy(() =>
   import("../common/VideoModal").catch(() => ({ default: () => <div>Failed to load VideoModal</div> }))

@@ -9,6 +9,7 @@ import TestimonialCard from "../common/TestimonialCard";
 import OurVision from "../common/OurVision";
 import SeoHelmet from "../common/SeoHelmet";
 import useSeoHelmet from "../hooks/ReactHelmet";
+import Footer from "../common/Footer";
 
 // Strategic lazy loading - group by priority and usage
 const CounterCard = lazy(() => 
@@ -30,11 +31,7 @@ const WaveWrapper = lazy(() =>
   }))
 );
 
-const Footer = lazy(() => 
-  import("../common/Footer").then(module => ({
-    default: module.default
-  }))
-);
+
 
 // Modal - only load when needed
 const VideoModal = lazy(() => 
@@ -169,7 +166,7 @@ class LazyComponentErrorBoundary extends React.Component {
     this.state = { hasError: false, retryCount: 0 };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 

@@ -5,6 +5,7 @@ import Banner from "../common/Banner";
 import NavBar from "../common/NavBar";
 import useSeoHelmet from "../hooks/ReactHelmet";
 import SeoHelmet from "../common/SeoHelmet";
+import Footer from "../common/Footer";
 
 // Constants
 const BANNER_TITLE = "Doors & Windows";
@@ -28,9 +29,7 @@ const WaveWrapper = lazy(() =>
   import("../common/WaveWrapper").catch(() => ({ default: () => <div>Failed to load WaveWrapper</div> }))
 );
 
-const Footer = lazy(() =>
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load Footer</div> }))
-);
+
 
 const OurVision = lazy(() =>
   import("../common/OurVision").catch(() => ({ default: () => <div>Failed to load OurVision</div> }))

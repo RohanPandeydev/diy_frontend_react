@@ -14,8 +14,7 @@ import Pagination from '../utils/Pagination';
 import { Row } from 'reactstrap';
 
 // Lazy-loaded components
-const WaveWrapper = lazy(() => import("../common/WaveWrapper"));
-const Footer = lazy(() => import("../common/Footer"));
+import Footer from "../common/Footer";
 
 // Loading Spinner Component
 const LoadingSpinner = React.memo(() => (
@@ -112,10 +111,9 @@ class ErrorBoundary extends React.Component {
 
 const SustainabilityInPreFab = () => {
   const seo = useSeoHelmet("sustainability-in-prefab");
-  const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const [limit, setLimit] = useState(10);
+  const [limit] = useState(10);
 
   // Get page from URL, default to 1
   const currentPage = parseInt(searchParams.get('page') || '1');
@@ -134,7 +132,7 @@ const SustainabilityInPreFab = () => {
     ]),
     select: (data) => data?.data,
     errorMsg: "",
-    onSuccess: (data) => { /* Handle success if needed */ },
+    onSuccess: () => { /* Handle success if needed */ },
   });
 
   return (

@@ -8,6 +8,7 @@ import NavBar from "../common/NavBar";
 import useSeoHelmet from "../hooks/ReactHelmet";
 import SeoHelmet from "../common/SeoHelmet";
 import ContactForm from "../components/contactus/ContactForm";
+import Footer from "../common/Footer";
 
 // Constants
 const BANNER_TITLE = "Contact Us";
@@ -18,9 +19,7 @@ const SECTION_DESCRIPTION = "Connect with engineering excellence that delivers s
 const LOADING_TEXT = "Loading...";
 
 // Lazy-loaded components with error handling
-const Footer = lazy(() =>
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load footer</div> }))
-);
+
 
 // Loading component
 const LoadingSpinner = ({ message = LOADING_TEXT }) => (

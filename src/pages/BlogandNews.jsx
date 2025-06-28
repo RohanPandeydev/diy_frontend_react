@@ -12,11 +12,10 @@ import Loader from '../utils/Loader/Loader';
 import NoDataFound from '../utils/NoDataFound';
 import BlogCard from '../components/blogandnews/BlogCard';
 import Pagination from '../utils/Pagination';
+import Footer from '../common/Footer';
 
 // Lazy-loaded components with error handling
-const Footer = lazy(() => 
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load footer</div> }))
-);
+
 
 // Loading component
 const LoadingSpinner = ({ message = "Loading..." }) => (

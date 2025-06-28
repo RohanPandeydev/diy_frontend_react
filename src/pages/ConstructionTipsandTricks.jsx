@@ -12,6 +12,7 @@ import Loader from '../utils/Loader/Loader';
 import NoDataFound from '../utils/NoDataFound';
 import BlogCard from '../components/blogandnews/BlogCard';
 import Pagination from '../utils/Pagination';
+import Footer from '../common/Footer';
 
 // Constants
 const BANNER_TITLE = "Blog and News";
@@ -22,9 +23,6 @@ const DEFAULT_PAGE = 1;
 const LOADING_TEXT = "Loading...";
 
 // Lazy-loaded components with error handling
-const Footer = lazy(() =>
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load footer</div> }))
-);
 
 // Loading component
 const LoadingSpinner = ({ message = LOADING_TEXT }) => (
@@ -36,10 +34,9 @@ const LoadingSpinner = ({ message = LOADING_TEXT }) => (
 
 const ConstructionTipsandTricks = () => {
   const seo = useSeoHelmet("construction-tips-tricks");
-  const navigate = useNavigate();
   const location = useLocation();
   const searchParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
-  const [limit, setLimit] = useState(DEFAULT_LIMIT);
+  const [limit] = useState(DEFAULT_LIMIT);
 
   // Memoized current page
   const currentPage = useMemo(() =>
@@ -67,7 +64,7 @@ const ConstructionTipsandTricks = () => {
     service: BlogServices.blogList,
     params: queryParams,
     select: (data) => data?.data,
-    onSuccess: (data) => {
+    onSuccess: () => {
       // Optional: Analytics or other side effects
     }
   });

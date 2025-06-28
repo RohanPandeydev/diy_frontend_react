@@ -5,6 +5,7 @@ import Banner from "../common/Banner";
 import ContactForm from "../common/ContactForm";
 import SeoHelmet from "../common/SeoHelmet";
 import useSeoHelmet from "../hooks/ReactHelmet";
+import Footer from "../common/Footer";
 
 // Constants
 const BANNER_TITLE = "Inquiry Form";
@@ -12,9 +13,7 @@ const BANNER_DESCRIPTION = "Reach Out for Innovation and Industrial Solutions";
 const LOADING_TEXT = "Loading...";
 
 // Lazy-loaded components with error handling
-const Footer = lazy(() =>
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load footer</div> }))
-);
+
 
 // Loading component
 const LoadingSpinner = ({ message = LOADING_TEXT }) => (

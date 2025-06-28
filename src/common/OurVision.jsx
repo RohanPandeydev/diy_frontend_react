@@ -45,10 +45,12 @@ const OurVision = () => {
                 <div className='play-video-container' onClick={handleOpenVideo}>
                     <button className="close-video-btn" aria-label="Close Video">✖</button>
                     <div className="video-wrapper">
-                        <video width="800" height="450" controls autoPlay>
-                            <source src="../src/assets/video/dummyvideo.mp4" type="video/webm" />
+                        <video width="800" height="450" preload="none" controls autoPlay poster={ImagePath.Logo}>
+                            <source src="../src/assets/video/dummyvideo.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
+
+                       
                     </div>
                 </div>
             )}

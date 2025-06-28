@@ -12,15 +12,14 @@ import moment from 'moment';
 import parse from 'html-react-parser';
 import { buildQueryString } from '../utils/BuildQuery';
 import ImagePath from '../assets/ImagePath';
+import Footer from '../common/Footer';
 
 // Lazy-loaded components with error handling
 const WaveWrapper = lazy(() =>
   import("../common/WaveWrapper").catch(() => ({ default: () => <div>Failed to load WaveWrapper</div> }))
 );
 
-const Footer = lazy(() =>
-  import("../common/Footer").catch(() => ({ default: () => <div>Failed to load footer</div> }))
-);
+
 
 // Loading component
 const LoadingSpinner = ({ message = "Loading..." }) => (
@@ -59,7 +58,7 @@ const BlogDetails = () => {
       }
       return data?.data?.data;
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       // Optional: Analytics or other side effects
     }
   });

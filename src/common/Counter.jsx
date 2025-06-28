@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 const Counter = React.memo(({ end = 100, duration = 2000, label = "Label", showPercent = true }) => {
