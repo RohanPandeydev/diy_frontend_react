@@ -230,25 +230,35 @@ export const sliderImages = [
 
 export const sliderSettings = {
   infinite: true,
-  speed: 100,
+  speed: 500, // Increased from 100 for smoother animation
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: true,
-  autoplaySpeed: 3000,
-  cssEase: "ease",
-  beforeChange: () => {
-    document.querySelectorAll(".slider-image").forEach((img) =>
-      img.classList.remove("zoom-in")
-    );
+  autoplaySpeed: 4000, // Slightly increased for better UX
+  cssEase: "cubic-bezier(0.4, 0, 0.2, 1)", // More performant easing
+  arrows: false, // Remove arrows for cleaner look and better performance
+  dots: true,
+  pauseOnHover: true,
+  swipeToSlide: true,
+  touchThreshold: 10,
+  accessibility: true,
+  beforeChange: (oldIndex, newIndex) => {
+    // More efficient DOM manipulation
+    const images = document.querySelectorAll(".slider-image");
+    images.forEach((img, index) => {
+      if (index === oldIndex) {
+        img.classList.remove("zoom-in", "active");
+      }
+    });
   },
-  afterChange: () => {
-    const activeImage = document.querySelector(
-      ".slick-active .slider-image"
-    );
-    activeImage?.classList.add("zoom-in");
+  afterChange: (currentSlide) => {
+    // Add zoom effect to active slide
+    const activeImage = document.querySelector(".slick-active .slider-image");
+    if (activeImage) {
+      activeImage.classList.add("zoom-in", "active");
+    }
   },
 };
-
 export const performanceList = [
   {
     icon: <IoLogoElectron className="performance-icons" />,

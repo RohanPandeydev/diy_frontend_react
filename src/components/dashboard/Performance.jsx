@@ -12,7 +12,7 @@ const Performance = ({toggleVideo}) => {
             <Container>
               <div className="video-section-container">
                 <div className="video-section">
-                  <img src={ImagePath.Performance} alt="Video" className="img-fluid" />
+                  <img src={"images/performance-banner.webp"||ImagePath.Performance} alt="Video" className="img-fluid" />
                   <div className="play-button" onClick={toggleVideo}>
                     <div className="play-button-box">
                       <FaPlay className="play-button-icon" />

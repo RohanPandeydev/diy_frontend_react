@@ -1,76 +1,44 @@
 
-import Logo from "./images/logo.png";
-import Performance from "./images/performance-banner.jpg";
-import WRB from "./images/we-are-back.jpeg";
-import WeOffer from "./images/we-offer.jpg";
-import TakeAction from "./images/take-action.webp";
-import Map from "./images/map.png";
-import BannerPattern from "./images/pattern-4.jpg";
-import ChooseUsVideo from "./images/choose-us-video.webp";
-import ChooseUsImg from "./images/choose-us-img.webp";
-import Bg from "./images/background-of-the-geometric-pattern.webp";
-import VideoBg from "./images/robotic-arms-along-assembly-line-in-modern-factory.jpg";
-import PlayButton from "./images/play-button.png";
-import Slider1 from "./images/choose-us-img.webp";
-import Slider2 from "./images/slider-2.webp";
-import Slider3 from "./images/slider-6.webp";
-import Slider4 from "./images/slider-5.webp";
-import Slider5 from "./images/we-are-back.jpeg";
-import MainSlider1 from "./images/main-slider-1.webp";
-import featureProject from "./images/feature-project.webp";
-import downSlider1 from "./images/1.png";
-import downSlider2 from "./images/2.png";
-import downSlider3 from "./images/3.png";
-import downSlider4 from "./images/4.png";
-import downSlider5 from "./images/5.png";
-import waveBg from "./images/wave-bg.jpg";
-import ourService from "./images/ourService-img.jpg";
-import sucessImg1 from "./images/sucess-img1.jpg";
-import sucessImg2 from "./images/sucess-img2.jpg";
-import sucessImg3 from "./images/sucess-img3.jpg";
-import sucessImg4 from "./images/sucess-img4.jpg";
-import sucessBg from "./images/sucess-bg.jpg"
-import projectBnrBg from './images/project-banner-img.jpg'
-import featureproject from './images/feature-project.webp'
-import projectgGalleryMainImg from './images/project-gallery-mainImg.webp'
-import projectsmallimg from './images/project-small-img.jpg'
 
+
+
+// Image paths as string constants (not imports)
 const ImagePath = {
-  Logo,
-  Performance,
-  WRB,
-  WeOffer,
-  TakeAction,
-  Map,
-  BannerPattern,
-  ChooseUsVideo,
-  ChooseUsImg,
-  Bg,
-  VideoBg,
-  PlayButton,
-  Slider1,
-  Slider2,
-  Slider3,
-  Slider4,
-  Slider5,
-  MainSlider1,
-  featureProject,
-  downSlider1,
-  downSlider2,
-  downSlider3,
-  downSlider4,
-  downSlider5,
-  waveBg,
-  ourService,
-  sucessImg1,
-  sucessImg2,
-  sucessImg3,
-  sucessImg4,
-  sucessBg,
-  projectBnrBg,
-  featureproject,
-  projectgGalleryMainImg,
-  projectsmallimg
+  Logo: "https://diyprefab.com/images/logo.png",
+  Performance: "https://diyprefab.com/images/performance-banner.webp",
+  WRB: "https://diyprefab.com/images/we-are-back.jpeg",
+  WeOffer: "https://diyprefab.com/images/we-offer.webp",
+  TakeAction: "https://diyprefab.com/images/take-action.webp",
+  Map: "https://diyprefab.com/images/map.png",
+  BannerPattern: "https://diyprefab.com/images/pattern-4.webp",
+  ChooseUsVideo: "https://diyprefab.com/images/choose-us-video.webp",
+  ChooseUsImg: "https://diyprefab.com/images/choose-us-img.webp",
+  Bg: "https://diyprefab.com/images/background-of-the-geometric-pattern.webp",
+  VideoBg: "https://diyprefab.com/images/robotic-arms-along-assembly-line-in-modern-factory.jpg",
+  PlayButton: "https://diyprefab.com/images/play-button.png",
+  Slider1: "https://diyprefab.com/images/choose-us-img.webp",
+  Slider2: "https://diyprefab.com/images/slider-2.webp",
+  Slider3: "https://diyprefab.com/images/slider-6.webp",
+  Slider4: "https://diyprefab.com/images/slider-5.webp",
+  Slider5: "https://diyprefab.com/images/we-are-back.jpeg",
+  MainSlider1: "https://diyprefab.com/images/main-slider-1.webp",
+  featureProject: "https://diyprefab.com/images/feature-project.webp",
+  downSlider1: "https://diyprefab.com/images/1.png",
+  downSlider2: "https://diyprefab.com/images/2.png",
+  downSlider3: "https://diyprefab.com/images/3.png",
+  downSlider4: "https://diyprefab.com/images/4.png",
+  downSlider5: "https://diyprefab.com/images/5.png",
+  waveBg: "https://diyprefab.com/images/wave-bg.webp",
+  ourService: "https://diyprefab.com/images/ourService-img.webp",
+  sucessImg1: "https://diyprefab.com/images/sucess-img1.webp",
+  sucessImg2: "https://diyprefab.com/images/sucess-img2.webp",
+  sucessImg3: "https://diyprefab.com/images/sucess-img3.webp",
+  sucessImg4: "https://diyprefab.com/images/sucess-img4.webp",
+  sucessBg: "https://diyprefab.com/images/sucess-bg.webp",
+  projectBnrBg: "https://diyprefab.com/images/project-banner-img.webp",
+  featureproject: "https://diyprefab.com/images/feature-project.webp",
+  projectgGalleryMainImg: "https://diyprefab.com/images/project-gallery-mainImg.webp",
+  projectsmallimg: "https://diyprefab.com/images/project-small-img.webp"
 };
 
 export default ImagePath;

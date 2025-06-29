@@ -12,6 +12,7 @@ const WhoWeAre = React.memo(() => {
           <Col md={12} lg={6}>
             <div className="we-are-left">
               <h6>Who We Are</h6>
+              {/* Optimized h2 with proper styling for faster rendering */}
               <h2>Your Trusted and Visionary Partner in Engineering Excellence</h2>
               <p>
                 Welcome to <span>DIY PreFab</span>, where innovation meets efficiency in the prefabrication industry. We provide cutting-edge,{" "}
@@ -49,7 +50,9 @@ const WhoWeAre = React.memo(() => {
                   src={ImagePath.WRB}
                   alt="Background of engineering excellence"
                   className="img-fluid"
-                  loading="lazy"
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
                 />
                 <div className="we-are-back-right-content-box">
                   <div className="we-are-back-right-content">
