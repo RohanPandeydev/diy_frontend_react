@@ -477,7 +477,7 @@ const Dashboard = () => {
 
       {/* Hero Section - Critical, load immediately with high priority */}
       <ErrorBoundary componentName="HeroSlider">
-        <Suspense fallback={<SectionPlaceholder />}>
+        <Suspense fallback={<SectionPlaceholder height="60vh" aspectRatio="16/9" />}>
           <HeroSlider />
         </Suspense>
       </ErrorBoundary>
