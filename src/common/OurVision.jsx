@@ -46,7 +46,7 @@ const OurVision = () => {
                     <button className="close-video-btn" aria-label="Close Video">✖</button>
                     <div className="video-wrapper">
                         <video width="800" height="450" preload="none" controls autoPlay poster={ImagePath.Logo}>
-                            <source src="../src/assets/video/dummyvideo.mp4" type="video/mp4" />
+                            <source src="https://diyprefab.com/video/dummyvideo.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
 

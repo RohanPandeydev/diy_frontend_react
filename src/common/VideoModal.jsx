@@ -1,5 +1,4 @@
 import React from "react";
-import video from "../assets/video/dummyvideo.mp4";
 
 const VideoModal = ({ open, onClose }) => {
   if (!open) return null;
@@ -9,7 +8,7 @@ const VideoModal = ({ open, onClose }) => {
       <button aria-label="Close Video" className="close-video-btn">✖</button>
       <div className="video-wrapper">
         <video width="800" height="450" controls autoPlay>
-          <source src={video} type="video/webm" />
+          <source src={"https://diyprefab.com/video/dummyvideo.mp4"} type="video/webm" />
           Your browser does not support the video tag.
         </video>
       </div>
