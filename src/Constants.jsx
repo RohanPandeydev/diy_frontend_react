@@ -223,7 +223,7 @@ export const weDo = [
 export const sliderImages = [
   { id: 1, image: ImagePath.MainSlider1 },
   { id: 2, image: ImagePath.Slider2 },
-  { id: 3, image: ImagePath.Slider3 },
+  // { id: 3, image: ImagePath.Slider3 },
   { id: 4, image: ImagePath.Slider4 },
   { id: 5, image: ImagePath.Slider5 },
 ];
@@ -237,7 +237,7 @@ export const sliderSettings = {
   autoplaySpeed: 4000, // Slightly increased for better UX
   cssEase: "cubic-bezier(0.4, 0, 0.2, 1)", // More performant easing
   arrows: false, // Remove arrows for cleaner look and better performance
-  dots: true,
+  dots: false,
   pauseOnHover: true,
   swipeToSlide: true,
   touchThreshold: 10,
