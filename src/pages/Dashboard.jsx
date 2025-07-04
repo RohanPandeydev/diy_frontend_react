@@ -421,6 +421,11 @@ const Dashboard = () => {
   // Memoize SEO data
   const seo = useSeoHelmet("home");
   
+  // Utility function for "Coming Soon" alerts
+  const handleComingSoon = useCallback((feature = "This feature") => {
+    alert(`${feature} is coming soon!`);
+  }, []);
+  
   // Memoize props to prevent unnecessary re-renders
   const performanceProps = useMemo(() => ({
     openVideo,
@@ -430,6 +435,18 @@ const Dashboard = () => {
   const whyChooseProps = useMemo(() => ({
     toggleVideo
   }), [toggleVideo]);
+
+  const weDoProps = useMemo(() => ({
+    handleComingSoon
+  }), [handleComingSoon]);
+
+  const weOfferProps = useMemo(() => ({
+    handleComingSoon
+  }), [handleComingSoon]);
+
+  const takeActionProps = useMemo(() => ({
+    handleComingSoon
+  }), [handleComingSoon]);
 
   // Add critical CSS for animations and performance
   useEffect(() => {
@@ -495,12 +512,12 @@ const Dashboard = () => {
       />
 
       {/* Static sections - Keep loaded for better UX */}
-      <WeDo />
+      <WeDo {...weDoProps} />
       <OurVision />
       <CounterCard />
       <WhyChoose {...whyChooseProps} />
-      <WeOffer />
-      <TakeAction />
+      <WeOffer {...weOfferProps} />
+      <TakeAction {...takeActionProps} />
 
       {/* Trust Section - Lazy load with optimized loading */}
       <LazySection 

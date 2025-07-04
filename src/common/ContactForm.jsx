@@ -28,7 +28,7 @@ const ContactForm = () => {
     const handleSubmit = useCallback((e) => {
         e.preventDefault();
         // Form submission logic here
-        alert('Form submitted');
+        alert('Contact form submission is coming soon!');
     }, []);
 
     return (

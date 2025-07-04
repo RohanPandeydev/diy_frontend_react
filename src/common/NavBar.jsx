@@ -157,7 +157,10 @@ const Header = () => {
                           onMouseEnter={() => setHoveredSubIndex(`${index}-${subIndex}`)}
                           onMouseLeave={() => setHoveredSubIndex(null)}
                         >
-                          <Link to={subItem.link} className="submenu-link">
+                          <Link 
+                            to={subItem.link} 
+                            className="submenu-link"
+                          >
                             {subItem.title}
                             {subItem.subsubmenu && (
                               <span className="submenu-arrow ms-2">
@@ -167,8 +170,12 @@ const Header = () => {
                           </Link>
                           {hoveredSubIndex === `${index}-${subIndex}` && subItem.subsubmenu && (
                             <div className="subsubmenu">
-                              {subItem.subsubmenu.map(child => (
-                                <Link key={child.link} to={child.link} className="submenu-link">
+                              {subItem.subsubmenu.map((child) => (
+                                <Link
+                                  key={child.link}
+                                  to={child.link}
+                                  className="submenu-link"
+                                >
                                   {child.title}
                                 </Link>
                               ))}

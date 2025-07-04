@@ -67,10 +67,10 @@ hr {
   transform: translateX(0);
   opacity: 1;
   z-index: -1;
-  background-color: #ffffff;
+  background-color: #001524;
 }
 .common-btn:hover {
-  color: #001524 !important;
+  color: #ffffff !important;
 }
 
 /**************************** Top Header design Start *************************/
@@ -155,11 +155,21 @@ hr {
 .navbar-container {
   width: 100%;
   background-color: #001524;
+  padding: 0 40px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
 }
 .logo-image {
   display: block;
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
+  margin-left: 0;
+  transition: transform 0.3s ease;
+}
+.logo-image:hover {
+  transform: scale(1.05);
 }
 .logo-image img {
   width: 100%;
@@ -224,22 +234,32 @@ hr {
 
 /* Arrow */
 .arrow {
-  font-size: 0.7rem;
-  margin-left: 4px;
-  transition: transform 0.2s;
+  font-size: 0.8rem;
+  margin-left: 6px;
+  transition: transform 0.3s ease;
+  color: #ffffff;
 }
 
 .navitem-wrapper:hover .arrow {
-  transform: scale(1.1);
+  transform: rotate(180deg);
 }
 
 /* NavLink custom styling */
 .navlink-custom {
   position: relative;
   color: #ffffff !important;
-  font-size: 14px !important;
+  font-size: 15px !important;
+  font-weight: 500;
   text-decoration: none;
-  /* transition: color 0.3s; */
+  padding: 12px 16px !important;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  margin: 0 4px;
+}
+.navlink-custom:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff !important;
+  transform: translateY(-2px);
 }
 .contact-info-box {
   text-decoration: none;
@@ -331,7 +351,16 @@ hr {
 
 .nav-bar-menu-open-button {
   background-color: transparent;
-  border: 1px solid #ffffff;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+.nav-bar-menu-open-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
 }
 
 .slider-img-box {
@@ -2684,7 +2713,7 @@ thead tr th {
   color: #1b263b !important;
   text-decoration: none;
   white-space: nowrap;
-  transition: all o.4s ease;
+  transition: all 0.4s ease;
   padding: 10px 15px !important;
 }
 

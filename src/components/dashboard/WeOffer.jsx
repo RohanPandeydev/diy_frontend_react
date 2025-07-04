@@ -3,7 +3,7 @@ import ImagePath from '../../assets/ImagePath'
 import { weOfferList } from '../../Constants'
 import { Button, Container } from 'reactstrap'
 
-const WeOffer = () => {
+const WeOffer = ({ handleComingSoon }) => {
   return (
     <section
         className="we-offer"
@@ -35,7 +35,12 @@ const WeOffer = () => {
                     <div className="we-offer-hover-content">
                       <h4>{item.title}</h4>
                       <p>{item.description}</p>
-                      <Button className="common-btn">Learn More</Button>
+                      <Button 
+                        className="common-btn"
+                        onClick={() => handleComingSoon ? handleComingSoon(`${item.title} - Learn More`) : alert(`${item.title} - Learn More is coming soon!`)}
+                      >
+                        Learn More
+                      </Button>
                     </div>
                   </div>
                 </div>

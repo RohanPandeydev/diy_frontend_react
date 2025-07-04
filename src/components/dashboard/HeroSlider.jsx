@@ -433,6 +433,7 @@ const HeroSlider = React.memo(() => {
           <Button 
             className="common-btn"
             aria-label="Get your free design and estimate consultation"
+            onClick={() => alert("Free Design & Estimate Consultation is coming soon!")}
           >
             Get Your Free Design & Estimate Consultation Now!
           </Button>
