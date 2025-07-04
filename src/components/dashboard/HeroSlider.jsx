@@ -3,6 +3,42 @@ import Slider from "react-slick";
 import { Button, Container } from "reactstrap";
 import { sliderImages, sliderSettings } from "../../Constants";
 
+// Custom Arrow Components
+const CustomPrevArrow = React.memo(({ className, onClick, currentSlide, slideCount }) => {
+  const isDisabled = currentSlide === 0;
+  
+  return (
+    <button
+      className={`custom-arrow custom-prev-arrow ${className} ${isDisabled ? 'disabled' : ''}`}
+      onClick={onClick}
+      disabled={isDisabled}
+      aria-label="Previous slide"
+      aria-disabled={isDisabled}
+    >
+      &lt;
+    </button>
+  );
+});
+
+const CustomNextArrow = React.memo(({ className, onClick, currentSlide, slideCount }) => {
+  const isDisabled = currentSlide === slideCount - 1;
+  
+  return (
+    <button
+      className={`custom-arrow custom-next-arrow ${className} ${isDisabled ? 'disabled' : ''}`}
+      onClick={onClick}
+      disabled={isDisabled}
+      aria-label="Next slide"
+      aria-disabled={isDisabled}
+    >
+      &gt;
+    </button>
+  );
+});
+
+CustomPrevArrow.displayName = 'CustomPrevArrow';
+CustomNextArrow.displayName = 'CustomNextArrow';
+
 // Optimized image component with proper error handling and loading states
 const OptimizedSliderImage = React.memo(({ src, alt, index, isFirst = false }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -72,14 +108,15 @@ const HeroSlider = React.memo(() => {
     accessibility: true,
     focusOnSelect: false,
     arrows: true,
-    dots: true,
+    prevArrow: <CustomPrevArrow />,
+    nextArrow: <CustomNextArrow />,
+    dots: false,
     responsive: [
       {
         breakpoint: 768,
         settings: {
-          arrows: false,
-          dots: true
-        }
+          arrows: true,
+          dots: false,        }
       }
     ]
   }), []);
@@ -293,15 +330,87 @@ const HeroSlider = React.memo(() => {
             padding: 14px 28px;
             font-size: 14px;
           }
+          .custom-arrow {
+            width: 40px;
+            height: 40px;
+          }
+          .custom-prev-arrow {
+            left: 10px;
+          }
+          .custom-next-arrow {
+            right: 10px;
+          }
         }
+        
+        /* Custom Arrow Styles */
+        .custom-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 50px;
+          height: 50px;
+          background: transparent;
+          border: none;
+          border-radius: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          z-index: 10;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          color: #fff;
+          box-shadow: none;
+        }
+        
+        .custom-arrow:hover {
+          background: rgba(0,0,0,0.08);
+          transform: translateY(-50%) scale(1.1);
+          box-shadow: none;
+        }
+        
+        .custom-arrow:active {
+          transform: translateY(-50%) scale(0.95);
+        }
+        
+        .custom-arrow:focus {
+          outline: 2px solid #ffd700;
+          outline-offset: 2px;
+        }
+        
+        .custom-arrow.disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+        
+        .custom-prev-arrow {
+          left: 20px;
+        }
+        
+        .custom-next-arrow {
+          right: 20px;
+        }
+        
+        /* Arrow hover effects */
+        .custom-arrow:hover svg {
+          transform: scale(1.1);
+          transition: transform 0.2s ease;
+        }
+        
         /* Reduce motion for users who prefer it */
         @media (prefers-reduced-motion: reduce) {
           .slider-image,
           .common-btn,
-          .loading-spinner {
+          .loading-spinner,
+          .custom-arrow {
             animation: none !important;
             transition: none !important;
           }
+        }
+        
+        /* Hide default slick arrows */
+        .slick-arrow:not(.custom-arrow) {
+          display: none !important;
         }
       `}</style>
       
