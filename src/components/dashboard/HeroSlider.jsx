@@ -6,8 +6,8 @@ import { sliderImages, sliderSettings } from "../../Constants";
 const HeroSlider = React.memo(() => {
   return (
     <div className="slider-container unique">
-      <Container>
-        <div className="slider-content-box">
+      <div className="slider-content-box">
+        <Container>
           <span>We provide cutting-edge, PEB Structure Solutions</span>
           <h3>High-quality PEB and modular structures, ensuring</h3>
           <p>
@@ -21,8 +21,8 @@ const HeroSlider = React.memo(() => {
           <Button className="common-btn">
             Get Your Free Design & Estimate Consultation Now!
           </Button>
-        </div>
-      </Container>
+        </Container>
+      </div>
 
       <Slider {...sliderSettings} lazyLoad="ondemand">
         {sliderImages.map(({ id, image }) => (

@@ -9,7 +9,7 @@ import {
   IoMdCall,
 } from "react-icons/io";
 import { MdOutlineMail } from "react-icons/md";
-import { Navbar, NavbarBrand, Nav, NavItem, Button } from "reactstrap";
+import { Navbar, NavbarBrand, Nav, NavItem, Button, Container } from "reactstrap";
 import { IoCloseSharp } from "react-icons/io5";
 import { navItems } from "../Constants";
 import { Link, NavLink } from "react-router-dom";
@@ -89,106 +89,112 @@ const Header = () => {
 
   return (
     <header className="header">
-      <section className="header-top">
-        <div className="contact-info-container">
-          <a href="mailto:info@diyprefab.com" className="contact-info-box">
-            <MdOutlineMail className="top-header-icon" />
-            <p>info@diyprefab.com</p>
-          </a>
-          <a href="tel:+918619015622" className="contact-info-box">
-            <IoMdCall className="top-header-icon" />
-            <p>(+91) 8619015622</p>
-          </a>
-        </div>
-        <div className="contact-info-container">
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="header-social-box"
-            aria-label="LinkedIn"
-          >
-            <FaLinkedinIn className="top-header-social-icon" />
-          </a>
-          <a
-            href="https://youtube.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="header-social-box"
-            aria-label="YouTube"
-          >
-            <FaYoutube className="top-header-social-icon" />
-          </a>
-        </div>
-      </section>
-
-      <Navbar expand="md" className="sm:px-4 d-flex justify-content-between navbar-container">
-        <NavLink to="/" className="logo-image">
-          <img src={ImagePath.Logo} alt="DIY Prefab Logo" className="img-fluid" loading="lazy" />
-        </NavLink>
-
-        <div className="d-none d-lg-flex" onMouseLeave={handleMouseLeave}>
-          <Nav className="ml-auto" navbar>
-            {navItems.map((item, index) => (
-              <NavItem
-                key={item.link}
-                onMouseEnter={() => handleMouseEnter(index)}
-                className="position-relative mx-2 navitem-wrapper"
+      <div className="header-top-container">
+        <Container>
+          <section className="header-top">
+            <div className="contact-info-container">
+              <a href="mailto:info@diyprefab.com" className="contact-info-box">
+                <MdOutlineMail className="top-header-icon" />
+                <p>info@diyprefab.com</p>
+              </a>
+              <a href="tel:+918619015622" className="contact-info-box">
+                <IoMdCall className="top-header-icon" />
+                <p>(+91) 8619015622</p>
+              </a>
+            </div>
+            <div className="contact-info-container">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="header-social-box"
+                aria-label="LinkedIn"
               >
-                <Link
-                  to={item.link || "#"}
-                  className="navlink-custom d-flex align-items-center gap-1"
-                >
-                  {item.title}
-                  {item.submenu && (
-                    <span className="arrow">
-                      {openSubmenu === index ? <IoIosArrowUp /> : <IoIosArrowDown />}
-                    </span>
-                  )}
-                </Link>
+                <FaLinkedinIn className="top-header-social-icon" />
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="header-social-box"
+                aria-label="YouTube"
+              >
+                <FaYoutube className="top-header-social-icon" />
+              </a>
+            </div>
+          </section>
+        </Container>
+      </div>
+      <div className="navbar-container-unique">
+        <Container>
+          <Navbar expand="md" className="navbar-container">
+            <NavLink to="/" className="logo-image">
+              <img src={ImagePath.Logo} alt="DIY Prefab Logo" className="img-fluid" loading="lazy" />
+            </NavLink>
 
-                {openSubmenu === index && item.submenu && (
-                  <div className="submenu desktop-submenu">
-                    <Nav vertical>
-                      {item.submenu.map((subItem, subIndex) => (
-                        <div
-                          key={subItem.id}
-                          className="submenu-item-wrapper"
-                          onMouseEnter={() => setHoveredSubIndex(`${index}-${subIndex}`)}
-                          onMouseLeave={() => setHoveredSubIndex(null)}
-                        >
-                          <Link to={subItem.link} className="submenu-link">
-                            {subItem.title}
-                            {subItem.subsubmenu && (
-                              <span className="submenu-arrow ms-2">
-                                {hoveredSubIndex === `${index}-${subIndex}` ? <IoIosArrowUp /> : <IoIosArrowForward />}
-                              </span>
-                            )}
-                          </Link>
-                          {hoveredSubIndex === `${index}-${subIndex}` && subItem.subsubmenu && (
-                            <div className="subsubmenu">
-                              {subItem.subsubmenu.map(child => (
-                                <Link key={child.link} to={child.link} className="submenu-link">
-                                  {child.title}
-                                </Link>
-                              ))}
+            <div className="d-none d-lg-flex" onMouseLeave={handleMouseLeave}>
+              <Nav className="ml-auto" navbar>
+                {navItems.map((item, index) => (
+                  <NavItem
+                    key={item.link}
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    className="position-relative mx-2 navitem-wrapper"
+                  >
+                    <Link
+                      to={item.link || "#"}
+                      className="navlink-custom d-flex align-items-center gap-1"
+                    >
+                      {item.title}
+                      {item.submenu && (
+                        <span className="arrow">
+                          {openSubmenu === index ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                        </span>
+                      )}
+                    </Link>
+
+                    {openSubmenu === index && item.submenu && (
+                      <div className="submenu desktop-submenu">
+                        <Nav vertical>
+                          {item.submenu.map((subItem, subIndex) => (
+                            <div
+                              key={subItem.id}
+                              className="submenu-item-wrapper"
+                              onMouseEnter={() => setHoveredSubIndex(`${index}-${subIndex}`)}
+                              onMouseLeave={() => setHoveredSubIndex(null)}
+                            >
+                              <Link to={subItem.link} className="submenu-link">
+                                {subItem.title}
+                                {subItem.subsubmenu && (
+                                  <span className="submenu-arrow ms-2">
+                                    {hoveredSubIndex === `${index}-${subIndex}` ? <IoIosArrowUp /> : <IoIosArrowForward />}
+                                  </span>
+                                )}
+                              </Link>
+                              {hoveredSubIndex === `${index}-${subIndex}` && subItem.subsubmenu && (
+                                <div className="subsubmenu">
+                                  {subItem.subsubmenu.map(child => (
+                                    <Link key={child.link} to={child.link} className="submenu-link">
+                                      {child.title}
+                                    </Link>
+                                  ))}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                      ))}
-                    </Nav>
-                  </div>
-                )}
-              </NavItem>
-            ))}
-          </Nav>
-        </div>
-
-        <Button className="d-lg-none nav-bar-menu-open-button" onClick={toggleDrawer}>
-          ☰
-        </Button>
-      </Navbar>
-
+                          ))}
+                        </Nav>
+                      </div>
+                    )}
+                  </NavItem>
+                ))}
+              </Nav>
+            </div>
+            <div></div>
+            <Button className="d-lg-none nav-bar-menu-open-button" onClick={toggleDrawer}>
+              ☰
+            </Button>
+          </Navbar>
+        </Container>
+      </div>
       <div className={`drawer ${isDrawerOpen ? "open" : ""}`}>
         <div className="text-end">
           <Button onClick={toggleDrawer} className="close-btn" aria-label="Close menu">
@@ -246,7 +252,6 @@ const Header = () => {
           ))}
         </Nav>
       </div>
-
       {isDrawerOpen && <div className="overlay" onClick={toggleDrawer}></div>}
     </header>
   );
