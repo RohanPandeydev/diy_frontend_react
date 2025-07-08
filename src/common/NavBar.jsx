@@ -195,55 +195,6 @@ const Header = () => {
           </Navbar>
         </Container>
       </div>
-                {openSubmenu === index && item.submenu && (
-                  <div className="submenu desktop-submenu">
-                    <Nav vertical>
-                      {item.submenu.map((subItem, subIndex) => (
-                        <div
-                          key={subItem.id}
-                          className="submenu-item-wrapper"
-                          onMouseEnter={() => setHoveredSubIndex(`${index}-${subIndex}`)}
-                          onMouseLeave={() => setHoveredSubIndex(null)}
-                        >
-                          <Link 
-                            to={subItem.link} 
-                            className="submenu-link"
-                          >
-                            {subItem.title}
-                            {subItem.subsubmenu && (
-                              <span className="submenu-arrow ms-2">
-                                {hoveredSubIndex === `${index}-${subIndex}` ? <IoIosArrowUp /> : <IoIosArrowForward />}
-                              </span>
-                            )}
-                          </Link>
-                          {hoveredSubIndex === `${index}-${subIndex}` && subItem.subsubmenu && (
-                            <div className="subsubmenu">
-                              {subItem.subsubmenu.map((child) => (
-                                <Link
-                                  key={child.link}
-                                  to={child.link}
-                                  className="submenu-link"
-                                >
-                                  {child.title}
-                                </Link>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </Nav>
-                  </div>
-                )}
-              </NavItem>
-            ))}
-          </Nav>
-        </div>
-
-        <Button className="d-lg-none nav-bar-menu-open-button" onClick={toggleDrawer}>
-          ☰
-        </Button>
-      </Navbar>
-
       <div className={`drawer ${isDrawerOpen ? "open" : ""}`}>
         <div className="text-end">
           <Button onClick={toggleDrawer} className="close-btn" aria-label="Close menu">
