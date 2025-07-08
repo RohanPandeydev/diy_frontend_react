@@ -500,7 +500,7 @@ const Dashboard = () => {
       </ErrorBoundary>
 
       {/* Performance Section - CRITICAL FOR LCP - Load immediately */}
-      {/* <Performance {...performanceProps} /> */}
+      <Performance {...performanceProps} />
 
       {/* Who We Are - Lazy load with intersection observer */}
       <LazySection 
