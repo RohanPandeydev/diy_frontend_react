@@ -30,10 +30,10 @@ const Footer = React.memo(() => {
             <Col md="2" sm="4" xs="6">
               <h6 className="footer-subtitle">Company</h6>
               <ul className="footer-links">
-                <li><Link to="#">About Us</Link></li>
-                <li><Link to="#">Careers</Link></li>
+                <li><Link to="/about-us">About Us</Link></li>
+                <li><Link to="/careers">Careers</Link></li>
                 <li><Link to="#">Press</Link></li>
-                <li><Link to="#">Blog</Link></li>
+                <li><Link to="/blog-news">Blog</Link></li>
               </ul>
             </Col>
 
@@ -43,7 +43,7 @@ const Footer = React.memo(() => {
                 <li><Link to="#">Help Center</Link></li>
                 <li><Link to="#">Privacy Policy</Link></li>
                 <li><Link to="#">Terms of Service</Link></li>
-                <li><Link to="#">Contact Us</Link></li>
+                <li><Link to="/contact-us">Contact Us</Link></li>
               </ul>
             </Col>
 
