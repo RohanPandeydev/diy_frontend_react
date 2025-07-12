@@ -8,6 +8,27 @@ import { MdEngineering, MdFactory, } from "react-icons/md";
 import { VscFileSubmodule } from "react-icons/vsc";
 import { IoLogoElectron, IoSettingsOutline } from "react-icons/io5";
 import ImagePath from "./assets/ImagePath";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+
+
+const NextArrow = (props) => {
+  const { onClick } = props;
+  return (
+    <div className="custom-arrow next" onClick={onClick}>
+      <FaArrowRight />
+    </div>
+  );
+};
+
+const PrevArrow = (props) => {
+  const { onClick } = props;
+  return (
+    <div className="custom-arrow prev" onClick={onClick}>
+      <FaArrowLeft />
+    </div>
+  );
+};
+
 
 
 export const navItems = [
@@ -227,7 +248,6 @@ export const sliderImages = [
   { id: 4, image: ImagePath.Slider4 },
   { id: 5, image: ImagePath.Slider5 },
 ];
-
 export const sliderSettings = {
   infinite: true,
   speed: 100,
@@ -247,7 +267,10 @@ export const sliderSettings = {
     );
     activeImage?.classList.add("zoom-in");
   },
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />,
 };
+
 
 export const performanceList = [
   {

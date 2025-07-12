@@ -2968,3 +2968,24 @@ thead tr th {
 
 
 /* End */
+
+
+
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+  opacity: 0.8;
+}
+
+.custom-arrow.next {
+  right: 10px;
+}
+
+.custom-arrow.prev {
+  left: 10px;
+}
