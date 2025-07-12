@@ -163,7 +163,7 @@ const Dashboard = () => {
         </Container>
       </section>
 
-      <WaveWrapper />
+      {/* <WaveWrapper /> */}
       <Footer />
 
       {openVideo && (
