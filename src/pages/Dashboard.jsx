@@ -336,7 +336,7 @@ const Dashboard = () => {
       </ErrorBoundary>
 
       {/* Performance Section - Above fold, load immediately */}
-      <Performance {...performanceProps} />
+      {/* <Performance {...performanceProps} /> */}
 
       {/* Who We Are - Lazy load with intersection observer */}
       <LazySection 
