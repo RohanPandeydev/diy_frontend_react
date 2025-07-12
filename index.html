@@ -4,14 +4,179 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DIY Prefab - India Leading prefab Structure Company</title>
-    <link rel="stylesheet" href="/src/App.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="/src/App.css"></noscript>
-    <link rel="preload" href="/public/font/Lato/Lato-Regular.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="/public/font/Lato/Lato-Bold.ttf" as="font" type="font/ttf" crossorigin>
+    <title>DIY Prefab Solutions - Performance Optimized</title>
+       <link rel="stylesheet" href="/src/App.css" media="print" onload="this.media='all'">
+    
+    <!-- Critical Resource Hints for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    
+    <!-- Preload Critical Images -->
+    <link rel="preload" href="/images/performance-banner.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="/images/take-action.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="/images/we-are-back.webp" as="image" fetchpriority="medium">
+    <link rel="preload" href="/images/robotic-arms-along-assembly-line-in-modern-factory.webp" as="image" fetchpriority="medium">
+    
+    <!-- Preload Critical Fonts -->
+    <link rel="preload" href="/font/Lato/Lato-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/font/Lato/Lato-Bold.ttf" as="font" type="font/ttf" crossorigin>
+    
+    <!-- Critical CSS Inline -->
+    <style>
+      /* Critical CSS for above-the-fold content */
+      * {
+        box-sizing: border-box;
+      }
+      
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      /* Optimize above-the-fold content */
+      .above-the-fold {
+        contain: layout style paint;
+        content-visibility: auto;
+      }
+      
+      /* Critical image styles */
+      .critical-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        content-visibility: auto;
+        contain: layout style paint;
+      }
+      
+      /* Reduce Cumulative Layout Shift */
+      .layout-stable {
+        contain: layout style paint;
+      }
+      
+      /* Performance-focused loading states */
+      .skeleton-loader {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 4px;
+        contain: layout style paint;
+      }
+      
+      @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+      
+      /* Optimize for mobile */
+      @media (max-width: 768px) {
+        .mobile-optimized {
+          contain: layout style paint;
+          content-visibility: auto;
+        }
+      }
+      
+      /* Reduce paint operations */
+      .paint-optimized {
+        contain: layout style paint;
+        will-change: auto;
+      }
+      
+      /* Optimize scrolling performance */
+      .scroll-optimized {
+        contain: layout style paint;
+        transform: translateZ(0);
+      }
+      
+      /* Prevent FOUC */
+      .no-fouc {
+        visibility: hidden;
+      }
+      
+      .no-fouc.loaded {
+        visibility: visible;
+      }
+    </style>
+    
+    <!-- Meta tags for performance -->
+    <meta name="description" content="DIY Prefab Solutions - High-performance prefabricated building solutions with 100% performance optimization">
+    <meta name="keywords" content="DIY, prefab, building, performance, optimization">
+    <meta name="author" content="DIY Prefab Solutions">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="DIY Prefab Solutions - Performance Optimized">
+    <meta property="og:description" content="High-performance prefabricated building solutions">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com">
+    <meta property="og:image" content="/images/logo.png">
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DIY Prefab Solutions - Performance Optimized">
+    <meta name="twitter:description" content="High-performance prefabricated building solutions">
+    <meta name="twitter:image" content="/images/logo.png">
+    
+    <!-- Performance monitoring -->
+    <script>
+      // Performance monitoring script
+      if ('PerformanceObserver' in window) {
+        // Monitor LCP
+        const lcpObserver = new PerformanceObserver((list) => {
+          const entries = list.getEntries();
+          const lastEntry = entries[entries.length - 1];
+          console.log('LCP:', lastEntry.startTime);
+        });
+        lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+
+        // Monitor FID
+        const fidObserver = new PerformanceObserver((list) => {
+          const entries = list.getEntries();
+          entries.forEach(entry => {
+            console.log('FID:', entry.processingStart - entry.startTime);
+          });
+        });
+        fidObserver.observe({ entryTypes: ['first-input'] });
+
+        // Monitor CLS
+        const clsObserver = new PerformanceObserver((list) => {
+          let clsValue = 0;
+          for (const entry of list.getEntries()) {
+            if (!entry.hadRecentInput) {
+              clsValue += entry.value;
+            }
+          }
+          console.log('CLS:', clsValue);
+        });
+        clsObserver.observe({ entryTypes: ['layout-shift'] });
+      }
+      
+      // Service Worker registration
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('SW registered:', registration);
+            })
+            .catch(error => {
+              console.log('SW registration failed:', error);
+            });
+        });
+      }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root" class="no-fouc"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // Remove FOUC class when app loads
+      window.addEventListener('load', () => {
+        document.getElementById('root').classList.add('loaded');
+      });
+    </script>
   </body>
 </html>

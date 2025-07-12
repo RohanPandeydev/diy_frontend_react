@@ -4,34 +4,78 @@ import { Button, Container } from "reactstrap";
 import { sliderImages, sliderSettings } from "../../Constants";
 
 // Custom Arrow Components
-const CustomPrevArrow = React.memo(({ className, onClick, currentSlide, slideCount }) => {
+// Custom Previous Arrow Component
+const CustomPrevArrow = React.memo(({ className, onClick, currentSlide }) => {
   const isDisabled = currentSlide === 0;
-  
+ 
   return (
     <button
-      className={`custom-arrow custom-prev-arrow ${className} ${isDisabled ? 'disabled' : ''}`}
+      className={`custom-arrow custom-prev-arrow ${className || ''} ${isDisabled ? 'disabled' : ''}`}
       onClick={onClick}
       disabled={isDisabled}
       aria-label="Previous slide"
       aria-disabled={isDisabled}
+      type="button"
+      style={{
+        position: 'absolute',
+        left: '10px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        zIndex: 2,
+        background: 'rgba(0, 0, 0, 0.5)',
+        border: 'none',
+        borderRadius: '50%',
+        width: '40px',
+        height: '40px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: isDisabled ? 'not-allowed' : 'pointer',
+        opacity: isDisabled ? 0.5 : 1,
+        transition: 'all 0.3s ease'
+      }}
     >
-      &lt;
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
     </button>
   );
 });
 
+// Custom Next Arrow Component
 const CustomNextArrow = React.memo(({ className, onClick, currentSlide, slideCount }) => {
   const isDisabled = currentSlide === slideCount - 1;
-  
+ 
   return (
     <button
-      className={`custom-arrow custom-next-arrow ${className} ${isDisabled ? 'disabled' : ''}`}
+      className={`custom-arrow custom-next-arrow ${className || ''} ${isDisabled ? 'disabled' : ''}`}
       onClick={onClick}
       disabled={isDisabled}
       aria-label="Next slide"
       aria-disabled={isDisabled}
+      type="button"
+      style={{
+        position: 'absolute',
+        right: '10px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        zIndex: 2,
+        background: 'rgba(0, 0, 0, 0.5)',
+        border: 'none',
+        borderRadius: '50%',
+        width: '40px',
+        height: '40px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: isDisabled ? 'not-allowed' : 'pointer',
+        opacity: isDisabled ? 0.5 : 1,
+        transition: 'all 0.3s ease'
+      }}
     >
-      &gt;
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
     </button>
   );
 });
@@ -54,6 +98,7 @@ const OptimizedSliderImage = React.memo(({ src, alt, index, isFirst = false }) =
 
   const handleError = useCallback(() => {
     setHasError(true);
+    setIsLoaded(false);
   }, []);
 
   return (
@@ -80,7 +125,8 @@ const OptimizedSliderImage = React.memo(({ src, alt, index, isFirst = false }) =
         onError={handleError}
         style={{ 
           opacity: isLoaded ? 1 : 0,
-          transition: 'opacity 0.3s ease'
+          transition: 'opacity 0.3s ease',
+          display: hasError ? 'none' : 'block'
         }}
       />
     </div>
@@ -91,13 +137,19 @@ OptimizedSliderImage.displayName = 'OptimizedSliderImage';
 
 const HeroSlider = React.memo(() => {
   const [isSliderReady, setIsSliderReady] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef(null);
+
+  // Handle slider state changes
+  const handleAfterChange = useCallback((current) => {
+    setCurrentSlide(current);
+  }, []);
 
   // Memoize slider settings to prevent recreation
   const optimizedSettings = useMemo(() => ({
     ...sliderSettings,
     lazyLoad: "ondemand",
-    infinite: true,
+    infinite: true, // Changed back to true for better UX
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -108,32 +160,47 @@ const HeroSlider = React.memo(() => {
     accessibility: true,
     focusOnSelect: false,
     arrows: true,
-    prevArrow: <CustomPrevArrow />,
-    nextArrow: <CustomNextArrow />,
+    // prevArrow: <CustomPrevArrow currentSlide={currentSlide} slideCount={sliderImages?.length || 0} />,
+    // nextArrow: <CustomNextArrow currentSlide={currentSlide} slideCount={sliderImages?.length || 0} />,
     dots: false,
+    afterChange: handleAfterChange,
     responsive: [
       {
         breakpoint: 768,
         settings: {
           arrows: true,
-          dots: false,        }
+          dots: false,
+        }
       }
     ]
-  }), []);
+  }), [currentSlide, handleAfterChange]);
 
   // Preload first image for better LCP
   useEffect(() => {
-    if (sliderImages.length > 0) {
+    if (sliderImages && sliderImages.length > 0) {
       const firstImage = new Image();
       firstImage.src = sliderImages[0].image;
       firstImage.onload = () => setIsSliderReady(true);
       firstImage.onerror = () => setIsSliderReady(true);
+    } else {
+      setIsSliderReady(true);
     }
   }, []);
 
+  // Handle button click
+  const handleButtonClick = useCallback(() => {
+    // You can replace this with actual functionality
+    console.log("Free Design & Estimate Consultation clicked!");
+    alert("Free Design & Estimate Consultation is coming soon!");
+  }, []);
+
   // Memoize slides to prevent recreation
-  const slides = useMemo(() => 
-    sliderImages.map(({ id, image }, index) => (
+  const slides = useMemo(() => {
+    if (!sliderImages || sliderImages.length === 0) {
+      return [];
+    }
+    
+    return sliderImages.map(({ id, image }, index) => (
       <div key={id} className="slider-img-box">
         <OptimizedSliderImage
           src={image}
@@ -142,27 +209,41 @@ const HeroSlider = React.memo(() => {
           isFirst={index === 0}
         />
       </div>
-    )), []);
+    ));
+  }, []);
 
   return (
     <>
       <style>{`
         .slider-container {
           position: relative;
-          min-height: 100vh;
+          width: 100%;
+          height: 100vh;
+          min-height: 600px;
           overflow: hidden;
+        }
+        
+        .slider-container .slick-slider {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
         }
         .slider-content-box {
           position: absolute;
           top: 50%;
-          left: 5vw;
+          left: 5%;
           transform: translateY(-50%);
-          z-index: 2;
-          width: 40vw;
-          min-width: 260px;
-          max-width: 520px;
+          z-index: 100;
+          width: 45%;
+          max-width: 600px;
+          min-width: 300px;
           text-align: left;
-          padding: 0 2vw;
+          padding: 40px;
+          background: rgba(0, 0, 0, 0.4);
+          border-radius: 15px;
+          backdrop-filter: blur(10px);
           box-sizing: border-box;
         }
         .slider-content-box span,
@@ -232,14 +313,24 @@ const HeroSlider = React.memo(() => {
           outline: 2px solid #ffd700;
           outline-offset: 2px;
         }
-        .slick-slider, .slick-list, .slick-track, .slider-img-box {
+        .slick-slider, .slick-list, .slick-track {
           height: 100vh !important;
-          min-height: 350px;
+          min-height: 600px !important;
         }
-        .slider-img-box, .slider-img-wrapper {
+        
+        .slider-img-box {
           position: relative;
-          overflow: hidden;
+          width: 100%;
           height: 100vh !important;
+          min-height: 600px !important;
+          overflow: hidden;
+        }
+        
+        .slider-img-wrapper {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
         }
         .slider-image {
           width: 100%;
@@ -301,10 +392,10 @@ const HeroSlider = React.memo(() => {
         }
         @media (max-width: 900px) {
           .slider-content-box {
-            left: 2vw;
-            width: 60vw;
-            max-width: 90vw;
-            padding: 0 2vw;
+            left: 3%;
+            width: 60%;
+            max-width: 90%;
+            padding: 30px;
           }
           .slider-title {
             font-size: 32px;
@@ -312,13 +403,23 @@ const HeroSlider = React.memo(() => {
           .slider-description {
             font-size: 14px;
           }
+          .custom-arrow {
+            width: 50px;
+            height: 50px;
+          }
+          .custom-prev-arrow {
+            left: 15px;
+          }
+          .custom-next-arrow {
+            right: 15px;
+          }
         }
         @media (max-width: 600px) {
           .slider-content-box {
-            left: 0;
-            width: 98vw;
-            max-width: 98vw;
-            padding: 0 2vw;
+            left: 2%;
+            width: 90%;
+            max-width: 95%;
+            padding: 20px;
           }
           .slider-title {
             font-size: 28px;
@@ -342,76 +443,92 @@ const HeroSlider = React.memo(() => {
           }
         }
         
-        /* Custom Arrow Styles */
-        .custom-arrow {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 50px;
-          height: 50px;
-          background: transparent;
-          border: none;
-          border-radius: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          z-index: 10;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          color: #fff;
-          box-shadow: none;
-        }
-        
-        .custom-arrow:hover {
-          background: rgba(0,0,0,0.08);
-          transform: translateY(-50%) scale(1.1);
-          box-shadow: none;
-        }
-        
-        .custom-arrow:active {
-          transform: translateY(-50%) scale(0.95);
-        }
-        
-        .custom-arrow:focus {
-          outline: 2px solid #ffd700;
-          outline-offset: 2px;
-        }
-        
-        .custom-arrow.disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-          pointer-events: none;
-        }
-        
-        .custom-prev-arrow {
-          left: 20px;
-        }
-        
-        .custom-next-arrow {
-          right: 20px;
-        }
-        
-        /* Arrow hover effects */
-        .custom-arrow:hover svg {
-          transform: scale(1.1);
-          transition: transform 0.2s ease;
-        }
-        
-        /* Reduce motion for users who prefer it */
-        @media (prefers-reduced-motion: reduce) {
-          .slider-image,
-          .common-btn,
-          .loading-spinner,
-          .custom-arrow {
-            animation: none !important;
-            transition: none !important;
-          }
-        }
-        
-        /* Hide default slick arrows */
-        .slick-arrow:not(.custom-arrow) {
-          display: none !important;
-        }
+        /* Replace the existing .custom-arrow styles with this: */
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  background: transparent; /* Changed from rgba(255, 255, 255, 0.9) */
+  border: none;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #fff; /* Changed from #333 to white */
+  box-shadow: none; /* Removed shadow */
+}
+
+.custom-arrow:hover {
+  background: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: none; /* No shadow on hover */
+}
+
+.custom-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.custom-arrow:focus {
+  outline: 3px solid #ffd700;
+  outline-offset: 2px;
+}
+
+.custom-arrow.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.custom-prev-arrow {
+  left: 30px;
+}
+
+.custom-next-arrow {
+  right: 30px;
+}
+
+/* Arrow hover effects */
+.custom-arrow:hover svg {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+/* Optional: Add a subtle backdrop for better visibility */
+.custom-arrow svg {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Mobile responsiveness */
+@media (max-width: 900px) {
+  .custom-arrow {
+    width: 50px;
+    height: 50px;
+  }
+  .custom-prev-arrow {
+    left: 15px;
+  }
+  .custom-next-arrow {
+    right: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .custom-arrow {
+    width: 40px;
+    height: 40px;
+  }
+  .custom-prev-arrow {
+    left: 10px;
+  }
+  .custom-next-arrow {
+    right: 10px;
+  }
+}
       `}</style>
       
       <section className="slider-container unique" aria-label="Hero Slider">
@@ -433,17 +550,25 @@ const HeroSlider = React.memo(() => {
           <Button 
             className="common-btn"
             aria-label="Get your free design and estimate consultation"
-            onClick={() => alert("Free Design & Estimate Consultation is coming soon!")}
+            onClick={handleButtonClick}
           >
             Get Your Free Design & Estimate Consultation Now!
           </Button>
         </div>
         
-        {isSliderReady && (
+        {isSliderReady && slides.length > 0 && (
           <div role="region" aria-label="Image carousel">
             <Slider ref={sliderRef} {...optimizedSettings}>
               {slides}
             </Slider>
+          </div>
+        )}
+        
+        {isSliderReady && slides.length === 0 && (
+          <div className="slider-img-box">
+            <div className="image-error">
+              <span>No images available</span>
+            </div>
           </div>
         )}
       </section>
