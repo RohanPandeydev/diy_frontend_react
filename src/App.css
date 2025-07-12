@@ -3082,88 +3082,21 @@ thead tr th {
 
 
 
-
-
-
-
-
-
-/* Option 1: If slider is a sibling of header */
-/* .slider-container {
-  position: relative;
-  z-index: 1;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  overflow: hidden;
-} */
-
-/* Option 2: If slider is inside a container, break it out */
-.hero-slider,
-.main-slider,
-.banner-slider {
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+  opacity: 0.8;
 }
 
-/* Option 3: Ensure header doesn't interfere */
-.header {
-  position: relative;
-  z-index: 1000;
+.custom-arrow.next {
+  right: 10px;
 }
 
-.header + .slider-section,
-.header + .hero-section,
-.header + .banner-section {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  overflow: hidden;
-}
-
-/* Option 4: Fix container constraints */
-.container-fluid.slider-wrapper {
-  padding: 0 !important;
-  margin: 0 !important;
-  max-width: 100% !important;
-  width: 100vw !important;
-}
-
-/* Option 5: Override Bootstrap container for slider */
-.slider-full-width {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-}
-
-/* Ensure slider content is properly positioned */
-.slider-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-}
-
-/* Fix for mobile drawer overlay */
-.drawer.open {
-  z-index: 1050;
-}
-
-.overlay {
-  z-index: 1049;
-}
-
-
-.header-top a:hover {
-  color: #00b4d8; /* Your accent color */
-}
-
-.header-top-toggle button:focus {
-  outline: none;
+.custom-arrow.prev {
+  left: 10px;
 }

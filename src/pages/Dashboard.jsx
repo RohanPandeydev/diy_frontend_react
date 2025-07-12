@@ -134,7 +134,8 @@ const Dashboard = () => {
         <HeroSlider />
       </Suspense>
 
-      {/* <Performance openVideo={openVideo} toggleVideo={toggleVideo} /> */}
+      {/* Performance Section - Above fold, load immediately */}
+      {/* <Performance {...performanceProps} /> */}
 
       <Suspense fallback={<div>Loading...</div>}>
         <WhoWeAre />
