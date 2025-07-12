@@ -10,7 +10,7 @@ const Footer = React.memo(() => {
       <Container>
         <div className="footer-content-section">
           <Row>
-            <Col md="4" sm="12">
+            <Col lg="4" md="6" sm="6" xs="6" className="mb-4">
               <Link to="/" className="logo-image">
                 <img src={ImagePath.Logo} alt="Company Logo" className="img-fluid" />
               </Link>
@@ -27,7 +27,7 @@ const Footer = React.memo(() => {
               </div>
             </Col>
 
-            <Col md="2" sm="4" xs="6">
+            <Col lg="2" md="6" sm="6" xs="6" className="mb-4">
               <h6 className="footer-subtitle">Company</h6>
               <ul className="footer-links">
                 <li><Link to="/about-us">About Us</Link></li>
@@ -37,7 +37,7 @@ const Footer = React.memo(() => {
               </ul>
             </Col>
 
-            <Col md="2" sm="4" xs="12">
+            <Col lg="2" md="6" sm="6" xs="6" className="mb-4">
               <h6 className="footer-subtitle">Support</h6>
               <ul className="footer-links">
                 <li><Link to="#">Help Center</Link></li>
@@ -47,7 +47,7 @@ const Footer = React.memo(() => {
               </ul>
             </Col>
 
-            <Col md="4" sm="4" xs="6">
+            <Col lg="4" md="6" sm="6" xs="6" className="mb-4">
               <h6 className="footer-subtitle">Connect With Us</h6>
               <div className="contact-footer-info-container">
                 <div className="footer-contact-info-box">
@@ -71,6 +71,7 @@ const Footer = React.memo(() => {
           </Row>
         </div>
       </Container>
+
       <div className="footer-bottom-container">
         <Container>
           <div className="footer-bottom">

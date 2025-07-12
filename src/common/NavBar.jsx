@@ -9,7 +9,7 @@ import {
   IoMdCall,
 } from "react-icons/io";
 import { MdOutlineMail } from "react-icons/md";
-import { Navbar, NavbarBrand, Nav, NavItem, Button, Container } from "reactstrap";
+import { Navbar, Nav, NavItem, Button, Container } from "reactstrap";
 import { IoCloseSharp } from "react-icons/io5";
 import { navItems } from "../Constants";
 import { Link, NavLink } from "react-router-dom";
@@ -17,6 +17,7 @@ import ImagePath from "../assets/ImagePath";
 
 const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isHeaderTopOpen, setIsHeaderTopOpen] = useState(window.innerWidth >= 768);
   const [openSubmenu, setOpenSubmenu] = useState(null);
   const [mobileOpenSubmenu, setMobileOpenSubmenu] = useState(null);
   const [hoveredSubIndex, setHoveredSubIndex] = useState(null);
@@ -24,6 +25,10 @@ const Header = () => {
   const toggleDrawer = useCallback(() => {
     setIsDrawerOpen(prev => !prev);
   }, []);
+
+  const toggleHeaderTop = () => {
+    setIsHeaderTopOpen(prev => !prev);
+  };
 
   const handleMouseEnter = useCallback((index) => {
     setOpenSubmenu(index);
@@ -36,6 +41,11 @@ const Header = () => {
 
   useEffect(() => {
     const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsHeaderTopOpen(true);
+      } else {
+        setIsHeaderTopOpen(false);
+      }
       if (window.innerWidth >= 768 && isDrawerOpen) {
         setIsDrawerOpen(false);
         setMobileOpenSubmenu(null);
@@ -89,42 +99,49 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="header-top-container">
-        <Container>
-          <section className="header-top">
-            <div className="contact-info-container">
-              <a href="mailto:info@diyprefab.com" className="contact-info-box">
-                <MdOutlineMail className="top-header-icon" />
-                <p>info@diyprefab.com</p>
-              </a>
-              <a href="tel:+918619015622" className="contact-info-box">
-                <IoMdCall className="top-header-icon" />
-                <p>(+91) 8619015622</p>
-              </a>
-            </div>
-            <div className="contact-info-container">
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="header-social-box"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedinIn className="top-header-social-icon" />
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="header-social-box"
-                aria-label="YouTube"
-              >
-                <FaYoutube className="top-header-social-icon" />
-              </a>
-            </div>
-          </section>
-        </Container>
+      {/* Header Top with Toggle */}
+      {/* <section className="header-top-toggle d-flex justify-content-between align-items-center px-3 py-2" style={{ backgroundColor: "#0d1b2a" }}>
+  
+</section> */}
+  <section className="header-top py-2" style={{ backgroundColor: "#1b263b" }}>
+    <Container className="d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <div className="d-flex align-items-center gap-3 mb-2 mb-md-0">
+        <a href="mailto:info@diyprefab.com" className="d-flex align-items-center gap-2 text-white text-decoration-none">
+          <MdOutlineMail size={20} />
+          <span>info@diyprefab.com</span>
+        </a>
+        <a href="tel:+918619015622" className="d-flex align-items-center gap-2 text-white text-decoration-none">
+          <IoMdCall size={20} />
+          <span>(+91) 8619015622</span>
+        </a>
       </div>
+      <div className="d-flex align-items-center gap-3">
+        <a
+          href="https://linkedin.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="d-flex justify-content-center align-items-center rounded-circle"
+          style={{ width: "32px", height: "32px", backgroundColor: "#ffffff20" }}
+          aria-label="LinkedIn"
+        >
+          <FaLinkedinIn className="text-white" />
+        </a>
+        <a
+          href="https://youtube.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="d-flex justify-content-center align-items-center rounded-circle"
+          style={{ width: "32px", height: "32px", backgroundColor: "#ffffff20" }}
+          aria-label="YouTube"
+        >
+          <FaYoutube className="text-white" />
+        </a>
+      </div>
+    </Container>
+  </section>
+
+
+      {/* Navbar */}
       <div className="navbar-container-unique">
         <Container>
           <Navbar expand="md" className="navbar-container">
@@ -166,7 +183,11 @@ const Header = () => {
                                 {subItem.title}
                                 {subItem.subsubmenu && (
                                   <span className="submenu-arrow ms-2">
-                                    {hoveredSubIndex === `${index}-${subIndex}` ? <IoIosArrowUp /> : <IoIosArrowForward />}
+                                    {hoveredSubIndex === `${index}-${subIndex}` ? (
+                                      <IoIosArrowUp />
+                                    ) : (
+                                      <IoIosArrowForward />
+                                    )}
                                   </span>
                                 )}
                               </Link>
@@ -188,13 +209,14 @@ const Header = () => {
                 ))}
               </Nav>
             </div>
-            <div></div>
             <Button className="d-lg-none nav-bar-menu-open-button" onClick={toggleDrawer}>
               ☰
             </Button>
           </Navbar>
         </Container>
       </div>
+
+      {/* Mobile Drawer */}
       <div className={`drawer ${isDrawerOpen ? "open" : ""}`}>
         <div className="text-end">
           <Button onClick={toggleDrawer} className="close-btn" aria-label="Close menu">

@@ -35,9 +35,9 @@ const CustomPrevArrow = React.memo(({ className, onClick, currentSlide }) => {
         transition: 'all 0.3s ease'
       }}
     >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+      {/* <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
         <path d="M15 18l-6-6 6-6"/>
-      </svg>
+      </svg> */}
     </button>
   );
 });
@@ -73,9 +73,9 @@ const CustomNextArrow = React.memo(({ className, onClick, currentSlide, slideCou
         transition: 'all 0.3s ease'
       }}
     >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+      {/* <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
         <path d="M9 18l6-6-6-6"/>
-      </svg>
+      </svg> */}
     </button>
   );
 });
@@ -160,8 +160,8 @@ const HeroSlider = React.memo(() => {
     accessibility: true,
     focusOnSelect: false,
     arrows: true,
-    // prevArrow: <CustomPrevArrow currentSlide={currentSlide} slideCount={sliderImages?.length || 0} />,
-    // nextArrow: <CustomNextArrow currentSlide={currentSlide} slideCount={sliderImages?.length || 0} />,
+    prevArrow: <CustomPrevArrow currentSlide={currentSlide} slideCount={sliderImages?.length || 0} />,
+    nextArrow: <CustomNextArrow currentSlide={currentSlide} slideCount={sliderImages?.length || 0} />,
     dots: false,
     afterChange: handleAfterChange,
     responsive: [
@@ -531,7 +531,7 @@ const HeroSlider = React.memo(() => {
 }
       `}</style>
       
-      <section className="slider-container unique" aria-label="Hero Slider">
+<section className="slider-container unique" aria-label="Hero Slider">
         <div className="slider-content-box">
           <span className="slider-tagline">
             We provide cutting-edge, PEB Structure Solutions

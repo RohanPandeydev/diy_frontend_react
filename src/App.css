@@ -88,6 +88,11 @@
   padding: 0;
   margin: 0;
 }
+.container, .container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 
 html,
 body {
@@ -607,15 +612,17 @@ hr {
   position: relative;
 }
 
+
 .slider-container::after {
   content: "";
-  width: 100%;
+  width: 100vw;
   height: 100%;
   display: block;
   background: rgba(0, 0, 0, 0.5);
   position: absolute;
   inset: 0;
 }
+
 
 .slider-content-box {
   position: absolute;
@@ -3082,13 +3089,13 @@ thead tr th {
 
 
 /* Option 1: If slider is a sibling of header */
-.slider-container {
+/* .slider-container {
   position: relative;
   z-index: 1;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   overflow: hidden;
-}
+} */
 
 /* Option 2: If slider is inside a container, break it out */
 .hero-slider,
@@ -3150,4 +3157,13 @@ thead tr th {
 
 .overlay {
   z-index: 1049;
+}
+
+
+.header-top a:hover {
+  color: #00b4d8; /* Your accent color */
+}
+
+.header-top-toggle button:focus {
+  outline: none;
 }
