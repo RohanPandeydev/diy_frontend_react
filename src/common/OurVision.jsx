@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { Button, Col, Container, Row } from 'reactstrap';
 import { FaPlay } from 'react-icons/fa';
 import ImagePath from '../assets/ImagePath';
-import video from '../assets/video/dummyvideo.mp4'; // Corrected import
 
 const OurVision = () => {
   const [openVideo, setOpenVideo] = useState(false);
@@ -90,7 +89,7 @@ const OurVision = () => {
               autoPlay
               poster={ImagePath.Logo}
             >
-              <source src={video} type="video/mp4" />
+              <source src={"https://diyprefab.com/video/dummyvideo.mp4"} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>

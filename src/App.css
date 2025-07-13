@@ -1629,7 +1629,7 @@ body {
   padding: 80px 0px;
   overflow: hidden;
   background-color: #0f0f3e;
-  background: url(./assets/images/wave-bg.jpg) no-repeat center center / cover;
+  background: url("https://diyprefab.com/images/wave-bg.jpg") no-repeat center center / cover;
 }
 .wave-wrapper > * {
   position: relative;
@@ -1761,7 +1761,7 @@ body {
   max-height: 400px;
   height: 100%;
   background-color: #342e2e;
-  background-image: url("../src/assets/images/pattern-4.jpg");
+  background-image: url("https://diyprefab.com/images/pattern-4.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
