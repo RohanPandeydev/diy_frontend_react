@@ -4,16 +4,19 @@ import { Container } from 'reactstrap';
 const WaveWrapper = React.memo(() => {
   const [email, setEmail] = useState('');
 
-  const handleSubmit = useCallback((event) => {
-    event.preventDefault();
-    // Handle form submission logic here
-    console.log('Submitted Email:', email);
-    setEmail('');
-  }, [email]);
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      // Replace this with your actual form submission logic or API call
+      console.log('Submitted Email:', email);
+      setEmail('');
+    },
+    [email]
+  );
 
-  const handleChange = useCallback((event) => {
+  const handleChange = (event) => {
     setEmail(event.target.value);
-  }, []);
+  };
 
   return (
     <div className="wave-wrapper">
@@ -32,7 +35,11 @@ const WaveWrapper = React.memo(() => {
                 onChange={handleChange}
                 required
               />
-              <button type="submit" className="styled-button">
+              <button
+                type="submit"
+                className="styled-button"
+                aria-label="Submit email for newsletter subscription"
+              >
                 Submit
               </button>
             </div>

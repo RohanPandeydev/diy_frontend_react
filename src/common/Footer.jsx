@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import ImagePath from '../assets/ImagePath';
 
 const Footer = React.memo(() => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="footer-section">
       <Container>
@@ -12,16 +14,31 @@ const Footer = React.memo(() => {
           <Row>
             <Col md="4" sm="12">
               <Link to="/" className="logo-image">
-                <img src={ImagePath.Logo} alt="Company Logo" className="img-fluid" />
+                <img
+                  src={ImagePath.Logo}
+                  alt="Company Logo"
+                  className="img-fluid"
+                  loading="lazy"
+                />
               </Link>
               <p className="footer-description">
                 Diyprefab is your go-to destination for customizable, easy-to-assemble prefab building kits. Whether you're creating a backyard office, tiny home, or storage shed, we make construction simple and affordable.
               </p>
               <div className="contact-info-container">
-                <Link to="#" className="header-social-box" style={{ textDecoration: 'none' }} aria-label="LinkedIn">
+                <Link
+                  to="#"
+                  className="header-social-box"
+                  style={{ textDecoration: 'none' }}
+                  aria-label="LinkedIn"
+                >
                   <FaLinkedinIn className="top-header-social-icon" />
                 </Link>
-                <Link to="#" className="header-social-box" style={{ textDecoration: 'none' }} aria-label="YouTube">
+                <Link
+                  to="#"
+                  className="header-social-box"
+                  style={{ textDecoration: 'none' }}
+                  aria-label="YouTube"
+                >
                   <FaYoutube className="top-header-social-icon" />
                 </Link>
               </div>
@@ -71,12 +88,13 @@ const Footer = React.memo(() => {
           </Row>
         </div>
       </Container>
+
       <div className="footer-bottom-container">
         <Container>
           <div className="footer-bottom">
-            Copyright © {new Date().getFullYear()} DIY Prefeb, All rights reserved. Powered by IOBS
+            © {currentYear} DIY Prefab, All rights reserved. Powered by IOBS
             <ul className="footer-bottom-links">
-              <li><Link to="#">Term of Use</Link></li>
+              <li><Link to="#">Terms of Use</Link></li>
               <li><Link to="#">Privacy Policy</Link></li>
               <li><Link to="#">Cookie Policy</Link></li>
             </ul>
