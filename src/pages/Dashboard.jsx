@@ -522,8 +522,8 @@ const Dashboard = () => {
       {/* Trust Section - Lazy load with optimized loading */}
       <LazySection 
         component={TrustSlider} 
-        height="200px"
-        rootMargin="100px"
+        // height="200px"
+        // rootMargin="100px"
         componentName="TrustSlider"
       />
 
