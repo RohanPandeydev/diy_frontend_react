@@ -1,4 +1,5 @@
 import "./App.css";
+import "./Responsive.css";
 import { Route, Routes } from "react-router-dom";
 import RoutesPath from './helper/Routes/Routes'
 import PageNotFound from "./pages/PageNotFound";
