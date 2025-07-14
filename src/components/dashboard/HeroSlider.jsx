@@ -89,7 +89,8 @@ const OptimizedSliderImage = React.memo(({ src, alt, index, isFirst = false }) =
 
 OptimizedSliderImage.displayName = 'OptimizedSliderImage';
 
-const HeroSlider = React.memo(() => {
+const HeroSlider = React.memo(
+  ({toggleLead}) => {
   const [isSliderReady, setIsSliderReady] = useState(false);
   const sliderRef = useRef(null);
 
@@ -433,7 +434,7 @@ const HeroSlider = React.memo(() => {
           <Button 
             className="common-btn"
             aria-label="Get your free design and estimate consultation"
-            onClick={() => alert("Free Design & Estimate Consultation is coming soon!")}
+            onClick={toggleLead}
           >
             Get Your Free Design & Estimate Consultation Now!
           </Button>

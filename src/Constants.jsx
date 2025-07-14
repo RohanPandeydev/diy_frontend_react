@@ -645,14 +645,9 @@ export const comparisonListHomeKit = [
 // Success
 
   export const successStories = [
-  { name: "Alexandra Mills", role: "Founder", image: ImagePath.sucessImg1 },
-  { name: "Alexandra Mills", role: "Founder", image: ImagePath.sucessImg2 },
-  { name: "Alexandra Mills", role: "Founder", image: ImagePath.sucessImg3 },
-  { name: "Alexandra Mills", role: "Founder", image: ImagePath.sucessImg4 },
-  { name: "Alexandra Mills", role: "Founder", image: ImagePath.sucessImg1 },
-  { name: "Alexandra Mills", role: "Founder", image: ImagePath.sucessImg2 },
-  { name: "Alexandra Mills", role: "Founder", image: ImagePath.sucessImg3 },
-  { name: "Alexandra Mills", role: "Founder", image: ImagePath.sucessImg4 },
+  { name: "Garvit Agrawal", role: "Founder", image: ImagePath.sucessImg1 },
+  { name: "Arpit Agrawal", role: "Founder", image: ImagePath.sucessImg2 },
+
 ];
 
 

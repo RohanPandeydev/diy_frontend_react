@@ -3,10 +3,10 @@ import { Col, Container, Row } from "reactstrap";
 
 // Critical components - loaded immediately
 import NavBar from "../common/NavBar";
-import OurVision from "../common/OurVision";
 import CounterCard from "../common/CounterCard";
 import WaveWrapper from "../common/WaveWrapper";
 import Footer from "../common/Footer";
+// import OurVision from '../common/OurVision'
 import Performance from "../components/dashboard/Performance";
 import WeDo from "../components/dashboard/WeDo";
 import WhyChoose from "../components/dashboard/WhyChoose";
@@ -95,6 +95,12 @@ const ContactForm = lazy(() =>
 
 const VideoModal = lazy(() => 
   import(/* webpackChunkName: "video-modal" */ "../common/VideoModal").then(module => ({
+    default: module.default
+  }))
+);
+
+const LeadModal = lazy(() => 
+  import(/* webpackChunkName: "lead-modal" */ "../common/FormModal").then(module => ({
     default: module.default
   }))
 );
@@ -316,13 +322,14 @@ const useAdvancedPreloading = () => {
       timeoutId = setTimeout(preloadCriticalComponents, 300);
     }
 
-    // Preload video modal on first user interaction
-    const preloadVideoModal = () => {
+    // Preload modals on first user interaction
+    const preloadModals = () => {
       import("../common/VideoModal");
+      import("../common/FormModal");
     };
 
     const handleFirstInteraction = () => {
-      preloadVideoModal();
+      preloadModals();
       document.removeEventListener('touchstart', handleFirstInteraction);
       document.removeEventListener('mousedown', handleFirstInteraction);
       document.removeEventListener('keydown', handleFirstInteraction);
@@ -345,42 +352,61 @@ const useAdvancedPreloading = () => {
   }, []);
 };
 
-// Optimized video modal hook with better state management
-const useVideoModal = () => {
+// Optimized modal hook with better state management for both video and lead modals
+const useModalManager = () => {
   const [openVideo, setOpenVideo] = useState(false);
+  const [openLead, setOpenLead] = useState(false);
   
   const toggleVideo = useCallback(() => {
     setOpenVideo(prev => !prev);
+  }, []);
+  
+  const toggleLead = useCallback(() => {
+    setOpenLead(prev => !prev);
   }, []);
 
   const closeVideo = useCallback(() => {
     setOpenVideo(false);
   }, []);
 
-  // Close on escape key
+  const closeLead = useCallback(() => {
+    setOpenLead(false);
+  }, []);
+
+  // Close on escape key for both modals
   useEffect(() => {
     const handleEscape = (e) => {
-      if (e.key === 'Escape' && openVideo) {
-        closeVideo();
+      if (e.key === 'Escape') {
+        if (openVideo) {
+          closeVideo();
+        }
+        if (openLead) {
+          closeLead();
+        }
       }
     };
 
-    if (openVideo) {
+    if (openVideo || openLead) {
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden'; // Prevent background scroll
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      if (!openVideo && !openLead) {
+        document.body.style.overflow = 'unset';
+      }
     };
-  }, [openVideo, closeVideo]);
+  }, [openVideo, openLead, closeVideo, closeLead]);
 
   return useMemo(() => ({
     openVideo,
+    openLead,
     toggleVideo,
-    closeVideo
-  }), [openVideo, toggleVideo, closeVideo]);
+    toggleLead,
+    closeVideo,
+    closeLead
+  }), [openVideo, openLead, toggleVideo, toggleLead, closeVideo, closeLead]);
 };
 
 // Enhanced lazy component wrapper
@@ -412,7 +438,14 @@ const LazySection = React.memo(({
 
 // Main Dashboard Component with enhanced performance optimizations
 const Dashboard = () => {
-  const { openVideo, toggleVideo, closeVideo } = useVideoModal();
+  const { 
+    openVideo, 
+    openLead, 
+    toggleVideo, 
+    toggleLead, 
+    closeVideo, 
+    closeLead 
+  } = useModalManager();
   
   // Critical: Preload LCP image immediately
   useLCPImagePreloader();
@@ -427,6 +460,10 @@ const Dashboard = () => {
   }, []);
   
   // Memoize props to prevent unnecessary re-renders
+  const heroSliderProps = useMemo(() => ({
+    toggleLead
+  }), [toggleLead]);
+
   const performanceProps = useMemo(() => ({
     openVideo,
     toggleVideo
@@ -476,6 +513,11 @@ const Dashboard = () => {
       }
       /* Optimize font loading */
       @font-display: swap;
+      /* Modal optimizations */
+      .modal-backdrop {
+        backdrop-filter: blur(4px);
+        will-change: opacity;
+      }
     `;
     document.head.appendChild(style);
 
@@ -486,6 +528,8 @@ const Dashboard = () => {
     };
   }, []);
 
+
+
   return (
     <div className="dashboard-box">
       <SeoHelmet seo={seo} />
@@ -495,7 +539,7 @@ const Dashboard = () => {
       {/* Hero Section - Critical, load immediately with high priority */}
       <ErrorBoundary componentName="HeroSlider">
         <Suspense fallback={<SectionPlaceholder height="60vh" aspectRatio="16/9" />}>
-          <HeroSlider />
+          <HeroSlider {...heroSliderProps} />
         </Suspense>
       </ErrorBoundary>
 
@@ -513,7 +557,8 @@ const Dashboard = () => {
 
       {/* Static sections - Keep loaded for better UX */}
       <WeDo {...weDoProps} />
-      <OurVision />
+            {/* <OurVision /> */}
+
       <CounterCard />
       <WhyChoose {...whyChooseProps} />
       <WeOffer {...weOfferProps} />
@@ -551,6 +596,15 @@ const Dashboard = () => {
         <ErrorBoundary componentName="VideoModal">
           <Suspense fallback={null}>
             <VideoModal open={openVideo} onClose={closeVideo} />
+          </Suspense>
+        </ErrorBoundary>
+      )}
+
+      {/* Lead Modal - Only render when open with portal for better performance */}
+      {openLead && (
+        <ErrorBoundary componentName="LeadModal">
+          <Suspense fallback={null}>
+            <LeadModal open={openLead} onClose={closeLead} />
           </Suspense>
         </ErrorBoundary>
       )}

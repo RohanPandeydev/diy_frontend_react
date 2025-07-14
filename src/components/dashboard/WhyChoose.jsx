@@ -44,13 +44,13 @@ const WhyChoose = ({toggleVideo}) => {
                   <Col md={6} key={i}>
                     <div className="why-choose-right-content-container">
                       <img src={img} alt="Choose Us Visual" className="img-fluid" />
-                      {i === 0 && (
+                      {/* {i === 0 && (
                         <div className="play-button" onClick={toggleVideo}>
                           <div className="play-button-box">
                             <FaPlay className="play-button-icon" />
                           </div>
                         </div>
-                      )}
+                      )} */}
                     </div>
                   </Col>
                 ))}
