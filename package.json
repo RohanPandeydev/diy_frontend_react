@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "npx critical dist/index.html --inline --base dist/",
     "generate:sitemap": "npx vite-node src/helper/Sitemap.js",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -39,6 +40,7 @@
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.21",
+    "critical": "^7.2.1",
     "eslint": "^9.22.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
