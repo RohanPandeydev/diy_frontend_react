@@ -1,22 +1,11 @@
 /******************** App.css *******************************/
 
-
-
-  @font-face {
-      font-family: 'Lato';
-      src: url('font/Lato/Lato-Regular.ttf'),url('font/Lato/Lato-Bold.ttf'),url('font/Lato/Lato-Light.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
-
-
-
-
-
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 * {
   box-sizing: border-box;
-  font-family: "Lato", "Times New Roman", Times, serif;
+  font-family: "Barlow","Lato", "Times New Roman", Times, serif;
   padding: 0;
   margin: 0;
 }
@@ -67,10 +56,10 @@ hr {
   transform: translateX(0);
   opacity: 1;
   z-index: -1;
-  background-color: #001524;
+  background-color: #ffffff;
 }
 .common-btn:hover {
-  color: #ffffff !important;
+  color: #001524 !important;
 }
 
 /**************************** Top Header design Start *************************/
@@ -83,6 +72,10 @@ hr {
   z-index: 9999;
   box-shadow: 0px 2px 2px #00000066;
 }
+.header-top-container{
+  width: 100%;
+  background-color: #1b263b;
+}
 
 .header-top {
   width: 100%;
@@ -90,8 +83,7 @@ hr {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  background-color: #1b263b;
-  padding: 10px 40px;
+  padding: 10px 0px;
   gap: 20px;
 }
 .contact-info-container {
@@ -151,25 +143,23 @@ hr {
 /**************************** Top Header design End *************************/
 
 /**************************** Navbar design Start *************************/
-
-.navbar-container {
+.container-fluid{
+  padding: 0px !important;
+}
+.navbar-container-unique{
   width: 100%;
   background-color: #001524;
-  padding: 0 40px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  min-height: 80px;
+}
+.navbar-container {
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .logo-image {
   display: block;
-  width: 90px;
-  height: 90px;
-  margin-left: 0;
-  transition: transform 0.3s ease;
-}
-.logo-image:hover {
-  transform: scale(1.05);
+  width: 80px;
+  height: 80px;
 }
 .logo-image img {
   width: 100%;
@@ -234,32 +224,22 @@ hr {
 
 /* Arrow */
 .arrow {
-  font-size: 0.8rem;
-  margin-left: 6px;
-  transition: transform 0.3s ease;
-  color: #ffffff;
+  font-size: 0.7rem;
+  margin-left: 4px;
+  transition: transform 0.2s;
 }
 
 .navitem-wrapper:hover .arrow {
-  transform: rotate(180deg);
+  transform: scale(1.1);
 }
 
 /* NavLink custom styling */
 .navlink-custom {
   position: relative;
   color: #ffffff !important;
-  font-size: 15px !important;
-  font-weight: 500;
+  font-size: 14px !important;
   text-decoration: none;
-  padding: 12px 16px !important;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  margin: 0 4px;
-}
-.navlink-custom:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff !important;
-  transform: translateY(-2px);
+  /* transition: color 0.3s; */
 }
 .contact-info-box {
   text-decoration: none;
@@ -351,16 +331,7 @@ hr {
 
 .nav-bar-menu-open-button {
   background-color: transparent;
-  border: 2px solid #ffffff;
-  color: #ffffff;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 18px;
-  transition: all 0.3s ease;
-}
-.nav-bar-menu-open-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  transform: scale(1.05);
+  border: 1px solid #ffffff;
 }
 
 .slider-img-box {
@@ -544,7 +515,7 @@ hr {
 
 .slider-content-box {
   position: absolute;
-  left: 5%;
+  left: 6.5%;
   top: 15%;
   z-index: 1;
   width: 50%;
@@ -2713,7 +2684,7 @@ thead tr th {
   color: #1b263b !important;
   text-decoration: none;
   white-space: nowrap;
-  transition: all 0.4s ease;
+  transition: all o.4s ease;
   padding: 10px 15px !important;
 }
 
@@ -2997,3 +2968,24 @@ thead tr th {
 
 
 /* End */
+
+
+
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+  opacity: 0.8;
+}
+
+.custom-arrow.next {
+  right: 10px;
+}
+
+.custom-arrow.prev {
+  left: 10px;
+}
