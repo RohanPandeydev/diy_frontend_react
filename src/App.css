@@ -1,11 +1,20 @@
 /******************** App.css *******************************/
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@font-face {
+      font-family: 'Lato';
+      src: url('font/Lato/Lato-Regular.ttf'),url('font/Lato/Lato-Bold.ttf'),url('font/Lato/Lato-Light.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+
+
+
+
+
 * {
   box-sizing: border-box;
-  font-family: "Barlow","Lato", "Times New Roman", Times, serif;
+  font-family: "Lato", "Times New Roman", Times, serif;
   padding: 0;
   margin: 0;
 }
@@ -2968,24 +2977,3 @@ thead tr th {
 
 
 /* End */
-
-
-
-.custom-arrow {
-  position: absolute;
-  top: 50%;
-  z-index: 10;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: white;
-  font-size: 24px;
-  opacity: 0.8;
-}
-
-.custom-arrow.next {
-  right: 10px;
-}
-
-.custom-arrow.prev {
-  left: 10px;
-}
